@@ -1,12 +1,12 @@
 # Technical direction
 
-**Status: working technical plan; no implementation exists.** The owner-confirmed game requirements are recorded in [Decisions and questions](decisions-and-questions.md). The architecture below is a recommendation for implementing them. Engine, language, target platform, distribution, and performance budgets remain undecided.
+**Status: working technical plan; a small development sandbox exists.** The owner-confirmed game requirements are recorded in [Decisions and questions](decisions-and-questions.md). The architecture below is a recommendation for implementing them. Godot 4.7.2 .NET, C#, and desktop targets were selected for the bootstrap; distribution and performance budgets remain undecided. See [development setup](development.md).
 
 ## Choose a small foundation
 
 Phase 0 should select a stack that can demonstrate top-down movement, tile placement, resource transfer, scene transitions, and local persistence with a small runnable experiment. Record the choice and its reasons, then build the experiment. Evaluate only options relevant to that target; do not build several complete prototypes or turn preparation into an indefinite documentation task.
 
-The first implementation should contain one engineer, one small ship, a few machines, and a bounded set of destinations. It should support the complete expedition described in the [roadmap](roadmap.md) before expanding content. Document actual setup and run commands once they exist; this document intentionally defines no fictitious commands or dependencies.
+The bootstrap contains one engineer and a visual deck. The next implementation increments should add a small ship, machines, and bounded destinations toward the complete expedition described in the [roadmap](roadmap.md). Actual setup and run commands are in [development setup](development.md).
 
 ## Simulation and presentation
 

@@ -8,6 +8,7 @@
 - **S2 — Engineer and failure:** the owner chose a single engineer, a small stranded ship repaired as the tutorial, roguelike features, no respawning, and permanent loss through crashing or exhausting resources.
 - **S3 — Surfaces and facilities:** the owner added landable planets, asteroids, and other large objects; hostile inhabitants; scouting and combat preparation; an exterior view of the landed ship; multiple entry ports; surface factories connected to the ship; and recurring resource visits.
 - **S4 — Repository initialization:** the owner requested the complete initial plan be turned into project documentation in `jfin602/space-factory`, primarily under `docs/`.
+- **S5 — Development bootstrap (2026-11-08):** the owner selected Godot 4 .NET, C#, single-player desktop targets (Linux, Windows, macOS), a 2D top-down view, and the Compatibility renderer for the initial sandbox. These choices do not settle later gameplay systems.
 
 Assistant elaborations are retained below as working designs. Their presence in these documents does not imply the owner separately selected every proposed mechanic, quantity, or technology.
 
@@ -55,7 +56,7 @@ Resolve choices when they affect the next concrete implementation step. Do not r
 
 | ID | Decision | When it matters |
 | --- | --- | --- |
-| Q01 | Target platform, engine, language, input baseline, packaging, and initial hardware budget. No stack has been selected. | Before the runnable foundation is scaffolded. |
+| Q01 | **Partly resolved by S5:** Godot 4 .NET, C#, desktop Linux/Windows/macOS, keyboard movement, and Compatibility rendering. Packaging details and hardware budget remain open. | Before production packaging and performance qualification. |
 | Q02 | Intended run length, victory condition or open-ended objective, and expected session length. | Before long-term pacing and content balance. |
 | Q03 | Simulation time, pause/build behavior, time acceleration, and whether any time advances while the application is closed. | Before integrating travel, remote production, and save/load. |
 | Q04 | Authored versus procedural locations, seed rules, starting-layout variation, and resource distribution. | Before generating more than the small test world. |

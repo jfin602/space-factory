@@ -1,0 +1,158 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+PROJECT="$ROOT/game"
+ARTIFACTS="$ROOT/artifacts"
+mkdir -p "$ARTIFACTS/logs"
+
+# Optional ignored local file may set GODOT_CMD=("path" "arg" ...) and DOTNET_BIN.
+if [[ -f "$ROOT/tools/local.env" ]]; then
+  # shellcheck source=/dev/null
+  source "$ROOT/tools/local.env"
+fi
+if [[ ! ${GODOT_CMD+x} ]]; then GODOT_CMD=("${GODOT_BIN:-godot}"); fi
+DOTNET_BIN=${DOTNET_BIN:-dotnet}
+if [[ $DOTNET_BIN == */* ]]; then
+  export DOTNET_ROOT="$(dirname "$DOTNET_BIN")"
+  export PATH="$DOTNET_ROOT:$PATH"
+fi
+
+help() {
+  cat <<'HELP'
+Usage: ./tools/dev <command> [argument]
+  doctor                 Show engine, SDK, display and template readiness
+  import                 Import project assets
+  build                  Build the C# project
+  check                  Import, build, runtime smoke and scene automation
+  run                    Build and play the sandbox in the foreground
+  editor                 Open the project editor in the foreground
+  inspect-scene <path>   Inspect a res:// scene or path under game/
+  automation-smoke       Create, edit, save and reload a disposable scene
+  export <preset>        Export Linux, Windows or macOS to artifacts/exports
+
+Override executable paths in ignored tools/local.env:
+  GODOT_CMD=("/absolute/path/to/Godot .NET")
+  DOTNET_BIN="/absolute/path/to/dotnet"
+GODOT_BIN may also name a single executable from the environment.
+HELP
+}
+
+need_tools() {
+  command -v "${GODOT_CMD[0]}" >/dev/null || { echo "Godot executable missing: ${GODOT_CMD[0]}" >&2; exit 2; }
+  command -v "$DOTNET_BIN" >/dev/null || { echo "dotnet SDK executable missing: $DOTNET_BIN" >&2; exit 2; }
+}
+
+run_logged() {
+  local name=$1 seconds=$2; shift 2
+  local log="$ARTIFACTS/logs/$name.log"
+  if ! timeout --signal=TERM --kill-after=5s "${seconds}s" "$@" >"$log" 2>&1; then
+    cat "$log" >&2
+    echo "Failed or timed out: $name (see $log)" >&2
+    return 1
+  fi
+  cat "$log"
+  if grep -En '(^ERROR:|SCRIPT ERROR:|Failed to load|Cannot load|Could not resolve script|SCENE_TOOL_FAILED|SPACE_FACTORY_SMOKE_FAILED)' "$log" >&2; then
+    echo "Engine errors in $log" >&2
+    return 1
+  fi
+}
+
+do_import() {
+  run_logged import 120 "${GODOT_CMD[@]}" --headless --path "$PROJECT" --import
+}
+
+do_build() {
+  (cd "$PROJECT" && run_logged build 180 "$DOTNET_BIN" build SpaceFactory.csproj --nologo)
+}
+
+smoke() {
+  run_logged smoke 30 "${GODOT_CMD[@]}" --headless --path "$PROJECT" -- --smoke
+  grep -q 'SPACE_FACTORY_SMOKE_OK main scene and C# scripts executed' "$ARTIFACTS/logs/smoke.log" || { echo 'Smoke marker absent' >&2; return 1; }
+}
+
+scene_tool() {
+  local name=$1; shift
+  run_logged "$name" 30 "${GODOT_CMD[@]}" --headless --path "$PROJECT" --script res://dev/scene_tool.gd -- "$@"
+}
+
+negative_scene_check() {
+  local log="$ARTIFACTS/logs/missing-scene.log"
+  local status
+  if timeout --signal=TERM --kill-after=5s 30s "${GODOT_CMD[@]}" --headless --path "$PROJECT" --script res://dev/scene_tool.gd -- inspect res://scenes/does-not-exist.tscn >"$log" 2>&1; then
+    echo "Missing-scene inspection unexpectedly succeeded (see $log)" >&2
+    return 1
+  else
+    status=$?
+  fi
+  if [[ $status -ne 1 ]] || ! grep -q 'SCENE_TOOL_FAILED scene does not exist:' "$log"; then
+    cat "$log" >&2
+    echo "Missing-scene check failed unexpectedly with status $status" >&2
+    return 1
+  fi
+  echo 'Expected missing-scene failure confirmed'
+}
+
+doctor() {
+  printf 'Godot invocation:'
+  printf ' %q' "${GODOT_CMD[@]}"
+  printf '\n'
+  echo "Godot version: $("${GODOT_CMD[@]}" --version)"
+  local version
+  version=$("${GODOT_CMD[@]}" --version)
+  if [[ $version == *mono* ]]; then echo '.NET editor: yes'; else echo '.NET editor: NO (standard editor)'; fi
+  echo "dotnet executable: $(command -v "$DOTNET_BIN" || echo missing)"
+  if command -v "$DOTNET_BIN" >/dev/null; then
+    echo "Selected SDK: $(cd "$PROJECT" && "$DOTNET_BIN" --version)"
+    "$DOTNET_BIN" --list-sdks
+  fi
+  echo "Project: $PROJECT"
+  echo "Display: DISPLAY=${DISPLAY:-unset} WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-unset}"
+  local templates="${XDG_DATA_HOME:-$HOME/.local/share}/godot/export_templates/4.7.2.stable.mono"
+  echo "Export templates: $templates"
+  if [[ -f $templates/version.txt ]]; then echo "  version: $(cat "$templates/version.txt")"; else echo '  version: missing'; fi
+  for target in linux_release.x86_64 windows_release_x86_64.exe macos.zip; do
+    if [[ -s $templates/$target ]]; then echo "  $target: available"; else echo "  $target: missing"; fi
+  done
+}
+
+export_game() {
+  local preset=${1:-}
+  local output
+  case "$preset" in
+    Linux) output="$ARTIFACTS/exports/Linux/SpaceFactory.x86_64" ;;
+    Windows) output="$ARTIFACTS/exports/Windows/SpaceFactory.exe" ;;
+    macOS) output="$ARTIFACTS/exports/macOS/SpaceFactory.zip" ;;
+    *) echo 'Preset must be exactly Linux, Windows, or macOS' >&2; exit 2 ;;
+  esac
+  do_import
+  do_build
+  mkdir -p "$(dirname "$output")"
+  run_logged "export-$preset" 240 "${GODOT_CMD[@]}" --headless --path "$PROJECT" --export-release "$preset" "$output"
+  [[ -s $output ]] || { echo "Export file missing: $output" >&2; return 1; }
+  echo "Exported: $output"
+}
+
+case "${1:-help}" in
+  doctor) doctor ;;
+  import) need_tools; do_import ;;
+  build) need_tools; do_build ;;
+  check) need_tools; do_import; do_build; smoke; scene_tool automation-smoke automation-smoke; negative_scene_check ;;
+  run) need_tools; do_build; exec "${GODOT_CMD[@]}" --path "$PROJECT" ;;
+  editor) need_tools; exec "${GODOT_CMD[@]}" --editor --path "$PROJECT" ;;
+  inspect-scene)
+    need_tools
+    [[ -n ${2:-} ]] || { help; exit 2; }
+    path=$2
+    if [[ $path == "$PROJECT/"* ]]; then
+      path="res://${path#"$PROJECT/"}"
+    elif [[ $path != res://* ]]; then
+      path="res://${path#game/}"
+    fi
+    scene_tool inspect-scene inspect "$path"
+    ;;
+  automation-smoke) need_tools; scene_tool automation-smoke automation-smoke ;;
+  export) need_tools; export_game "${2:-}" ;;
+  help|-h|--help) help ;;
+  *) help; exit 2 ;;
+esac

@@ -1,6 +1,6 @@
 # Development roadmap
 
-**Status: proposed implementation sequence. Every Phase and Gate is NOT STARTED.** These documents define work; they are not evidence that gameplay exists. The sequence can change as experiments provide evidence. Owner-confirmed requirements and unresolved choices live in [Decisions and questions](decisions-and-questions.md).
+**Status: proposed implementation sequence. Bootstrap work has begun; no Gate is yet qualified.** The sandbox is recorded in [development setup](development.md). The sequence can change as experiments provide evidence. Owner-confirmed requirements and unresolved choices live in [Decisions and questions](decisions-and-questions.md).
 
 ## First integrated slice
 
@@ -18,9 +18,9 @@ A Gate passes when its listed behavior is observed on an identified revision and
 
 ### Phase 0: Runnable foundation
 
-**Status: NOT STARTED**
+**Status: IN PROGRESS — sandbox foundation only**
 
-**G0.1 — Stack and launch — NOT STARTED**
+**G0.1 — Stack and launch — IN PROGRESS**
 
 - Record engine, language, initial platform, and the narrow reasons for choosing them.
 - Launch a small 2D scene with actual documented setup instructions.

@@ -2,7 +2,7 @@
 
 Space Factory is a proposed 2D game about a single engineer operating a spaceship through its internal factory and a network of persistent surface outposts. This documentation captures the initial design discussion of **2026-11-08**.
 
-**Implementation status: not started.** The repository currently establishes the design, boundaries, development sequence, and validation expectations. It does not yet establish a game engine or runnable application.
+**Implementation status: bootstrap sandbox in progress.** The game design and its major systems remain planned. A Godot 4 .NET project and developer commands now live in this repository; see [development setup](development.md) for actual verification results.
 
 ## How to read these documents
 
@@ -23,6 +23,7 @@ For a focused task, use the table below instead of reading every file. [AGENTS.m
 | [Tutorial](tutorial.md) | The deliberately solvable stranded-ship opening and first successful departure. |
 | [UX and presentation](ux-and-presentation.md) | Interior/exterior views, interaction, readable system states, and warnings. |
 | [Technical direction](technical-direction.md) | Proposed architecture and persistence boundaries without choosing a technology stack. |
+| [Development setup](development.md) | Godot/.NET installation, commands, scene automation, exports, and bootstrap evidence. |
 | [Roadmap](roadmap.md) | Small development Phases, Gates, dependencies, and expected evidence. |
 | [Validation](validation.md) | Scenario-based acceptance, regressions, and the distinction between design and proof. |
 | [Decisions and open questions](decisions-and-questions.md) | Confirmed requirements, working recommendations, unresolved choices, and provenance. |
@@ -34,7 +35,7 @@ For a focused task, use the table below instead of reading every file. [AGENTS.m
 - **Working design:** a proposed way to realize the confirmed requirements; useful for planning but subject to validation and change.
 - **Example:** illustrative content, recipe, scenario, or number; not a locked balance specification.
 - **Open decision:** a choice that has not been made. Each should be resolved when its dependent work needs it.
-- **Implemented / verified:** reserved for actual code and recorded evidence. None of the initial system documents makes that claim.
+- **Implemented / verified:** reserved for actual code and recorded evidence. The sandbox evidence is recorded in [development setup](development.md); the planned gameplay systems are not thereby complete.
 
 The [decision register](decisions-and-questions.md) owns requirement status. System documents own their detailed behavior. The roadmap owns the intended work sequence, and validation describes what evidence is needed. Avoid copying the full specification into every task.
 

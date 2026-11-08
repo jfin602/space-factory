@@ -4,7 +4,7 @@
 
 Read this guide and [docs/README.md](docs/README.md), then read only the documents needed for the requested task. Keep the original goal, relevant constraints, acceptance criteria, current step, and verification evidence explicit in your working context. Documentation is input to the task; reading it is not implementation progress.
 
-This repository starts with documentation only. Engine, language, target platform, and build commands are not selected. Do not import assumptions from another project or invent commands that have not been established here.
+The project uses Godot 4.7.2 .NET and C# for a small desktop sandbox. Read [development setup](docs/development.md) for the selected tools and verified commands. Run `./tools/dev doctor`, `./tools/dev check`, `./tools/dev editor`, and `./tools/dev run` from the repository root. The development entry point also works from another working directory.
 
 ## Documentation routing
 

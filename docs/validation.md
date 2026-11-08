@@ -1,6 +1,6 @@
 # Validation and evidence
 
-**Status: planned checks; none have been executed against a game implementation.** This document defines how to assess the [roadmap](roadmap.md). Documentation validation confirms the documents' integrity only.
+**Status: planned gameplay checks; none of V01–V20 have been qualified.** Bootstrap checks for the Godot sandbox are recorded separately in [development setup](development.md). This document defines how to assess the [roadmap](roadmap.md).
 
 ## What counts as evidence
 

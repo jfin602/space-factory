@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/Main.cs" id="1_main"]
+[ext_resource type="Script" path="res://scripts/Deck.cs" id="2_deck"]
+[ext_resource type="Script" path="res://scripts/Engineer.cs" id="3_engineer"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_engineer"]
+radius = 13.0
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Deck" type="Node2D" parent="."]
+script = ExtResource("2_deck")
+position = Vector2(480, 300)
+
+[node name="Engineer" type="CharacterBody2D" parent="."]
+script = ExtResource("3_engineer")
+position = Vector2(480, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Engineer"]
+shape = SubResource("CircleShape2D_engineer")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 300)
+enabled = true
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="Title" type="Label" parent="Overlay"]
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 540.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 23
+text = "Space Factory — Development Sandbox"
+
+[node name="Help" type="Label" parent="Overlay"]
+offset_left = 26.0
+offset_top = 552.0
+offset_right = 650.0
+offset_bottom = 580.0
+theme_override_font_sizes/font_size = 16
+text = "WASD / arrow keys: move engineer     •     Close window: quit"
