@@ -2,9 +2,9 @@
 
 **Status: working technical plan; a small development sandbox exists.** The owner-confirmed game requirements are recorded in [Decisions and questions](decisions-and-questions.md). The architecture below is a recommendation for implementing them. Godot 4.7.2 .NET, C#, and desktop targets were selected for the bootstrap; distribution and performance budgets remain undecided. See [development setup](development.md).
 
-## Choose a small foundation
+## Build from the selected foundation
 
-Phase 0 should select a stack that can demonstrate top-down movement, tile placement, resource transfer, scene transitions, and local persistence with a small runnable experiment. Record the choice and its reasons, then build the experiment. Evaluate only options relevant to that target; do not build several complete prototypes or turn preparation into an indefinite documentation task.
+The bootstrap selected Godot 4 .NET and C# for desktop Linux, Windows, and macOS, with the versions and verification scope recorded in [development setup](development.md). Continue Phase 0 from that existing sandbox. Demonstrate the remaining state/time foundation and introduce tile placement, resource transfer, scene transitions, and local persistence only as their planned gameplay increments require them. Avoid repeating engine selection or turning preparation into an indefinite documentation task.
 
 The bootstrap contains one engineer and a visual deck. The next implementation increments should add a small ship, machines, and bounded destinations toward the complete expedition described in the [roadmap](roadmap.md). Actual setup and run commands are in [development setup](development.md).
 
@@ -65,4 +65,4 @@ Define how terminal outcomes become durable and how failed writes are recovered 
 
 Keep rules testable without rendering. Validate identifiers and content at load boundaries, expose causal diagnostics during development, and exercise the boundaries where inventories, locations, and saves change ownership. Establish performance budgets on the selected target hardware after a representative scene exists; no benchmark is claimed here.
 
-The next technical decisions are stack and target, simulation clock policy, save format, world representation, initial combat model, and outpost abstraction. Follow [AGENTS.md](../AGENTS.md) for task-scoped document routing and [Validation](validation.md) for evidence requirements.
+The remaining technical decisions include simulation clock policy, save format, world representation, initial combat model, outpost abstraction, and distribution/performance details. Resolve each when its dependent task requires it. Follow [AGENTS.md](../AGENTS.md) for task-scoped document routing, [MODULES.md](../MODULES.md) for current code responsibilities, and [Validation](validation.md) for evidence requirements.

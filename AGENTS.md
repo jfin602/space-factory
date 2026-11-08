@@ -1,42 +1,60 @@
-# Working on Space Factory
+# Space Factory Agent Guide
 
 ## Start with the task
 
-Read this guide and [docs/README.md](docs/README.md), then read only the documents needed for the requested task. Keep the original goal, relevant constraints, acceptance criteria, current step, and verification evidence explicit in your working context. Documentation is input to the task; reading it is not implementation progress.
+Read this guide first, then [BOOT.md](BOOT.md). Use [the workflow](docs/workflow.md) and the routing table below to read only the documents and source needed for the requested task. Keep the goal, constraints, acceptance criteria, current step, and verification evidence explicit. Reading documentation is preparation, not implementation progress.
 
-The project uses Godot 4.7.2 .NET and C# for a small desktop sandbox. Read [development setup](docs/development.md) for the selected tools and verified commands. Run `./tools/dev doctor`, `./tools/dev check`, `./tools/dev editor`, and `./tools/dev run` from the repository root. The development entry point also works from another working directory.
+Inspect the actual repository, branch, revision, and working-tree changes before editing. Preserve existing work, including local changes ahead of the remote. Current user instructions govern the requested scope; a direct instruction to import, update, fix, or execute already authorizes that bounded work. Do not add a second approval or `/activate` step.
+
+## Project and commands
+
+Space Factory is a single-player, top-down 2D desktop game targeting Linux, Windows, and macOS. Gameplay uses Godot 4 .NET and C#; the current implementation is a small engineer-and-grid sandbox. [Development setup](docs/development.md) owns exact engine/SDK pins, local configuration, commands, and recorded platform evidence.
+
+| Need | Existing command |
+| --- | --- |
+| Inspect local tool readiness | `./tools/dev doctor` |
+| Compile C# | `./tools/dev build` |
+| Import, build, and run bootstrap/scene-automation checks | `./tools/dev check` |
+| Open the editor / play the game | `./tools/dev editor` / `./tools/dev run` |
+| Inspect a saved scene | `./tools/dev inspect-scene scenes/main.tscn` |
+
+The entry point resolves paths independently of the caller's working directory. Use repository files, the terminal, and Godot's CLI/scene APIs for ordinary implementation. Use the running game for claims about appearance, input, and player workflows. The current commands do not constitute an automated prompt-stack runner.
 
 ## Documentation routing
 
-| Task | Relevant documents |
+| Task | Read the relevant parts of |
 | --- | --- |
-| Understand the product or resolve scope | [Vision](docs/vision.md), [game design](docs/game-design.md), [decisions](docs/decisions-and-questions.md) |
+| Session status and next work | [Boot guide](BOOT.md), [roadmap](docs/roadmap.md) |
+| Development process or executable prompts | [Workflow](docs/workflow.md), [planning](docs/planning/README.md), [task stacks](docs/tasks/README.md) |
+| Product scope and decisions | [Vision](docs/vision.md), [game design](docs/game-design.md), [decision register](docs/decisions-and-questions.md), [decision-record conventions](docs/decisions/README.md) |
+| Architecture and code ownership | [Module map](MODULES.md), [technical direction](docs/technical-direction.md), affected source |
 | Resources, machines, logistics, or power | [Factory and resources](docs/systems/factory-and-resources.md) |
-| Engineer survival, run state, or permanent failure | [Survival and runs](docs/systems/survival-and-runs.md) |
-| Ship construction, travel, or scouting | [Ship and navigation](docs/systems/ship-and-navigation.md) |
+| Ship construction, movement, or scouting | [Ship and navigation](docs/systems/ship-and-navigation.md) |
+| Survival, run state, or permanent failure | [Survival and runs](docs/systems/survival-and-runs.md) |
 | Surface play, ports, or persistent outposts | [Landings and outposts](docs/systems/landings-and-outposts.md) |
-| Opening experience or presentation | [Tutorial](docs/tutorial.md), [UX and presentation](docs/ux-and-presentation.md) |
-| Architecture, persistence, or implementation sequence | [Technical direction](docs/technical-direction.md), [roadmap](docs/roadmap.md) |
-| Acceptance and regression checks | [Validation](docs/validation.md), plus the affected system document |
+| Opening experience or game interface | [Tutorial](docs/tutorial.md), [UX and presentation](docs/ux-and-presentation.md) |
+| Acceptance, regressions, or qualification | [Validation](docs/validation.md), the affected system document, current task evidence |
+| Reported defects or new ideas | [Known issues](known-issues.md), [feature ideas](feature-ideas.md) |
 
-## Design authority
-
-- Preserve the user-confirmed requirements in the decision register, especially single-engineer control, the stranded-ship introduction, permanent failure, and persistent surface supply facilities.
-- Working designs and example recipes are proposals. State consequential assumptions when implementing them; update their status when a decision is actually made.
-- Direct user instructions take precedence over these project guidelines. Do not turn an unresolved question into an unnecessary approval barrier for unrelated, reversible work.
-- Keep current behavior distinct from intended behavior. Do not describe planned systems as implemented.
+[The documentation index](docs/README.md) describes document ownership. Follow a specific reference when needed; do not preload the entire corpus or repeatedly reread it after recovery.
 
 ## Implementation practices
 
-- Work in small playable increments with a clear observable outcome.
-- Keep simulation state independent of presentation. Opening a screen or changing a camera must not create resources or alter simulation results.
-- Give persistent entities stable identities and clear ownership. Ship and outpost inventory must not be duplicated by docking, travel, unloading, saving, or loading.
-- Make resource transfer, production, damage, and terminal run transitions explicit and inspectable.
-- Use bounded, task-relevant document retrieval. Carry forward useful findings; do not repeatedly reread the entire documentation set or create recursive documentation tasks.
-- Record the actual result of a change and its verification. A passing helper test does not establish that a complete player workflow works.
-- Use focused checks for material behavior risks. Documentation changes need content and link checks; they do not require invented game tests or unrelated broad suites.
-- Preserve other contributors' changes and keep edits scoped to the task.
+- Work in small playable increments with a concrete observable outcome. Inspect current source before choosing affected files or claiming a feature exists.
+- Preserve confirmed requirements: one engineer, a stranded-ship introduction, factory-supported ship operation, permanent failure, and persistent surface facilities. Treat working designs and example recipes as proposals until decided.
+- Trace affected state owners, inputs, outputs, and presentation before changing a boundary. Keep authoritative simulation state separate from input, rendering, cameras, and interface panels.
+- Give persistent entities stable identities and explicit ownership when those systems are introduced. Resource transfer must reconcile source and destination; view changes, docking, saves, or loading must not duplicate inventory.
+- Make production, consumption, damage, and terminal transitions inspectable. Keep proposed future architecture distinct from the small current sandbox; add abstractions when a real task needs them.
+- Follow the existing C# namespace and Godot scene conventions. Keep editor automation in `game/dev/` separate from gameplay. Coordinate external scene edits with an open editor to avoid conflicting saves; retain relevant Godot UID sidecars.
+- Keep machine-specific executable paths and generated files in the existing ignored locations described in development setup. Do not commit build caches, local configuration, or unrelated owner changes.
+- Preserve task findings, acceptance criteria, completed steps, and remaining checks through interruptions. Recover by inspecting existing work rather than restarting or discarding it.
 
-## Keeping the docs useful
+## Workflow and verification
 
-Update the owning document when behavior or a decision changes, then adjust its links and affected acceptance criteria. Keep the roadmap's progress tied to concrete evidence. Add real setup and test commands only after they exist and have been checked.
+For substantial planned changes, use `/prompt-ass` → `/prompt-plan` → `/prompt-write <folder>` as defined in [the workflow](docs/workflow.md). These are assistant authoring conventions. Writing prompts does not run them; a request to execute a selected stack authorizes its implementation without another activation step. A small directly requested fix can proceed with a bounded plan and focused checks.
+
+Use T1 focused checks by default, T2 when affected systems must work together, and T3 for explicit gameplay/platform/release qualification. Inspect command composition to avoid duplicate builds and broad reruns. Documentation-only changes need content, link, and diff checks. Automate material gameplay risks; avoid tests that merely repeat implementation details.
+
+Report what changed, the actual checks and results, and remaining gaps. Compilation or a headless smoke does not prove player-visible behavior. Keep planned, implemented, observed, and qualified states separate; owner acceptance of a gap does not convert it into a passed check.
+
+Update the owning document when behavior or a decision changes. Link Gate results to source-bound evidence in the single [roadmap](docs/roadmap.md). Keep BOOT concise and current, with detailed history in task evidence. Preserve executed prompts and prior failures when recording repairs.

@@ -2,13 +2,13 @@
 
 Space Factory is a proposed 2D game about a single engineer operating a spaceship through its internal factory and a network of persistent surface outposts. This documentation captures the initial design discussion of **2026-11-08**.
 
-**Implementation status: bootstrap sandbox in progress.** The game design and its major systems remain planned. A Godot 4 .NET project and developer commands now live in this repository; see [development setup](development.md) for actual verification results.
+**Implementation status: bootstrap sandbox committed; gameplay systems remain planned.** A Godot 4 .NET project and developer commands now live in this repository; see [development setup](development.md) for recorded verification results and [BOOT.md](../BOOT.md) for current routing. Bootstrap delivery does not by itself qualify the roadmap's full foundation Gates.
 
 ## How to read these documents
 
 For a first overview, read [vision](vision.md), [game design](game-design.md), and [decisions and open questions](decisions-and-questions.md). To begin development, then read [technical direction](technical-direction.md), the next Phase in the [roadmap](roadmap.md), and the relevant [validation scenarios](validation.md).
 
-For a focused task, use the table below instead of reading every file. [AGENTS.md](../AGENTS.md) provides contributor and coding-agent practices.
+For a focused task, begin with [AGENTS.md](../AGENTS.md) and [BOOT.md](../BOOT.md), then use the table below instead of reading every file. [The workflow](workflow.md) defines documentation review, prompt authoring, execution, and closeout.
 
 ## Document map
 
@@ -22,12 +22,18 @@ For a focused task, use the table below instead of reading every file. [AGENTS.m
 | [Survival and runs](systems/survival-and-runs.md) | Engineer risk, combat boundaries, recoverable crises, terminal loss, and run lifecycle. |
 | [Tutorial](tutorial.md) | The deliberately solvable stranded-ship opening and first successful departure. |
 | [UX and presentation](ux-and-presentation.md) | Interior/exterior views, interaction, readable system states, and warnings. |
-| [Technical direction](technical-direction.md) | Proposed architecture and persistence boundaries without choosing a technology stack. |
+| [Technical direction](technical-direction.md) | Working simulation and persistence architecture using the selected Godot/.NET stack. |
 | [Development setup](development.md) | Godot/.NET installation, commands, scene automation, exports, and bootstrap evidence. |
+| [Module map](../MODULES.md) | Source-backed current responsibilities and explicitly planned future boundaries. |
+| [Workflow](workflow.md) | Task-scoped reading, documentation changes, prompt stacks, execution, validation tiers, and closeout. |
+| [Planning index](planning/README.md) | Phase design organization and references to the canonical roadmap. |
+| [Task index](tasks/README.md) | Executable task conventions and source-bound qualification records. |
+| [Decision-record index](decisions/README.md) | Detailed durable decisions linked from the existing decision register. |
 | [Roadmap](roadmap.md) | Small development Phases, Gates, dependencies, and expected evidence. |
 | [Validation](validation.md) | Scenario-based acceptance, regressions, and the distinction between design and proof. |
 | [Decisions and open questions](decisions-and-questions.md) | Confirmed requirements, working recommendations, unresolved choices, and provenance. |
 | [Glossary](glossary.md) | Shared terms, including the distinction between a run and an expedition. |
+| [Known issues](../known-issues.md) / [feature ideas](../feature-ideas.md) | Reported defects and proposed enhancements, separate from accepted scope. |
 
 ## Design status vocabulary
 
