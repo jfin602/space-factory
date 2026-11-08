@@ -24,7 +24,7 @@ The runner starts a separate `codex exec --json` process for each prompt using i
 
 ## Task folders and version metadata
 
-The private root [package.json](../package.json) starts at `0.0.0`. Its version is development roadmap/checkpoint metadata. It is independent of Godot `4.7.2`, .NET SDK `10.0.403`, and any future public game-release policy. Preserve the root manifest and its scripts when changing this version.
+The private root [package.json](../package.json) was ported at `0.0.0`; its current initial baseline is deliberately prepared at `0.1.0` for the authored [M1-P1 stack](tasks/p1/README.md). Its version is development roadmap/checkpoint metadata. It is independent of Godot `4.7.2`, .NET SDK `10.0.403`, and any future public game-release policy. Preparing this baseline neither executes gameplay nor qualifies a Gate. Preserve the root manifest and its scripts when changing this version.
 
 | Folder | Prompt type and version rule |
 | --- | --- |
@@ -36,7 +36,7 @@ The private root [package.json](../package.json) starts at `0.0.0`. Its version 
 
 For the initial `0.0.0` baseline, an ordinary Phase stack starts at `p0` with P1 assigned `0.0.1`. Starting `p1` requires a deliberate, reviewed root version update to `0.1.0` before running it. The runner does not perform this new-Phase baseline transition for you. Choose continuation versions deliberately so they do not reuse prior checkpoint subjects. Version metadata alone does not advance the [roadmap](roadmap.md).
 
-The accepted [M1 plan](planning/p1/first-flight.md) begins with M1-P1. Its first execution stack can use `p1` after preparing that `0.1.0` baseline; adding this runner does not create an extra gameplay Phase 0 or execute the M1 plan.
+The accepted [M1 plan](planning/p1/first-flight.md) begins with M1-P1. Its [p1 stack](tasks/p1/README.md) is now authored with the `0.1.0` baseline prepared and targets `0.1.1` through `0.1.4`. Validate it with `npm run space-factory:phase:validate -- p1`; when implementation is requested, use `npm run space-factory:phase -- p1`. P4 is a required native manual checkpoint and closeout. This preparation creates no extra gameplay Phase 0 and does not execute the M1 plan.
 
 ## Prompt grammar and templates
 

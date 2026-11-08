@@ -1,0 +1,40 @@
+TASK: Phase 1 / P3 — Spatial fixture and integration
+
+MODEL / REASONING / USAGE
+- Recommended configuration: `GPT-6 Sol High`.
+- Browser required: no.
+- GUI required: no.
+
+ROADMAP SCOPE
+Integrated preparation for M1-G1.1 and M1-G1.2. This prompt prepares the observation fixture and state evidence; P4 owns native qualification and closeout.
+
+GOAL
+Exercise the real ship/engineer/helm integration and provide a deliberate, visibly labeled spatial translation fixture so the live checkpoint can observe a moving ship frame without implementing or claiming factory-powered flight.
+
+PREREQUISITES AND NARROW READING
+Require P1 and P2 implementation with applicable passing checks. Read AGENTS.md, BOOT.md, the p1 README contract, the P3/check-matrix sections of implementation-plan.md, and actual implementation evidence. Inspect the current main scene, ship/control/engineer scripts, Main.cs smoke path, tools/dev, and development setup command documentation. Preserve newer work and recheck current Git/source identity.
+
+SCOPE AND STEPS
+1. Add ./tools/dev p1-demo as a narrowly scoped developer launch command using the existing selected Godot/.NET paths. It builds and opens the actual main scene with user argument --p1-spatial-demo. The command/flag do not exist in the assessed baseline: implement and verify them before documenting or using them as available.
+2. Only when explicitly enabled, show a clear development-fixture label and translate the real ship root through a bounded offset, then hold/reset predictably. Keep the external landmark stationary and the hull visible. Allow walking and helm interaction after translation; the tester must not edit source to move between cases.
+3. Keep ordinary ./tools/dev run free of the fixture and any free-flight control. The fixture neither creates propellant nor enables actual engine thrust, and cannot count as M1-G4.1 evidence.
+4. Extend the existing real-main-scene C# smoke or a small C# helper it invokes to exercise the actual shared ownership/control paths. Use bounded physics frames when movement/input requires them, release injected inputs, and preserve the existing timeout and meaningful success/failure exits. The current early _Ready exit must not skip deferred assertions.
+5. Cover the implementation-plan matrix: initial and translated local/world positions; all body-inset deck edges/corners; nearby versus out-of-range helm before/after translation; exclusive movement routing; held-input entry/exit cleanup and repeat transitions; ordinary unpowered ship invariance; and required-node/assertion failure semantics. Reuse P1/P2 checks instead of maintaining duplicate models.
+6. Update docs/development.md for the implemented command, intended fixture behavior, and actual check scope. Preserve the historical bootstrap record. Keep all gameplay/GUI results not yet observed explicitly unqualified.
+
+EXPLICIT DEFERRALS
+No general testing framework, desktop automation installation, runner port, production fuel/engine systems, normal-play ship motion, screenshot claims, or global documentation closeout. Fix only concrete defects revealed within the selected integration boundary and retain their failure evidence.
+
+VALIDATION
+Tier: T2. GUI required: no for this preparation step; native appearance/input is P4.
+Run ./tools/dev check once on the final candidate, including the bounded actual-scene integration checks. Validate the fixture's state path through that headless C# path without claiming to have viewed it. Check the new shell dispatch/help structurally (bash -n tools/dev and ./tools/dev help). Document any required fixture observation as NOT OBSERVED. The integration task may exceed an ordinary prompt's planning target; retain progress and state remaining bounded work rather than skipping checks.
+
+DONE CONDITION
+The material spatial/control invariants pass through real scene/state paths, the fixture launch route is implemented with its argument/state path checked headlessly, and ordinary play remains unpowered. Native opening/appearance remain NOT OBSERVED for P4. The handoff names the actual controls and expected observations; no Phase/Gate qualification is inferred from these preparation results.
+
+RECORD AND HANDOFF
+Append P3 results, exact source identity, commands and fixture behavior to docs/tasks/p1/qualification/implementation.md. Give the owner the native launch commands and actual interaction binding for P4. Report implementation scope, state-check results, and all still-unobserved native cases separately. Do not run P4 automatically, use --closeout, self-commit, or push; preserve the runner's default manual final boundary.
+
+VERSIONING
+The assigned project version is `0.1.3`.
+After P3's required preparation/integration scope passes, set only the existing root package.json version to this checkpoint, preserving its scripts/settings and the README runner contract. Native observations remain for P4; a failed required P3 check leaves the prior checkpoint unchanged. Do not self-commit.

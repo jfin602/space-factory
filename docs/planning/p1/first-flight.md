@@ -63,6 +63,8 @@ Walking and Piloting are mutually exclusive. Leaving the helm clears thrust inpu
 
 Follow [AGENTS.md](../../../AGENTS.md), [BOOT.md](../../../BOOT.md), and [the workflow](../../workflow.md), with task-scoped reading. The roadmap's M1-P1 through M1-P5 order is the dependency order. Use `/prompt-ass` → `/prompt-plan` → `/prompt-write <folder>` when authoring the selected execution stack; this plan does not itself create prompts, run a stack, or install a phase runner.
 
+The first selected execution stack is now authored under [docs/tasks/p1](../../tasks/p1/README.md), with its [assessment](../../tasks/p1/prompt-assessment.md) and [implementation plan](../../tasks/p1/implementation-plan.md). It implements M1-P1 only. The published [phase runner](../../phase-runner.md) validates its four prompts; the initial 0.1.0 development checkpoint baseline is prepared without executing gameplay. Later M1 stacks remain unauthored, and all gameplay progress stays in the roadmap.
+
 Each Phase may need several short prompts. Keep each ordinary prompt to one coherent responsibility, with explicit prerequisites and the smallest meaningful validation. Apply the workflow's planning budgets as decomposition guidance, not as a promise that the whole Phase or milestone will finish within a fixed time. Preserve any explicit manual checkpoint when a stack is later authored.
 
 | Evidence boundary | Appropriate checks |

@@ -1,0 +1,40 @@
+TASK: Phase 1 / P1 — Ship-local ownership
+
+MODEL / REASONING / USAGE
+- Recommended configuration: `GPT-6 Sol High`.
+- Browser required: no.
+- GUI required: no.
+
+ROADMAP SCOPE
+M1-P1, primarily M1-G1.1. The runner label Phase 1 means this coherent-ship stack, not the broader Restore the stranded ship Phase. This is the first execution prompt; authoring it did not implement anything.
+
+GOAL
+Give the existing deck and engineer a shared ship-local frame, with deck-relative containment and a stationary external reference, while preserving a runnable main scene and meaningful C# smoke checks.
+
+PREREQUISITES AND NARROW READING
+Read AGENTS.md, BOOT.md, docs/tasks/p1/README.md (execution/version contract), and the P1/source-boundary sections of docs/tasks/p1/implementation-plan.md. Inspect current Git revision/status and compatible partial work. Read only the selected M1-G1.1 criteria, game/scenes/main.tscn, game/scripts/Deck.cs, Engineer.cs, Main.cs, and the relevant tools/dev check composition. Inspect development setup if tool readiness is unknown.
+
+SCOPE AND STEPS
+1. Confirm that the source still matches or compatibly extends the assessed bootstrap. Preserve newer/owner work; adapt the bounded plan rather than resetting to the recorded revision.
+2. Introduce a small ship root that owns the existing deck and engineer. Convert initial child positions and local bounds together so the old (480, 300) offsets are not applied twice. Keep camera/HUD/world ownership deliberate.
+3. Share one deck-bounds definition between drawing and engineer containment. Keep the entire existing engineer body inside an appropriate inset, including corners. Remove dependence on the old fixed world/screen clamp. Preserve WASD and arrow movement.
+4. Add a simple recognizable hull and one external stationary landmark outside the ship hierarchy. Keep both readable in the existing viewport without an art or camera-system redesign.
+5. Update Main.cs required-node/path assumptions in the same change. Preserve execution of real C# scripts, the smoke success/failure contract, and bounded exit. Introduce only a small ship owner/script if needed; retain normal Godot namespace/UID conventions.
+6. Add or adapt the smallest actual-scene invariant checks for initial local ownership, nonzero ship translation, unchanged landmark/local positions, and body-inset bounds. Use real scene/state paths, not copied production math. Normal gameplay remains unpowered.
+
+EXPLICIT DEFERRALS
+Helm controls belong to P2. The deliberate visible translation fixture and integrated control checks belong to P3. Do not implement factory/inventory/recipes, propulsion, fuel, arbitrary building, ship rotation, landings, saves, or a generic simulation/test framework.
+
+VALIDATION
+Tier: T1. GUI required: no; visual qualification is P4.
+Run ./tools/dev doctor if readiness is unknown/changed. Run ./tools/dev check once for this candidate; it already imports, builds, runs the main-scene smoke, and exercises scene automation. If scene inspection is needed for a concrete ownership question, ./tools/dev inspect-scene scenes/main.tscn is available. Do not run component builds redundantly. A failed invariant must not fall through to the smoke success marker.
+
+DONE CONDITION
+The actual scene has coherent ship-local deck/engineer ownership and containment; a nonzero ship origin preserves local relationships while the world reference stays stationary; applicable runtime checks pass. Native appearance/input remain NOT OBSERVED until P4.
+
+RECORD AND REPORT
+Create/update docs/tasks/p1/qualification/implementation.md with this step's source identity, changed files, actual commands/results and relevant coordinates, remaining gaps, and P2 handoff. Do not mark M1 Gates PASS or the Phase complete. Report implementation, verification, and next scope separately. Do not self-commit or push.
+
+VERSIONING
+The assigned project version is `0.1.1`.
+After the required scope/checks pass, set only the existing root package.json version to this checkpoint, preserving its scripts/settings. Initial execution requires the prepared 0.1.0 baseline; resumed work follows the runner history checks in README.md. Failure leaves the prior checkpoint unchanged. Do not alter Godot/.NET pins or self-commit.

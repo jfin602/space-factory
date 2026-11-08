@@ -20,7 +20,7 @@ This is the immediate playtest target. Its five Phases expand the existing found
 | M1-P4 — First powered flight | Manufactured propellant enables and sustains real thrust | M1-P3 | G1.2 | NOT STARTED |
 | M1-P5 — Complete the playtest | Fresh startup, beacon objective, starvation/recovery, and restart work together | M1-P4 | G1.1, G1.2 | NOT STARTED |
 
-All M1 checks are currently **NOT OBSERVED**; no implementation stack or qualification evidence is created by accepting this plan. Attach source-bound task evidence to the relevant Gate as work executes, following [the workflow](workflow.md). Focused accounting checks support the integrated result; actual input, appearance, and the player loop require observation in the running game. Existing build/smoke evidence does not qualify future gameplay.
+All M1 gameplay checks are currently **NOT OBSERVED**. The [p1 stack](tasks/p1/README.md) is authored for M1-P1 only, with three implementation/integration prompts and a required native checkpoint/closeout; it has not been executed. Its prepared 0.1.0 runner baseline and authoring validation do not qualify gameplay. Attach source-bound task evidence to the relevant Gate as work executes, following [the workflow](workflow.md). Focused checks support the integrated result; actual input, appearance, and the player loop require observation in the running game. Existing build/smoke evidence does not qualify future gameplay.
 
 M1-P4 delivers the core first-flight behavior. The full milestone passes when all ten M1 Gates pass, including the repeatable scenario in M1-P5. Review the original G0/G1 criteria against the same evidence before changing those broader statuses; milestone completion does not automatically qualify unrelated criteria or any later expedition Phase.
 
@@ -120,7 +120,7 @@ M1-P4 delivers the core first-flight behavior. The full milestone passes when al
 
 Linux is the immediate playtest target; Windows/macOS remain desktop targets requiring their own later export and native evidence. Fixed hull and installed machinery, one recipe, one pipe socket, and one beacon bound this milestone. General construction/logistics, ship rotation, damage/repair crafting, complex electrical systems, landings, combat, save/load, permanent-loss qualification, and outposts remain later work.
 
-The next implementation scope is **M1-P1**, through the assessment/plan/prompt process in [workflow](workflow.md). This documentation update does not author or execute that stack. After the first flight, use observed play to order richer placement, repairs, hull/propulsion improvements, and the following expedition work.
+The next implementation scope is **M1-P1**, using its authored [p1 assessment, plan, and prompts](tasks/p1/README.md) under [the workflow](workflow.md). Authoring does not execute the stack; later M1 execution stacks remain to be written. After the first flight, use observed play to order richer placement, repairs, hull/propulsion improvements, and the following expedition work.
 
 ## First integrated slice
 

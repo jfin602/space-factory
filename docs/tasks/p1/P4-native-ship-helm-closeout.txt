@@ -1,0 +1,42 @@
+TASK: Phase 1 / P4 — Native ship and helm closeout
+
+MODEL / REASONING / USAGE
+- Recommended configuration: `GPT-6 Sol High`.
+- Browser required: yes.
+- GUI required: yes.
+
+MANUAL FINAL BOUNDARY
+This is the stack's sole final closeout. Run it deliberately in an interactive session after P3. The repository uses the historical Browser required field for native Godot/manual handoffs; yes stops this prompt even with --closeout. Use the normal runner launch without that option. GUI required is supplemental information, not the pause mechanism. A Godot window is the required surface; browser access alone cannot control it.
+
+ROADMAP SCOPE AND GOAL
+Qualify only M1-G1.1 and M1-G1.2 by observing the real native ship/helm workflow, then reconcile its evidence and next routing. The development translation fixture is spatial evidence, never factory-powered flight. Full broader Phase 1 and later M1 work remain outside scope.
+
+PREREQUISITES AND NARROW READING
+Read AGENTS.md, BOOT.md, the p1 README contract, selected roadmap Gates, the P4 section/check matrix of implementation-plan.md, and actual qualification/implementation.md results. Require completed P1–P3 scope and applicable passing checks. Inspect current HEAD, relevant dirty-source identity, actual controls, and available native display/input/capture tools. Preserve uncommitted/owner work. Revalidate only evidence invalidated by intervening source changes.
+
+A — NATIVE QUALIFICATION
+1. Launch normal play with ./tools/dev run. Record the source candidate, platform/tool versions, actual command, and actual input/capture method. Do not invent installed utilities or treat headless smoke output as a visible run. This launch wrapper already builds; avoid an extra standalone build/check on the same candidate without a concrete reason.
+2. Observe recognizable hull/deck/grid and a stationary external landmark. Walk toward each edge and corner; the complete engineer body remains inside the deck. Record real actions and before/after images or a short recording where available.
+3. Attempt the actual interaction binding from outside helm range, then nearby. The first attempt must not enter; the nearby attempt enters exactly once. Confirm the mode/instructions change and the engineer retains its local position.
+4. In Piloting, hold each direction. The engineer must not walk, and the ordinary unpowered ship must not translate/accelerate. Observe the actual no-supply explanation rather than a fake fuel/readiness display.
+5. Enter while walking and exit while a pilot direction is held; repeat entry/exit. Confirm residual engineer velocity and prior ship requests are cleared on their transitions, current walking input behaves normally afterward, and no stored thrust returns or teleport occurs. Correlate native observations with P3 state evidence; screenshots alone cannot establish request cleanup.
+6. Close normal play cleanly. Launch the implemented ./tools/dev p1-demo command. Confirm the explicit development-fixture label, bounded translation of the actual ship relative to the stationary landmark, and preserved deck/engineer/helm alignment.
+7. Once translated, repeat deck-edge/corner walking, out-of-range/nearby helm interaction, and control transitions. Range/bounds must follow the ship rather than the old screen coordinates. Confirm the fixture's hold/reset is predictable and closing it is clean.
+8. Record each scenario as PASS, FAIL, NOT OBSERVED, or BLOCKED with the specific dependency. Use only tools actually available. If native interaction is unavailable, give the owner these concrete actions and retain NOT OBSERVED until actual results are provided; do not infer a pass or mark the Phase complete.
+
+B — EVIDENCE AND SINGLE CLOSEOUT
+1. Create docs/tasks/p1/qualification/native-playtest.md from observed results, naming source revision plus relevant dirty-source identity, commands/actions, expected and observed results, supporting artifacts/state evidence, and gaps. Preserve failed observations and any subsequent repair evidence.
+2. If a concrete defect is found, retain the implemented work and identify the smallest repair/recheck. Do not turn closeout into a broad new implementation phase, silently weaken criteria, or advance the version/Gates while required evidence is missing. Record a precise blocked/partial disposition if the issue cannot be resolved within this scope.
+3. Create docs/tasks/p1/closeout.md with separate implementation, verification, and progression conclusions. Map actual evidence to every criterion in M1-G1.1 and M1-G1.2. A helper pass or owner acceptance of a gap does not make an unobserved check pass.
+4. Reconcile this stack's README, the canonical roadmap, BOOT, MODULES, and owning docs that actually changed. Record real source responsibilities rather than proposed filenames. Mark only supported selected Gate/Phase results; do not automatically qualify broader G0/G1 criteria or later M1 Phases. Keep full-factory/propulsion claims out of the result.
+5. If both selected Gates pass, route the next gameplay scope to M1-P2. Otherwise route to the exact missing observation or bounded repair. Check documentation links/diff without rerunning unchanged gameplay solely for documentation reconciliation. Final changes remain reviewable; do not self-commit or push.
+
+VALIDATION
+Tier: T3 for the native scenarios, then T1 content/link/diff review for reconciliation. Run fresh focused/integration checks only if a repair or intervening source change invalidated the existing evidence. No export, cross-platform, factory, survival, or save qualification is required by this stack.
+
+REQUIRED FINAL REPORT
+State the source candidate and selected Gate outcomes; list the observed normal-play and fixture behavior, actual checks, evidence paths, and limitations. Distinguish a completed implementation from complete qualification. State whether M1-P2 may proceed and the exact remaining task when it may not. Do not claim powered flight from the fixture.
+
+VERSIONING
+The assigned project version is `0.1.4`.
+Only if both selected Gates and this closeout pass, set the existing root package.json version to this checkpoint, preserving its scripts/settings. A failed/unobserved requirement retains the prior checkpoint. Leave the final changes uncommitted for review; do not create a checkpoint commit to imply success.

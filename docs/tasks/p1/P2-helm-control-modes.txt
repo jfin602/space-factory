@@ -1,0 +1,41 @@
+TASK: Phase 1 / P2 — Helm control modes
+
+MODEL / REASONING / USAGE
+- Recommended configuration: `GPT-6 Sol High`.
+- Browser required: no.
+- GUI required: no.
+
+ROADMAP SCOPE
+M1-P1 / M1-G1.2, preserving M1-G1.1. This remains the coherent-ship stack; factory machinery and applied propulsion are later M1 Phases.
+
+GOAL
+Let the nearby engineer enter and leave a visible helm, route movement exclusively to Walking or Piloting, clear stale requests on transition, and explain the genuinely unavailable propulsion supply.
+
+PREREQUISITES AND NARROW READING
+Require P1's implemented scope and passing applicable checks. Read AGENTS.md, BOOT.md, the p1 README contract, the P2/control-boundary sections of implementation-plan.md, and P1's actual implementation evidence. Inspect current main scene, engineer/ship owner, project.godot input actions, and overlay. Read only the selected helm Gate and accepted M1 ship/presentation sections if behavior needs clarification. Inspect current Git state and preserve compatible partial work.
+
+SCOPE AND STEPS
+1. Add a visible helm located in ship-local space with a simple nearby-interaction range. Use the same coordinate frame for engineer/helm distance, including after ship translation.
+2. Add one named InputMap interaction action with a communicated binding, such as E, preserving existing WASD/arrow movement. Handle each press edge once through one authoritative mode owner so a single press cannot enter and exit in the same frame.
+3. Permit entry only for a nearby Walking engineer. Entry preserves local position, stops walking, and clears residual engineer velocity. In Piloting, direction input produces only a ship-control intention and cannot walk the engineer.
+4. Permit leaving the helm to restore Walking. Clear the old thrust request immediately; subsequent Walking may use current walking input normally, but must not reactivate an old ship request. Repeated transitions preserve ship and engineer position.
+5. Keep applied propulsion unavailable because no real supply/engine chain has been implemented. Derive its reason from the ship/control capability owner, e.g. no propellant supply available. A pilot intention must not accelerate or translate the ship. Do not invent a tank/inventory simulator, independent HUD boolean, free-flight mode, or fuel meter to fake this state.
+6. Wire a compact current-mode label, relevant control/nearby interaction hint, and truthful unavailable-supply feedback to actual state. Preserve useful viewport framing and required smoke nodes/assertions as the overlay changes.
+7. Add focused checks through the actual control/scene paths for range acceptance/refusal, one transition per interaction edge, exclusive input, and immediate request/velocity cleanup. Keep integration expansion bounded for P3.
+
+EXPLICIT DEFERRALS
+No factory, loading, construction, recipe, fuel debit, actual thrust, ship rotation, complex menus, or full input-remapping framework. No native qualification or Phase completion claim in this step.
+
+VALIDATION
+Tier: T1. GUI required: no; P4 observes real native input and readability.
+Run ./tools/dev check once after this candidate's changes; reuse its build/import/runtime composition. Record the real mode/request/velocity results, including out-of-range interaction and entry/exit while directional input is held. Do not mask missing required dependencies or failed assertions with a success marker.
+
+DONE CONDITION
+One authoritative control path implements nearby helm entry/exit, exclusive Walking/Piloting, transition cleanup, and state-derived unavailable-supply feedback. Normal piloting applies no ship motion. Required focused checks pass and P1 spatial ownership remains intact.
+
+RECORD AND REPORT
+Append source-bound P2 findings/results to docs/tasks/p1/qualification/implementation.md, preserving prior evidence and failures. Identify the actual input binding and source owners for P3/P4. Keep native checks NOT OBSERVED and Gates unqualified. Report remaining risks and the P3 handoff. Do not self-commit or push.
+
+VERSIONING
+The assigned project version is `0.1.2`.
+After required work/checks pass, set only the existing root package.json version to this checkpoint, preserving its scripts/settings. Require P1's actual completed scope and compatible checkpoint history as described in README.md. Failure leaves the prior checkpoint unchanged; do not self-commit.
