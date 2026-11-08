@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Space Factory
 
 A 2D, top-down survival and automation game about one engineer keeping a spaceship alive through the factory built inside it.
@@ -30,3 +31,6 @@ The engineer has one life per run. Catastrophic ship damage or irreversible reso
 7. Live with permanent consequences: the engineer can die and a run can be lost.
 
 The current milestone is to turn this design into a small, testable playable sequence. See the roadmap for the proposed order; no development Phase is complete merely because its design is documented.
+=======
+# space-factory
+>>>>>>> 8204fc7 (first commit)
