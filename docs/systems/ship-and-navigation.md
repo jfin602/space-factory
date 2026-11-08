@@ -1,6 +1,6 @@
 # Ship and navigation
 
-This describes intended behavior, not implementation. **Confirmed** identifies owner decisions; **recommended** identifies proposals. Values and examples are illustrative. See [game design](../game-design.md) and the [decision register](../decisions-and-questions.md).
+This describes intended behavior and identifies the currently implemented M1-P1 subset. **Confirmed** identifies owner decisions; **recommended** identifies proposals. Values and examples are illustrative. See [game design](../game-design.md), the [decision register](../decisions-and-questions.md), and [M1-P1 closeout](../tasks/p1/closeout.md).
 
 ## Confirmed foundations
 
@@ -15,7 +15,7 @@ The detailed relationship between ship damage, surviving a crash, and engineer d
 
 ## Accepted M1 ship and flight rules
 
-**Scope: First Factory-Powered Flight, accepted for implementation planning on 2026-11-08; gameplay is not yet implemented or qualified.** See the [milestone plan](../planning/p1/first-flight.md) and canonical [roadmap Gates](../roadmap.md#milestone-m1-first-factory-powered-flight).
+**Scope: First Factory-Powered Flight, accepted for implementation planning on 2026-11-08.** The ship-local hull/deck/engineer/helm, stationary beacon, and exclusive Walking/Piloting modes are implemented and qualified under [M1-P1](../tasks/p1/closeout.md). The factory, real supply chain, applied propulsion, and flight rules below remain planned. See the [milestone plan](../planning/p1/first-flight.md) and canonical [roadmap Gates](../roadmap.md#milestone-m1-first-factory-powered-flight).
 
 - Use one fixed starter hull, a recognizable outline, a walkable deck, installed machinery, and a nearby-interaction helm. Stars and stationary beacons make world movement visible.
 - Ship position belongs to space. Engineer position, deck bounds, grid cells, machinery, and connections belong to the ship. Translating the ship preserves their local positions and relationships.

@@ -26,6 +26,7 @@ Usage: ./tools/dev <command> [argument]
   build                  Build the C# project
   check                  Import, build, runtime smoke and scene automation
   run                    Build and play the sandbox in the foreground
+  p1-demo                Build and play the labeled ship-translation fixture
   editor                 Open the project editor in the foreground
   inspect-scene <path>   Inspect a res:// scene or path under game/
   automation-smoke       Create, edit, save and reload a disposable scene
@@ -69,6 +70,12 @@ do_build() {
 smoke() {
   run_logged smoke 30 "${GODOT_CMD[@]}" --headless --path "$PROJECT" -- --smoke
   grep -q 'SPACE_FACTORY_SMOKE_OK main scene and C# scripts executed' "$ARTIFACTS/logs/smoke.log" || { echo 'Smoke marker absent' >&2; return 1; }
+}
+
+demo_smoke() {
+  run_logged demo-smoke 30 "${GODOT_CMD[@]}" --headless --path "$PROJECT" -- --smoke --p1-spatial-demo
+  grep -q 'SPACE_FACTORY_P1_DEMO_OK' "$ARTIFACTS/logs/demo-smoke.log" || { echo 'Demo smoke marker absent' >&2; return 1; }
+  grep -q 'SPACE_FACTORY_SMOKE_OK main scene and C# scripts executed' "$ARTIFACTS/logs/demo-smoke.log" || { echo 'Smoke marker absent' >&2; return 1; }
 }
 
 scene_tool() {
@@ -137,8 +144,9 @@ case "${1:-help}" in
   doctor) doctor ;;
   import) need_tools; do_import ;;
   build) need_tools; do_build ;;
-  check) need_tools; do_import; do_build; smoke; scene_tool automation-smoke automation-smoke; negative_scene_check ;;
+  check) need_tools; do_import; do_build; smoke; demo_smoke; scene_tool automation-smoke automation-smoke; negative_scene_check ;;
   run) need_tools; do_build; exec "${GODOT_CMD[@]}" --path "$PROJECT" ;;
+  p1-demo) need_tools; do_build; exec "${GODOT_CMD[@]}" --path "$PROJECT" -- --p1-spatial-demo ;;
   editor) need_tools; exec "${GODOT_CMD[@]}" --editor --path "$PROJECT" ;;
   inspect-scene)
     need_tools

@@ -1,6 +1,6 @@
 # Development roadmap
 
-**Status: M1 First Factory-Powered Flight plan accepted on 2026-11-08; gameplay implementation remains NOT STARTED.** The bootstrap is committed, with its evidence in [development setup](development.md). Existing G0.1 remains IN PROGRESS; no roadmap Gate has been qualified. [Decisions and questions](decisions-and-questions.md) records the owner instruction and the scope of the accepted prototype choices.
+**Status: M1 First Factory-Powered Flight plan accepted on 2026-11-08; M1-P1 coherent ship COMPLETE.** Its selected M1-G1.1 and M1-G1.2 Gates passed source-bound runtime and native checks in the [p1 closeout](tasks/p1/closeout.md). M1-P2–P5 remain NOT STARTED. The bootstrap evidence is in [development setup](development.md). Existing broader G0.1 remains IN PROGRESS; no broader G0/G1 Gate was qualified by this closeout. [Decisions and questions](decisions-and-questions.md) records the accepted prototype choices.
 
 ## Milestone M1: First Factory-Powered Flight
 
@@ -14,13 +14,13 @@ This is the immediate playtest target. Its five Phases expand the existing found
 
 | Phase | Observable outcome | Dependency | Broader Gates served | Status |
 | --- | --- | --- | --- | --- |
-| M1-P1 — A coherent ship | Ship-relative interior, world reference, and exclusive walking/piloting modes | Committed bootstrap | G0.1, foundation for G0.2 | NOT STARTED |
+| M1-P1 — A coherent ship | Ship-relative interior, world reference, and exclusive walking/piloting modes | Committed bootstrap | G0.1, foundation for G0.2 | **COMPLETE** — [closeout](tasks/p1/closeout.md) |
 | M1-P2 — Prepare the factory | Finite supply can be loaded and the missing pipe installed | M1-P1 | G0.2, G1.1 | NOT STARTED |
 | M1-P3 — Manufacture propellant | Timed production and bounded delivery fill the tank | M1-P2 | G0.2, G1.2 | NOT STARTED |
 | M1-P4 — First powered flight | Manufactured propellant enables and sustains real thrust | M1-P3 | G1.2 | NOT STARTED |
 | M1-P5 — Complete the playtest | Fresh startup, beacon objective, starvation/recovery, and restart work together | M1-P4 | G1.1, G1.2 | NOT STARTED |
 
-All M1 gameplay checks are currently **NOT OBSERVED**. The [p1 stack](tasks/p1/README.md) is authored for M1-P1 only, with three implementation/integration prompts and a required native checkpoint/closeout; it has not been executed. Its prepared 0.1.0 runner baseline and authoring validation do not qualify gameplay. Attach source-bound task evidence to the relevant Gate as work executes, following [the workflow](workflow.md). Focused checks support the integrated result; actual input, appearance, and the player loop require observation in the running game. Existing build/smoke evidence does not qualify future gameplay.
+M1-P1's selected checks are **PASS** through the [p1 implementation](tasks/p1/qualification/implementation.md), [native playtest](tasks/p1/qualification/native-playtest.md), and [closeout](tasks/p1/closeout.md). The remaining M1 gameplay checks are **NOT OBSERVED**. The p1 stack was executed manually in an uncommitted working tree; its development checkpoint versions are not runner Git checkpoint commits. Focused checks support the integrated result; actual input and appearance were observed in the native Linux game. This evidence does not qualify factory-powered flight or later player loops.
 
 M1-P4 delivers the core first-flight behavior. The full milestone passes when all ten M1 Gates pass, including the repeatable scenario in M1-P5. Review the original G0/G1 criteria against the same evidence before changing those broader statuses; milestone completion does not automatically qualify unrelated criteria or any later expedition Phase.
 
@@ -28,14 +28,14 @@ M1-P4 delivers the core first-flight behavior. The full milestone passes when al
 
 **Outcome:** the engineer walks inside a recognizable ship situated in space. The interior uses ship-local coordinates; the ship itself has a separate world position.
 
-**M1-G1.1 — Ship and interior ownership — NOT STARTED**
+**M1-G1.1 — Ship and interior ownership — PASS** ([source-bound closeout](tasks/p1/closeout.md#verification-against-selected-gates), [native spatial evidence](tasks/p1/qualification/native-playtest.md#explicit-spatial-fixture))
 
 - Align the existing deck/grid with the starter hull and express engineer movement bounds relative to that deck.
 - Changing ship world position carries the deck, engineer, and installed interior objects together, preserving their local positions and grid alignment.
 - Provide a stationary external landmark so world movement can be distinguished from camera movement.
 - Observe the spatial result in the game; a bounded translation fixture may establish this Gate before production-powered flight exists, without counting as M1-G4.1 evidence.
 
-**M1-G1.2 — Helm and control modes — NOT STARTED**
+**M1-G1.2 — Helm and control modes — PASS** ([source-bound closeout](tasks/p1/closeout.md#verification-against-selected-gates), [native control evidence](tasks/p1/qualification/native-playtest.md#normal-play))
 
 - Let the engineer approach and interact with the helm to enter Piloting mode and leave it to restore Walking mode.
 - Route movement input exclusively to the active controller; walking input must not also command the ship.

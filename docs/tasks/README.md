@@ -2,13 +2,13 @@
 
 This directory holds bounded implementation briefs and their results. Use the [workflow](../workflow.md) and the selected Gates in the [roadmap](../roadmap.md) to define the next task.
 
-## Authored stacks
+## Task stacks
 
-| Stack | Scope | Authoring state |
+| Stack | Scope | Current state |
 | --- | --- | --- |
-| [p1 — A coherent ship](p1/README.md) | M1-P1 / M1-G1.1 and M1-G1.2; three implementation/integration prompts plus one native manual checkpoint and closeout | Authored, not executed; initial checkpoint baseline prepared at 0.1.0 |
+| [p1 — A coherent ship](p1/README.md) | M1-P1 / M1-G1.1 and M1-G1.2; three implementation/integration prompts plus one native manual checkpoint and closeout | Executed manually and qualified on Linux; [closeout](p1/closeout.md), checkpoint 0.1.4; uncommitted review state |
 
-The `p1` folder and runner Phase 1 label refer to M1-P1, not the entire broader stranded-ship Phase 1. [The roadmap](../roadmap.md) remains the gameplay progress authority; authoring status and runner metadata do not qualify its Gates.
+The `p1` folder and runner Phase 1 label refer to M1-P1, not the entire broader stranded-ship Phase 1. [The roadmap](../roadmap.md) remains the gameplay progress authority; its selected p1 Gate results link to runtime and native evidence. Authoring status and runner metadata alone do not qualify Gates.
 
 ## Folder conventions
 

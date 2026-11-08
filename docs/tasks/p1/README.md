@@ -1,8 +1,8 @@
 # p1 — M1-P1: A coherent ship
 
-**Disposition: AUTHORED, NOT EXECUTED.** The owner requested `/prompt-ass + /prompt-plan + /prompt-write p1` on 2026-11-08. This stack implements only [M1-P1](../../roadmap.md#m1-p1-a-coherent-ship), serving **M1-G1.1** and **M1-G1.2**. It does not implement the broader expedition roadmap's Phase 1, the remaining M1 Phases, or factory-powered flight.
+**Disposition: EXECUTED AND QUALIFIED for M1-P1 on 2026-11-08.** The owner first requested `/prompt-ass + /prompt-plan + /prompt-write p1`, then directed P1–P4 manually in the current uncommitted working tree. This stack implements only [M1-P1](../../roadmap.md#m1-p1-a-coherent-ship), serving **M1-G1.1** and **M1-G1.2**. It does not implement the broader expedition roadmap's Phase 1, the remaining M1 Phases, or factory-powered flight. See [implementation evidence](qualification/implementation.md), [native playtest](qualification/native-playtest.md), and [closeout](closeout.md).
 
-The [roadmap](../../roadmap.md) remains the sole Gate/Phase progress authority. Both selected Gates remain NOT STARTED and gameplay checks remain NOT OBSERVED. Authorship and parser validation are not execution or gameplay evidence.
+The [roadmap](../../roadmap.md) remains the sole Gate/Phase progress authority. It records both selected Gates PASS and M1-P1 COMPLETE from source-bound runtime and native evidence. Authorship and parser validation alone did not qualify gameplay.
 
 ## Source and plan
 
@@ -20,13 +20,13 @@ The [roadmap](../../roadmap.md) remains the sole Gate/Phase progress authority. 
 | P3 | [Spatial fixture and integration](P3-spatial-fixture-integration.txt) | Explicit development translation fixture and actual-scene integration checks | T2 | No | 0.1.3 |
 | P4 | [Native ship and helm closeout](P4-native-ship-helm-closeout.txt) | Manual native-game observation, then the single evidence-based closeout | T3 then T1 reconciliation | Yes | 0.1.4 |
 
-Execute P1 → P2 → P3 → **manual P4**. Every step requires its predecessor's implemented scope and applicable passing checks. All four prompts are currently unrun. P4 contains the live checkpoint followed by closeout so there is no intermediate native-GUI task that the runner would silently execute without pausing.
+P1 → P2 → P3 → **manual P4** was completed in order. P1–P3 passed actual-scene checks; P4 performed native observation, repaired the fixture label/framing, rechecked, and closed out the selected Gates. P4 contains the live checkpoint followed by closeout so there is no intermediate native-GUI task that the runner would silently execute without pausing.
 
 ## Runner commands and prepared baseline
 
 Use the published [Space Factory runner](../../phase-runner.md), [parser](../../../scripts/space-factory-phase-core.mjs), and [validator](../../../scripts/validate-space-factory-phase.mjs). Folder `p1` requires `TASK: Phase 1 / Pn`, contiguous top-level `Pn-<slug>.txt` files, supported model metadata, sequential 0.1.n targets, and one final closeout. Here the runner's Phase 1 label maps specifically to M1-P1; it does not rename the broader roadmap.
 
-The port initially set root `package.json` to 0.0.0. This authoring change deliberately prepares its existing **development checkpoint baseline at 0.1.0** so P1's 0.1.1 target is valid. The field is independent of Godot/.NET versions and a future public game-release policy. Preparing it does not run a prompt or complete any Gate. All existing manifest scripts/settings are preserved.
+The port initially set root `package.json` to 0.0.0. Authoring prepared its **development checkpoint baseline at 0.1.0**; manual execution advanced it through P1–P4's assigned values to **0.1.4** only after each step's required evidence. The field is independent of Godot/.NET versions and a future public game-release policy. All existing manifest scripts/settings are preserved.
 
 From the repository root:
 
@@ -34,15 +34,15 @@ From the repository root:
 npm run space-factory:phase:validate -- p1
 ```
 
-When execution is requested, with the [runner prerequisites](../../phase-runner.md#setup-and-commands) available and a reviewed working tree:
+For a fresh compatible stack only, with the [runner prerequisites](../../phase-runner.md#setup-and-commands) available and a reviewed working tree:
 
 ```bash
 npm run space-factory:phase -- p1
 ```
 
-The initial run expects root version 0.1.0 and no root `package-lock.json`. No npm install is needed. After implementation starts, use the runner's version/Git-history resume checks; do not reset a progressed checkout to the initial baseline. Grammar validation does not launch Codex or prove native gameplay.
+The initial runner run expects root version 0.1.0 and no root `package-lock.json`. No npm install is needed. **This manually executed stack has no runner checkpoint commits despite its progressed version; do not launch or resume the runner here without reconciling its Git-history contract.** Do not reset this checkout to the initial baseline. Grammar validation does not launch Codex or prove native gameplay.
 
-**Keep P4 as a deliberate manual native-game handoff.** Use the normal launch without `--closeout`. P4 declares the repository's canonical historical `- Browser required: yes.` field, which also marks native Godot checks and stops the runner even if `--closeout` is supplied. Its additional `GUI required: yes` description is informational only. This historical field name does not mean a browser can control the game. After P3, open P4 in an interactive Codex session with actual native desktop access or perform its named player actions with the owner.
+**P4 was handled as a deliberate manual native-game handoff, without a P4 runner launch or `--closeout`.** Its canonical historical `- Browser required: yes.` field marks native Godot checks and would stop the runner even if `--closeout` were supplied. Its additional `GUI required: yes` description is informational only. This historical field name does not mean a browser can control the game. The actual native actions and results are in [native-playtest](qualification/native-playtest.md).
 
 Reconcile unexecuted metadata if the actual runner contract changes. Never infer observed gameplay from a parser check, process exit, version update, or checkpoint commit.
 
@@ -65,7 +65,7 @@ The recommended model strings follow the verified Space Factory parser; actual m
 
 The engineer stays inside a deck that belongs to a movable ship root. World references remain stationary. Nearby helm interaction switches exclusively between walking and piloting, clears prior requests, and explains the genuinely unavailable propulsion supply. Ordinary pilot input cannot move the ship. A visibly labeled, explicitly launched spatial fixture demonstrates interior coherence after translation.
 
-P4 may qualify M1-G1.1 and M1-G1.2 only with the required state and native observations. If both pass, the next gameplay scope is M1-P2. Otherwise BOOT and the closeout must identify the exact repair or missing observation; do not advance to factory work under a false completed-Phase claim.
+P4 qualified M1-G1.1 and M1-G1.2 with required state and native observations after its bounded fixture presentation repair. The next gameplay scope is **M1-P2**; [closeout](closeout.md) records the supported result and limits.
 
 ## Authoring verification
 
@@ -75,4 +75,4 @@ Authoring checks on 2026-11-08:
 - Actual runner-core version/history checks against the seven reachable commits through a6b77498: PASS; zero completed prompts, next P1, expected prepared baseline 0.1.0. P1–P3 are non-handoff prompts; P4 has the canonical required-manual flag.
 - Relative references/heading targets, Gate coverage/status preservation, and the scoped diff: PASS. The root manifest changes only its development checkpoint version; gameplay and runner implementation source are unchanged.
 
-These are authoring/tooling checks. No Godot gameplay, native input, or live Codex stack execution was performed by authoring this stack. Runtime prerequisites and the actual working tree must still be checked where it is executed.
+These were authoring/tooling checks at the time of prompt writing, not gameplay evidence. Later manual P1–P4 execution and qualification are recorded separately above and in the linked evidence. No runner checkpoint commits were fabricated.

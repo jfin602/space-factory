@@ -10,29 +10,29 @@ The accepted immediate target is [M1 — First Factory-Powered Flight](docs/road
 
 ## Current starting point — 2026-11-08
 
-The bootstrap is committed. The baseline inspected for this workflow import is [Space Factory `536cfd08`](https://github.com/jfin602/space-factory/commit/536cfd08da06f119e91d8a4f8865b4508be2e579). This identifies the inspected source, not a revision to reset to; inspect current HEAD and local work at each session.
+The bootstrap is committed. M1-P1 was implemented and natively qualified as uncommitted work on `main` HEAD `4ec4b625b7948f02ba6df938263eea7e763dc579`; inspect current HEAD and local work rather than resetting to an earlier revision. [The p1 closeout](docs/tasks/p1/closeout.md) owns the detailed evidence.
 
 | Area | Current state |
 | --- | --- |
 | Engine and language | Godot 4.7.2 .NET with C# and the Compatibility renderer. |
 | SDK | .NET SDK 10.0.403 in `game/global.json`; `Godot.NET.Sdk/4.7.2` and `net10.0` in `game/SpaceFactory.csproj`. |
-| Playable sandbox | `game/scenes/main.tscn` composes a drawn deck/grid, bounded engineer movement, camera, and instructions. Movement uses WASD or arrow keys. |
+| Playable sandbox | `game/scenes/main.tscn` composes a ship-local deck, engineer, and helm; a world beacon; camera; and mode/help/feedback overlay. WASD or arrows walk, and nearby **E** enters/leaves Piloting. Propulsion remains unavailable. |
 | Developer tooling | `tools/dev` exposes inspection, import, C# build, runtime smoke, saved-scene automation, editor, play, and export commands. |
-| Phase runner | Node.js 24 tooling is ported from Dope with `npm run space-factory:phase` and `space-factory:phase:validate`. Root package version `0.1.0` prepares the authored `p1` stack's development checkpoint baseline; it is independent of engine/SDK versions and does not record gameplay completion. See [the runner guide](docs/phase-runner.md). |
-| Recorded Linux evidence | Development setup records successful build/check, scene automation, visible movement, and Linux export/launch on Linux Mint. Those are prior bootstrap results, not new runtime checks performed by this documentation import. |
+| Phase runner | Node.js 24 tooling provides `npm run space-factory:phase` and `space-factory:phase:validate`. Root package version `0.1.4` records the completed p1 development checkpoint, independent of engine/SDK pins. P1–P4 were executed manually without runner checkpoint commits; reconcile Git history before any runner resume. See [the runner guide](docs/phase-runner.md). |
+| Recorded Linux evidence | [P1–P3 implementation evidence](docs/tasks/p1/qualification/implementation.md) records actual-scene checks. [P4 native evidence](docs/tasks/p1/qualification/native-playtest.md) records visible ship, movement, helm, unpowered feedback, and the spatial fixture on Linux Mint. Bootstrap build/export evidence remains in [development setup](docs/development.md). |
 | Windows and macOS | Export presets exist. Their exports and target-OS runs remain unverified in the recorded baseline. |
 | Gameplay systems | Factory production, powered ship flight, travel, combat, saves, and outposts remain planned. The visible grid is not an implemented factory placement system. |
-| Roadmap | The M1 plan is accepted; all M1 Phases/Gates remain NOT STARTED and their gameplay checks NOT OBSERVED. G0.1 remains IN PROGRESS; G0.2 and subsequent broader Gates retain their unqualified status. Plan adoption and the runner port do not qualify gameplay. |
+| Roadmap | M1-P1 is COMPLETE; selected M1-G1.1 and M1-G1.2 are PASS. M1-P2–P5 and their Gates remain NOT STARTED/NOT OBSERVED. G0.1 remains IN PROGRESS; broader G0/G1 statuses were not changed by p1. |
 
 ## Next development scope
 
-The next scope is **M1-P1 — A coherent ship**, covering ship-local interior ownership, deck-relative engineer bounds, a stationary world reference, and nearby helm interaction with exclusive Walking/Piloting modes. Its [p1 execution stack](docs/tasks/p1/README.md), [assessment](docs/tasks/p1/prompt-assessment.md), and [implementation plan](docs/tasks/p1/implementation-plan.md) are authored and unrun. Read the selected [roadmap Gates](docs/roadmap.md#m1-p1-a-coherent-ship) and current source, then execute the requested stack in order when implementation is authorized.
+The next gameplay scope is **M1-P2 — Prepare the factory**: finite starting supplies, nearby cargo/processor transfer, the missing pipe segment, and real bounded storage/connection ownership. Preserve the qualified ship-local hierarchy and control mode owner from [p1 closeout](docs/tasks/p1/closeout.md). Read [M1-P2 Gates](docs/roadmap.md#m1-p2-prepare-the-factory), the relevant factory/ship design, and current source before planning or implementation.
 
-Validate with `npm run space-factory:phase:validate -- p1`. The execution command is `npm run space-factory:phase -- p1`: three implementation/integration prompts precede P4's required native-game checkpoint and sole closeout. P4 uses the canonical manual-handoff field and must be completed in an interactive session with native tools or owner observations. All M1 gameplay statuses remain unqualified.
+The [p1 stack](docs/tasks/p1/README.md) has completed P1–P3 actual-scene implementation and P4 native closeout. Its runner grammar may still be validated with `npm run space-factory:phase:validate -- p1`, but its manual, uncommitted execution history is incompatible with a simple runner resume. Do not fabricate checkpoint commits or restart it from the old 0.1.0 baseline.
 
 The adopted M1 factory is finite ice → solar-powered processor → player-installed pipe → propellant tank → engine. Manual fixed-orientation four-direction flight and coasting are scoped prototype choices. Quantities, timings, speed, exact bindings, and presentation tuning remain task-level choices. [The decision register](docs/decisions-and-questions.md#accepted-m1-prototype-decisions) records their scope.
 
-The accepted plan was added against remote `main` at [7a5b1b55](https://github.com/jfin602/space-factory/commit/7a5b1b55acca2fe21d64790c56cd081e4cb8aed8), after the workflow import. The p1 stack was assessed at [295f2056](https://github.com/jfin602/space-factory/commit/295f205657527a2545b47ba3b47a5fbfb154608c) and reconciled with the [a6b77498 runner port](https://github.com/jfin602/space-factory/commit/a6b77498d6319e65a9f49520e509b51083a7d9e1). Inspect current HEAD and preserve newer work. Only M1-P1's stack is authored; later M1 stacks and the expedition/outpost roadmap remain future work. No gameplay stack has been executed by this authoring update.
+The accepted plan was added against remote `main` at [7a5b1b55](https://github.com/jfin602/space-factory/commit/7a5b1b55acca2fe21d64790c56cd081e4cb8aed8), and p1 was later assessed and authored. P1–P4 were then manually executed against the current source and qualified as described above. Later M1 stacks and the expedition/outpost roadmap remain future work.
 
 ## Repository responsibilities
 

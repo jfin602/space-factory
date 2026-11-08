@@ -1,6 +1,6 @@
 # User experience and presentation
 
-This document separates **owner-confirmed presentation requirements** from **recommended interface behavior** and scoped prototype choices. The engineer/grid bootstrap and small overlay exist; the gameplay interfaces described here remain planned. The [game design](game-design.md) and [decision register](decisions-and-questions.md) govern scope.
+This document separates **owner-confirmed presentation requirements** from **recommended interface behavior** and scoped prototype choices. The M1-P1 ship, helm, basic mode/help/unavailable-supply overlay, and development spatial fixture are implemented and [natively qualified on Linux](tasks/p1/qualification/native-playtest.md); factory, flight, and later interfaces remain planned. The [game design](game-design.md) and [decision register](decisions-and-questions.md) govern scope.
 
 ## Confirmed player perspective
 
@@ -10,7 +10,7 @@ The opening experience involves restoring a small stranded ship. Permanent engin
 
 ## Accepted M1 interaction and feedback
 
-**Scope: First Factory-Powered Flight, accepted for implementation planning on 2026-11-08; gameplay is not yet implemented or qualified.** See the [milestone plan](planning/p1/first-flight.md) and [roadmap](roadmap.md#milestone-m1-first-factory-powered-flight).
+**Scope: First Factory-Powered Flight, accepted for implementation planning on 2026-11-08.** The Walking/Piloting mode, nearby E helm hint, and truthful unavailable-propellant feedback are qualified under [M1-P1](tasks/p1/closeout.md); the rest of this milestone interface remains planned. See the [milestone plan](planning/p1/first-flight.md) and [roadmap](roadmap.md#milestone-m1-first-factory-powered-flight).
 
 The player's immediate goal is to prepare the onboard factory, manufacture propellant, and fly to a beacon. Use a readable interior cutaway, recognizable hull boundary, and nearby interactions for the crate, processor, missing pipe socket, and helm. Simple **Take**, **Load**, and **Install** actions with counts are sufficient; a full inventory or construction interface is deferred.
 

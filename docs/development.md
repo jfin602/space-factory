@@ -1,6 +1,6 @@
 # Development setup
 
-This is a Godot 4.7.2 .NET and C# desktop sandbox using the Compatibility renderer. The game project is in `game/`; its command entry point is `tools/dev`; generated logs and exports are in ignored `artifacts/`. The separate Node.js phase runner coordinates development prompts. Gameplay systems in the roadmap remain planned.
+This is a Godot 4.7.2 .NET and C# desktop sandbox using the Compatibility renderer. The game project is in `game/`; its command entry point is `tools/dev`; generated logs and exports are in ignored `artifacts/`. The separate Node.js phase runner coordinates development prompts. M1-P1 ship/helm gameplay is [qualified on Linux](tasks/p1/closeout.md); factory and powered-flight systems remain planned.
 
 ## Local installation and fresh checkout
 
@@ -36,8 +36,9 @@ All paths below are relative to the repository root. `tools/dev` resolves the pr
 | `./tools/dev doctor` | Show local tool and export readiness. |
 | `./tools/dev import` | Wait for asset imports to finish. |
 | `./tools/dev build` | Compile the C# project. |
-| `./tools/dev check` | Import, build, run the real main-scene C# smoke mode, and verify scene automation. |
+| `./tools/dev check` | Import, build, run normal and spatial-fixture main-scene C# smoke checks, and verify scene automation. |
 | `./tools/dev run` | Build and launch the sandbox in the foreground. |
+| `./tools/dev p1-demo` | Build and launch the real main scene with the labeled P1 spatial fixture. |
 | `./tools/dev editor` | Open the project in the Godot editor. |
 | `./tools/dev inspect-scene scenes/main.tscn` | Print a saved scene hierarchy and useful properties. A `res://` path also works. |
 | `./tools/dev automation-smoke` | Create, edit, save, reload, assert, and remove a disposable scene. |
@@ -47,13 +48,15 @@ All paths below are relative to the repository root. `tools/dev` resolves the pr
 
 The exact preset names are `Linux`, `Windows`, and `macOS`. Install the matching 4.7.2 .NET templates before exporting. Windows and macOS builds are configured here; running, signing, notarizing, and packaging them on their target operating systems is separate validation.
 
+`./tools/dev p1-demo` passes `--p1-spatial-demo` to the game. It labels the development fixture, moves the real ship from `(480, 300)` to `(420, 300)` over 1.25 seconds, and holds it there until the game closes. The world beacon stays at `(930, 300)`; the deck, engineer, and helm keep their ship-local positions. WASD or arrows walk the engineer, and **E** enters or leaves the helm when nearby. Piloting records a direction request but has no available propellant supply or applied thrust. Relaunch the command to restart at the initial position. Ordinary `./tools/dev run` does not enable this fixture.
+
 ## Editing and automation
 
 Edit gameplay in `game/scripts/*.cs`, saved scenes in `game/scenes/*.tscn`, and future resources in `.tres` files. Godot serializes scene changes through its editor; close or reload an open scene before an external tool writes that same file, to avoid conflicting saves. Generated `.godot/`, `bin/`, `obj/`, logs, and exports are ignored.
 
 `game/dev/scene_tool.gd` is a small standalone `SceneTree` script for Godot's `--script` workflow. It is isolated from C# gameplay and excluded from exports. Its `inspect` operation loads and walks a saved scene. Its automation operation creates a root and owned child, changes the child's position and text, packs and saves the scene, reloads with cache bypass, asserts the serialized values, and removes the fixture. To add a future operation, add a command to its match statement and a corresponding `tools/dev` branch; use Godot's scene/resource APIs and a fresh load when validating persistence. A missing `inspect-scene` path must return a nonzero result.
 
-`./tools/dev check` requires the exact `SPACE_FACTORY_SMOKE_OK` marker from `Main.cs`. It also treats timeouts and engine/script errors as failures. The log for each operation is in `artifacts/logs/`. Clean generated outputs by deleting `artifacts/`, `game/.godot/`, `game/bin/`, and `game/obj/` after closing the editor; all can be recreated.
+`./tools/dev check` requires the exact `SPACE_FACTORY_SMOKE_OK` marker from `Main.cs` in both ordinary and fixture runs, plus `SPACE_FACTORY_P1_DEMO_OK` from the fixture run. The real-scene smoke covers initial and translated ownership, body-inset deck edges and corners, helm range, control routing across held-input transitions, unpowered ship invariance, and the fixture's bounded offset/hold state. It also treats timeouts and engine/script errors as failures. Logs are in `artifacts/logs/`; these headless checks do not establish native appearance or input quality. Clean generated outputs by deleting `artifacts/`, `game/.godot/`, `game/bin/`, and `game/obj/` after closing the editor; all can be recreated.
 
 ## Phase-runner development
 
@@ -65,7 +68,7 @@ npm run space-factory:phase -- <folder>
 npm run test:runner
 ```
 
-The root private `package.json` version starts at `0.0.0` and tracks runner Phase/checkpoint metadata. Godot/.NET pins stay in their existing game configuration; runner versions do not define public game releases. Preserve the inherited rule that a root `package-lock.json` is absent. Runner logs and final responses go to ignored `.codex-runs/`.
+The root private `package.json` version was initialized at `0.0.0` and now holds the completed M1-P1 checkpoint `0.1.4`; it tracks Phase/checkpoint metadata rather than a public game release. Godot/.NET pins stay in their existing game configuration. Preserve the inherited rule that a root `package-lock.json` is absent. Runner logs and final responses go to ignored `.codex-runs/`. The manual p1 execution has no runner Git checkpoint commits, so reconcile runner history before a future resume.
 
 [The runner guide](phase-runner.md) defines valid task folders, exact prompt/model/version metadata, capacity retries, Git-based resume, dirty-tree decisions, and manual closeout. Mark visible/manual Godot steps with `- Browser required: yes.` to trigger the inherited handoff; appropriate native desktop tools or owner observation are needed to perform them. Running the phase tool does not itself capture screenshots, drive game input, or qualify gameplay.
 

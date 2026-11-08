@@ -5,12 +5,31 @@ namespace SpaceFactory;
 public partial class Engineer : CharacterBody2D
 {
     private const float Speed = 220f;
+    // Covers the drawn body and its three-pixel shadow offset, with one pixel clearance.
+    public const float BodyInset = 20f;
+    private Deck _deck = null!;
+    private Ship _ship = null!;
+
+    public override void _Ready()
+    {
+        _deck = GetNode<Deck>("../Deck");
+        _ship = (Ship)GetParent();
+    }
 
     public override void _PhysicsProcess(double delta)
     {
-        Velocity = Input.GetVector("move_left", "move_right", "move_up", "move_down") * Speed;
+        Velocity = _ship.WalkingDirection * Speed;
         MoveAndSlide();
-        Position = new Vector2(Mathf.Clamp(Position.X, 140, 820), Mathf.Clamp(Position.Y, 100, 500));
+        ConstrainToDeck();
+    }
+
+    internal void ConstrainToDeck()
+    {
+        var safe = Deck.InteriorBounds.Grow(-BodyInset);
+        var deckPosition = _deck.ToLocal(GlobalPosition);
+        deckPosition.X = Mathf.Clamp(deckPosition.X, safe.Position.X, safe.End.X);
+        deckPosition.Y = Mathf.Clamp(deckPosition.Y, safe.Position.Y, safe.End.Y);
+        GlobalPosition = _deck.ToGlobal(deckPosition);
     }
 
     public override void _Draw()

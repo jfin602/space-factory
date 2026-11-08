@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_main"]
 [ext_resource type="Script" path="res://scripts/Deck.cs" id="2_deck"]
 [ext_resource type="Script" path="res://scripts/Engineer.cs" id="3_engineer"]
+[ext_resource type="Script" path="res://scripts/Ship.cs" id="4_ship"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_engineer"]
 radius = 13.0
@@ -10,16 +11,48 @@ radius = 13.0
 [node name="Main" type="Node2D"]
 script = ExtResource("1_main")
 
-[node name="Deck" type="Node2D" parent="."]
+[node name="Ship" type="Node2D" parent="."]
+position = Vector2(480, 300)
+script = ExtResource("4_ship")
+
+[node name="Deck" type="Node2D" parent="Ship"]
 script = ExtResource("2_deck")
-position = Vector2(480, 300)
 
-[node name="Engineer" type="CharacterBody2D" parent="."]
+[node name="Engineer" type="CharacterBody2D" parent="Ship"]
 script = ExtResource("3_engineer")
-position = Vector2(480, 300)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Engineer"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/Engineer"]
 shape = SubResource("CircleShape2D_engineer")
+
+[node name="Helm" type="Node2D" parent="Ship"]
+position = Vector2(0, -95)
+
+[node name="Console" type="Polygon2D" parent="Ship/Helm"]
+color = Color(0.22, 0.48, 0.59, 1)
+polygon = PackedVector2Array(-35, -21, 35, -21, 35, 21, -35, 21)
+
+[node name="Screen" type="Polygon2D" parent="Ship/Helm"]
+color = Color(0.4, 0.83, 0.81, 1)
+polygon = PackedVector2Array(-25, -12, 25, -12, 25, 6, -25, 6)
+
+[node name="HelmLabel" type="Label" parent="Ship/Helm"]
+offset_left = -22.0
+offset_top = 23.0
+offset_right = 25.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 12
+text = "HELM"
+
+[node name="Landmark" type="Node2D" parent="."]
+position = Vector2(930, 300)
+
+[node name="Beacon" type="Polygon2D" parent="Landmark"]
+color = Color(0.99, 0.78, 0.34, 1)
+polygon = PackedVector2Array(0, -19, 15, 0, 0, 19, -15, 0)
+
+[node name="BeaconCore" type="Polygon2D" parent="Landmark"]
+color = Color(0.2, 0.36, 0.44, 1)
+polygon = PackedVector2Array(0, -9, 8, 0, 0, 9, -8, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(480, 300)
@@ -38,7 +71,31 @@ text = "Space Factory — Development Sandbox"
 [node name="Help" type="Label" parent="Overlay"]
 offset_left = 26.0
 offset_top = 552.0
-offset_right = 650.0
+offset_right = 900.0
 offset_bottom = 580.0
 theme_override_font_sizes/font_size = 16
-text = "WASD / arrow keys: move engineer     •     Close window: quit"
+text = "WASD / arrows: walk"
+
+[node name="Mode" type="Label" parent="Overlay"]
+offset_left = 26.0
+offset_top = 62.0
+offset_right = 320.0
+offset_bottom = 89.0
+theme_override_font_sizes/font_size = 18
+text = "Mode: Walking"
+
+[node name="Feedback" type="Label" parent="Overlay"]
+offset_left = 26.0
+offset_top = 521.0
+offset_right = 900.0
+offset_bottom = 548.0
+theme_override_font_sizes/font_size = 16
+
+[node name="DemoLabel" type="Label" parent="Overlay"]
+visible = false
+offset_left = 550.0
+offset_top = 24.0
+offset_right = 960.0
+offset_bottom = 52.0
+theme_override_font_sizes/font_size = 16
+text = "DEV SPATIAL FIXTURE — translating ship"
