@@ -4,7 +4,7 @@ This directory holds bounded implementation briefs and their results. No impleme
 
 ## Folder conventions
 
-Use `docs/tasks/pN/` for a Phase stack, or `docs/tasks/cN-<slug>/` for a bounded correction associated with Phase N. Choose a descriptive slug and preserve existing folder identities once execution begins.
+Use `docs/tasks/pN/` for a Phase stack, or `docs/tasks/cN-<slug>/` for a bounded correction associated with Phase N. Choose a descriptive slug and preserve existing folder identities once execution begins. [The runner guide](../phase-runner.md) defines the additional inherited continuation/major-family/named-correction forms and their version rules.
 
 | File or folder | Purpose |
 | --- | --- |
@@ -12,15 +12,15 @@ Use `docs/tasks/pN/` for a Phase stack, or `docs/tasks/cN-<slug>/` for a bounded
 | `prompt-assessment.md` | Decomposition, preserved behavior, risks, deferred work, and validation tiers. |
 | `implementation-plan.md` | Source-grounded changes, affected ownership boundaries, likely files, dependencies, and actual validation commands. |
 | `P1-<slug>.txt`, `P2-<slug>.txt`, etc. | Short, ordered execution briefs with one coherent responsibility per ordinary implementation prompt. |
-| `manual/` | Prompts requiring a deliberate manual handoff, such as visible gameplay qualification. Create only when needed. |
+| `manual/` | Optional supporting instructions/evidence for manual work. The runner does not discover prompts in this subfolder; put ordered handoff prompts at the stack root with `- Browser required: yes.`. |
 | `qualification/` | Source-bound scenario results, failures, repair evidence, and links to durable supporting artifacts. Create as evidence is collected. |
 | `closeout.md` | The final scoped outcome, exact source identity, actual checks, remaining gaps, and next routing. |
 
-The README records the complete dependency order, including manual prompts. Keep prompt numbers unambiguous and contiguous across that order. Plan one final closeout for the stack; an intermediate implementation handoff does not qualify the entire Phase.
+The README records the complete dependency order, including manual prompts. Keep runner prompt files directly at the stack root, numbered contiguously from P1 without leading zeros. Plan one final closeout whose filename slug and TASK title both contain `closeout`; an intermediate implementation handoff does not qualify the entire Phase.
 
 ## Authoring and execution
 
-`/prompt-ass`, `/prompt-plan`, and `/prompt-write <folder>` are conversational instructions to the assistant. They describe authoring work under [the workflow](../workflow.md). Space Factory does not currently contain an installed phase runner, slash-command executable, automatic checkpoint system, or Phase-based version-bump mechanism.
+`/prompt-ass`, `/prompt-plan`, and `/prompt-write <folder>` are conversational authoring instructions under [the workflow](../workflow.md). The separate Node.js runner validates and executes those authored files through `npm run space-factory:phase:validate -- <folder>` and `npm run space-factory:phase -- <folder>`. It preserves Dope's implementation checkpoints, resume, retries, and Phase/correction version policies. See [the runner guide](../phase-runner.md) for setup and templates.
 
 Writing prompts produces reviewable task files. A request to run the selected stack or implement its task supplies execution authorization for that scope; no second `/activate` step is required. Honor existing authorization and preserve manual checkpoints that the task explicitly requires.
 
@@ -28,7 +28,9 @@ Before execution, inspect current source, Git status, dependencies, and the actu
 
 ## Prompt contents
 
-Each execution brief identifies its goal, relevant source/doc references, prerequisite results, scope boundaries, intended changes, concrete done conditions, and smallest sufficient validation. State the validation tier and whether direct GUI/manual observation is required. Model guidance, when included, follows the current workflow and the owner's selected configuration.
+Each execution brief identifies its goal, relevant source/doc references, prerequisite results, scope boundaries, intended changes, concrete done conditions, and smallest sufficient validation. State the validation tier and whether direct GUI/manual observation is required. Runner prompts require a canonical `TASK: Phase N / Pn — Title` or `TASK: Correction N / Pn — Title`, an exact recommended configuration, and their assigned or unchanged project version. Use the [full grammar and templates](../phase-runner.md#prompt-grammar-and-templates); new prompts normally choose `GPT-6 Sol Medium`, `GPT-6 Sol High`, or `GPT-6 Sol XHigh` as appropriate to the work and available configuration.
+
+Include `- Browser required: yes.` or `- Browser required: no.` exactly. The historical field is also the manual handoff for native Godot checks; `GUI required` is not recognized. Visible gameplay evidence needs an interactive environment with native desktop tools or the owner's actual observations. The default final closeout is manual; `--closeout` can execute it but still leaves uncommitted changes for human review.
 
 Use T1 for focused implementation checks, T2 for affected integration, and T3 for actual gameplay, native, packaging, or release qualification as appropriate. Keep broad or expensive checks at the step that needs them, and inspect command composition to avoid repeating the same build or test work.
 

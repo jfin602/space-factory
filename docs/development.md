@@ -1,6 +1,6 @@
 # Development setup
 
-This is a Godot 4.7.2 .NET and C# desktop sandbox using the Compatibility renderer. The game project is in `game/`; the command entry point is `tools/dev`; generated logs and exports are in ignored `artifacts/`. Gameplay systems in the roadmap remain planned.
+This is a Godot 4.7.2 .NET and C# desktop sandbox using the Compatibility renderer. The game project is in `game/`; its command entry point is `tools/dev`; generated logs and exports are in ignored `artifacts/`. The separate Node.js phase runner coordinates development prompts. Gameplay systems in the roadmap remain planned.
 
 ## Local installation and fresh checkout
 
@@ -55,7 +55,21 @@ Edit gameplay in `game/scripts/*.cs`, saved scenes in `game/scenes/*.tscn`, and 
 
 `./tools/dev check` requires the exact `SPACE_FACTORY_SMOKE_OK` marker from `Main.cs`. It also treats timeouts and engine/script errors as failures. The log for each operation is in `artifacts/logs/`. Clean generated outputs by deleting `artifacts/`, `game/.godot/`, `game/bin/`, and `game/obj/` after closing the editor; all can be recreated.
 
-## Verification record
+## Phase-runner development
+
+Use Node.js 24 (`>=24 <25`) and a locally installed, authenticated Codex CLI for the ported Dope runner. It uses Node's built-ins and has no npm dependencies or install step. Run its commands from the repository root:
+
+```bash
+npm run space-factory:phase:validate -- <folder>
+npm run space-factory:phase -- <folder>
+npm run test:runner
+```
+
+The root private `package.json` version starts at `0.0.0` and tracks runner Phase/checkpoint metadata. Godot/.NET pins stay in their existing game configuration; runner versions do not define public game releases. Preserve the inherited rule that a root `package-lock.json` is absent. Runner logs and final responses go to ignored `.codex-runs/`.
+
+[The runner guide](phase-runner.md) defines valid task folders, exact prompt/model/version metadata, capacity retries, Git-based resume, dirty-tree decisions, and manual closeout. Mark visible/manual Godot steps with `- Browser required: yes.` to trigger the inherited handoff; appropriate native desktop tools or owner observation are needed to perform them. Running the phase tool does not itself capture screenshots, drive game input, or qualify gameplay.
+
+## Bootstrap verification record
 
 Verified on Linux Mint x86_64 with Godot `4.7.2.stable.mono.official.ed1daf0bf` and .NET SDK `10.0.403` on 2026-11-08:
 

@@ -1,0 +1,16 @@
+{
+  "name": "space-factory",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Development-only phase runner for Space Factory",
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "space-factory:phase": "node scripts/space-factory-phase.mjs",
+    "space-factory:phase:validate": "node scripts/validate-space-factory-phase.mjs",
+    "test:runner": "node --test test/unit/space-factory-phase-prompt-grammar.test.ts test/unit/space-factory-phase-runner.test.ts",
+    "test": "npm run test:runner"
+  }
+}

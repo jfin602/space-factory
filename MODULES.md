@@ -18,6 +18,19 @@ The repository contains a Godot 4.7.2 .NET/C# sandbox with a moving engineer, a 
 
 `main.tscn` composes the present runtime. `tools/dev check` imports and builds the project, runs the real scene's smoke mode, and exercises the scene utility. These checks establish their recorded bootstrap scope; [development setup](docs/development.md) owns the verification record.
 
+## Phase-runner tooling
+
+The Node.js runner is separate from the Godot runtime. [The runner guide](docs/phase-runner.md) owns its user-facing contract and Dope source provenance.
+
+| Responsibility | Current source | Owns |
+| --- | --- | --- |
+| Stack execution | [space-factory-phase.mjs](scripts/space-factory-phase.mjs) | Codex launcher, prompt execution, terminal progress, capacity retries, Git checkpoints/resume, artifacts, and manual/closeout handoffs. |
+| Shared runner logic | [space-factory-phase-core.mjs](scripts/space-factory-phase-core.mjs) | Prompt grammar, model mapping, Phase/correction version plans, checkpoint matching, event tracking, and display helpers. |
+| Standalone validation | [validate-space-factory-phase.mjs](scripts/validate-space-factory-phase.mjs) | Parse a task folder and report its prompt/version plan without launching Codex. |
+| Tooling metadata and tests | [package.json](package.json), `test/unit/space-factory-phase-*.test.ts` | CLI aliases, Node version requirement, development checkpoint version, and runner regression coverage. |
+
+The runner schedules implementation instructions; it adds no gameplay system, screenshot harness, or native game-input driver. Actual Godot checks belong in the relevant prompt and task evidence.
+
 ## Planned gameplay responsibilities
 
 These are proposed logical boundaries from the existing design. They have no implemented subsystem paths yet. Introduce source organization as the relevant playable increment needs it.
@@ -40,7 +53,9 @@ Simulation owns quantities and outcomes; presentation observes them and submits 
 | --- | --- |
 | `game/` | Godot project, C# gameplay, saved scenes, and the isolated scene utility. |
 | `tools/` | Repository development commands; machine-specific overrides stay local and ignored. |
+| `scripts/`, `test/unit/` | Node.js phase-runner implementation, validator, and TypeScript tests. |
 | `docs/` | Product/system design, development guidance, roadmap, decisions, plans, tasks, and evidence summaries. |
 | `artifacts/` | Ignored, reproducible logs and exports. Preserve any evidence needed for a durable claim in the relevant task record or a durable linked artifact before cleanup. |
+| `.codex-runs/` | Ignored runner invocation records, Codex events/final responses, and checkpoint-message files. |
 
 Start a session with [AGENTS.md](AGENTS.md) and [BOOT.md](BOOT.md). Use the [workflow](docs/workflow.md) to turn the next roadmap outcome into bounded implementation work.

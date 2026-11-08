@@ -2,7 +2,7 @@
 
 This workflow adapts Dope's agent routing, documentation process, prompt planning, and evidence discipline to Space Factory's Godot/.NET project. Start with [AGENTS.md](../AGENTS.md) and [BOOT.md](../BOOT.md), then retrieve only the source and documentation relevant to the task.
 
-Slash commands below are instructions to the collaborating assistant. They are not installed shell commands, Godot editor features, or an automated runner. Existing development commands are owned by [development setup](development.md) and implemented in `tools/dev`.
+Slash commands below are authoring instructions to the collaborating assistant, not installed shell commands or Godot editor features. The separate [Node.js phase runner](phase-runner.md) executes authored task stacks through `npm run space-factory:phase`. Godot development commands are owned by [development setup](development.md) and implemented in `tools/dev`.
 
 ## 1. Establish the task
 
@@ -61,9 +61,11 @@ Store phase-level design under [planning](planning/README.md), and task-specific
 
 Write the selected stack under `docs/tasks/<folder>/` using the [task conventions](tasks/README.md). Each execution brief states its goal, prerequisites, narrow reading list, allowed scope, explicit deferrals, implementation steps, validation tier, real commands or check scenarios, observable done condition, and required final report.
 
-Identify `GUI required: yes` or `GUI required: no`. A native game playtest is a GUI task even when no browser is involved. A required owner/manual checkpoint is a visible handoff; a future runner must pause there. Prompt files are execution instructions, not proof that execution occurred.
+Use the canonical `- Browser required: yes.` or `- Browser required: no.` field. This historical parser field also marks a native Godot/manual playtest, and the runner pauses before a prompt marked `yes`. Do not substitute `GUI required`, which the parser does not recognize. Native game observation requires appropriate desktop/screenshot/input tools or owner participation; browser access alone does not control the game. Prompt files are execution instructions, not proof that execution occurred.
 
-Use model recommendations only for configurations actually available to the owner, respecting the selected model and effort. Choose effort appropriate to the task; an authored recommendation does not change a live session's configuration.
+Follow [the runner's exact prompt grammar](phase-runner.md#prompt-grammar-and-templates): canonical Phase/Correction TASK line, one recommended configuration, assigned or unchanged project version, contiguous P1-based filenames, and one final closeout identified in both filename and title. Validate the authored stack with `npm run space-factory:phase:validate -- <folder>` before execution.
+
+For new prompts, choose `GPT-6 Sol Medium`, `GPT-6 Sol High`, or `GPT-6 Sol XHigh` according to the task and the owner's available configuration. The runner's legacy mappings remain supported without silently changing models. An authored recommendation selects the spawned Codex process; it does not change an already active assistant session's configuration.
 
 ### Prompt efficiency review
 
@@ -85,7 +87,9 @@ A deliberate request to implement or run a selected task/stack authorizes that w
 
 Before editing, inspect current source and any changed dependencies. Continue compatible partial work; protect unrelated changes. Do not reset, stash, overwrite, or include other work in a commit without applicable authorization. If current source materially invalidates the plan, explain the conflict and revise the bounded plan before proceeding.
 
-Use the existing `tools/dev` entry point for build/run/scene operations. This repository currently has no Dope-style phase runner, automatic checkpoint commits, model retry service, or phase-to-version mapping. Operate prompts through the available assistant/CLI workflow and record completion explicitly. Add runner functionality only as a separately requested implementation task.
+Use `tools/dev` for build/run/scene operations. To execute an authored stack, run `npm run space-factory:phase -- <folder>` from the repository root. [The runner guide](phase-runner.md) owns the preserved Dope model selection, capacity retries, checkpoints, Git-based resume, and version rules. Root package version `0.0.0` starts development checkpoint metadata; entering a new Phase baseline is a deliberate metadata change, and corrections retain the existing version.
+
+The runner owns implementation commits and uses `git add -A`. A dirty tree asks for an explicit interactive decision with default No; accepting treats its contents as intentional partial implementation and can include them in the next checkpoint. Review that scope before continuing. The final closeout is manual by default; `--closeout` may execute it but leaves changes uncommitted for human review. Required GUI handoffs still stop execution. No runner success state substitutes for gameplay evidence or a Gate decision.
 
 Preserve started/completed prompt text and its execution evidence. Amend unexecuted plans explicitly; use a new correction or recovery brief when a completed task needs repair. A resumed session should inspect current progress rather than replay completed work automatically.
 
@@ -123,7 +127,7 @@ Use **PASS**, **FAIL**, and **NOT OBSERVED** for individual checks. Explain a **
 
 The [roadmap](roadmap.md) remains the single Phase/Gate progress authority. A Gate passes when its criteria have the required source-bound evidence; a Phase passes when all of its Gates pass. A passing helper check, authored stack, commit, or accepted design does not substitute for that evidence. Owner acceptance of a gap can permit progression, but the original failed/unobserved check retains its result.
 
-Keep detailed task results under the task's qualification records and final `closeout.md`. Preserve earlier failures and add the repair and its new evidence. A correction should include a focused regression guard when meaningful for the defect class. Generated bulk output stays under ignored `artifacts/`; retain essential evidence durably with the task or at a stable referenced location before cleanup.
+Keep detailed task results under the task's qualification records and final `closeout.md`. Preserve earlier failures and add the repair and its new evidence. A correction should include a focused regression guard when meaningful for the defect class. Generated Godot output stays under ignored `artifacts/`, and runner invocation records under ignored `.codex-runs/`; retain essential evidence durably with the task or at a stable referenced location before cleanup.
 
 At terminal closeout, reconcile the affected roadmap status, task record, BOOT routing, and any changed owning documents once. Link evidence rather than copying it throughout the repository. State the exact scope that passed, outstanding requirements, and the next actionable step. Documentation reconciliation needs text/source review; it is not a reason to rerun gameplay or release checks.
 
@@ -131,4 +135,4 @@ At terminal closeout, reconcile the affected roadmap status, task record, BOOT r
 
 Adapted on 2026-11-08 from `jfin602/dope` at [commit `02bb1377`](https://github.com/jfin602/dope/commit/02bb13779acb7e2409f8c6ee42aeffccc0180c37): [AGENTS.md](https://github.com/jfin602/dope/blob/02bb13779acb7e2409f8c6ee42aeffccc0180c37/AGENTS.md), [BOOT.md](https://github.com/jfin602/dope/blob/02bb13779acb7e2409f8c6ee42aeffccc0180c37/BOOT.md), [docs/workflow.md](https://github.com/jfin602/dope/blob/02bb13779acb7e2409f8c6ee42aeffccc0180c37/docs/workflow.md), and its responsibility/registry/planning/task layout.
 
-Space Factory's existing `game/`, `tools/`, system documents, `docs/roadmap.md`, and decision register retain their roles. Historical Dope phase results, product features, Node/Theia packages, and runner implementation are outside this documentation import.
+Space Factory's existing `game/`, `tools/`, system documents, `docs/roadmap.md`, and decision register retain their roles. Historical Dope phase results, product features, and Node/Theia application packages are not imported. The separately requested runner port uses the same Dope revision, with Space Factory CLI names and the existing execution behavior; [its guide](phase-runner.md) records that contract.

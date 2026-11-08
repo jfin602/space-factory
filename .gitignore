@@ -1,4 +1,6 @@
 /artifacts/
+/.codex-runs/
+/node_modules/
 /game/.godot/
 /game/.automation-fixtures/
 /game/.mono/

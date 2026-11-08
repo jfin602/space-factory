@@ -2,7 +2,7 @@
 
 Space Factory is a proposed 2D game about a single engineer operating a spaceship through its internal factory and a network of persistent surface outposts. This documentation captures the initial design discussion of **2026-11-08**.
 
-**Implementation status: bootstrap sandbox committed; gameplay systems remain planned.** A Godot 4 .NET project and developer commands now live in this repository; see [development setup](development.md) for recorded verification results and [BOOT.md](../BOOT.md) for current routing. Bootstrap delivery does not by itself qualify the roadmap's full foundation Gates.
+**Implementation status: bootstrap sandbox committed; gameplay systems remain planned.** A Godot 4 .NET project, developer commands, and the ported Node.js phase runner live in this repository; see [development setup](development.md) for recorded verification results and [BOOT.md](../BOOT.md) for current routing. Bootstrap delivery and runner tooling do not by themselves qualify the roadmap's full foundation Gates.
 
 **Accepted next milestone:** [M1 — First Factory-Powered Flight](roadmap.md#milestone-m1-first-factory-powered-flight), a five-Phase plan from ship-relative interior movement through a real factory-supplied flight playtest. [The milestone design](planning/p1/first-flight.md) records its scoped choices and implementation boundaries; the roadmap alone tracks Gate progress.
 
@@ -28,6 +28,7 @@ For a focused task, begin with [AGENTS.md](../AGENTS.md) and [BOOT.md](../BOOT.m
 | [Development setup](development.md) | Godot/.NET installation, commands, scene automation, exports, and bootstrap evidence. |
 | [Module map](../MODULES.md) | Source-backed current responsibilities and explicitly planned future boundaries. |
 | [Workflow](workflow.md) | Task-scoped reading, documentation changes, prompt stacks, execution, validation tiers, and closeout. |
+| [Phase runner](phase-runner.md) | Node/Codex setup, CLI commands, exact prompt grammar, model mapping, version policy, Git checkpoints/resume, artifacts, and manual handoffs. |
 | [Planning index](planning/README.md) | Phase design organization and references to the canonical roadmap. |
 | [First-flight milestone design](planning/p1/first-flight.md) | Accepted M1 scope, baseline, state boundaries, deferrals, and execution guidance. |
 | [Task index](tasks/README.md) | Executable task conventions and source-bound qualification records. |

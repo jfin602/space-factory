@@ -18,10 +18,11 @@ The bootstrap is committed. The baseline inspected for this workflow import is [
 | SDK | .NET SDK 10.0.403 in `game/global.json`; `Godot.NET.Sdk/4.7.2` and `net10.0` in `game/SpaceFactory.csproj`. |
 | Playable sandbox | `game/scenes/main.tscn` composes a drawn deck/grid, bounded engineer movement, camera, and instructions. Movement uses WASD or arrow keys. |
 | Developer tooling | `tools/dev` exposes inspection, import, C# build, runtime smoke, saved-scene automation, editor, play, and export commands. |
+| Phase runner | Node.js 24 tooling is ported from Dope with `npm run space-factory:phase` and `space-factory:phase:validate`. Root package version `0.0.0` starts development checkpoint metadata; it is independent of engine/SDK versions. See [the runner guide](docs/phase-runner.md). |
 | Recorded Linux evidence | Development setup records successful build/check, scene automation, visible movement, and Linux export/launch on Linux Mint. Those are prior bootstrap results, not new runtime checks performed by this documentation import. |
 | Windows and macOS | Export presets exist. Their exports and target-OS runs remain unverified in the recorded baseline. |
 | Gameplay systems | Factory production, powered ship flight, travel, combat, saves, and outposts remain planned. The visible grid is not an implemented factory placement system. |
-| Roadmap | The M1 plan is accepted; all M1 Phases/Gates remain NOT STARTED and their gameplay checks NOT OBSERVED. G0.1 remains IN PROGRESS; G0.2 and subsequent broader Gates retain their unqualified status. Plan adoption does not qualify gameplay. |
+| Roadmap | The M1 plan is accepted; all M1 Phases/Gates remain NOT STARTED and their gameplay checks NOT OBSERVED. G0.1 remains IN PROGRESS; G0.2 and subsequent broader Gates retain their unqualified status. Plan adoption and the runner port do not qualify gameplay. |
 
 ## Next development scope
 
@@ -29,7 +30,7 @@ The next scope is **M1-P1 — A coherent ship**, covering ship-local interior ow
 
 The adopted M1 factory is finite ice → solar-powered processor → player-installed pipe → propellant tank → engine. Manual fixed-orientation four-direction flight and coasting are scoped prototype choices. Quantities, timings, speed, exact bindings, and presentation tuning remain task-level choices. [The decision register](docs/decisions-and-questions.md#accepted-m1-prototype-decisions) records their scope.
 
-The accepted plan was added against remote `main` at [7a5b1b55](https://github.com/jfin602/space-factory/commit/7a5b1b55acca2fe21d64790c56cd081e4cb8aed8), after the workflow import. Inspect current HEAD and preserve newer work. Detailed execution stacks have not been authored or run by this planning update; the later expedition/outpost roadmap remains in place.
+The accepted plan was added against remote `main` at [7a5b1b55](https://github.com/jfin602/space-factory/commit/7a5b1b55acca2fe21d64790c56cd081e4cb8aed8), after the workflow import. Inspect current HEAD and preserve newer work. Detailed execution stacks have not been authored or run by the planning update or runner port; the later expedition/outpost roadmap remains in place.
 
 ## Repository responsibilities
 
@@ -39,13 +40,16 @@ The accepted plan was added against remote `main` at [7a5b1b55](https://github.c
 | [MODULES.md](MODULES.md) | Current code responsibilities and clearly labeled future boundaries. |
 | `game/` | Godot project, C# gameplay, scenes, and isolated scene-automation helpers. |
 | `tools/` | Existing developer CLI and ignored local executable configuration. |
+| `scripts/`, `test/unit/`, root `package.json` | Node.js phase-runner CLI/core/validator, runner tests, and development checkpoint metadata. |
 | [docs/README.md](docs/README.md) | Product/system documentation index and ownership. |
 | [docs/workflow.md](docs/workflow.md) | Documentation, planning, implementation, validation, and closeout process. |
+| [docs/phase-runner.md](docs/phase-runner.md) | Runner commands, prompt grammar, checkpoints, version rules, and manual handoffs. |
 | [docs/planning/](docs/planning/README.md) | Phase and task design as work is planned. |
 | [docs/tasks/](docs/tasks/README.md) | Executable task briefs and source-bound execution evidence. |
 | [docs/decisions/](docs/decisions/README.md) | Detailed durable decision records when needed; the existing decision register remains the status index. |
 | [known-issues.md](known-issues.md) / [feature-ideas.md](feature-ideas.md) | Defect reports and proposed enhancements with stable IDs. |
 | `artifacts/` | Ignored generated logs and exports; retain necessary qualification evidence before cleanup. |
+| `.codex-runs/` | Ignored runner status, event logs, final responses, and checkpoint-message artifacts. |
 
 ## Start a session
 
