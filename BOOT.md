@@ -6,7 +6,7 @@ Read [AGENTS.md](AGENTS.md) first. This file gives the current starting point an
 
 Space Factory is a single-player, top-down 2D survival and automation game. One engineer starts aboard a stranded ship, restores its internal factory, and uses the resulting supplies to operate the ship. The larger design includes exploration, landings, hostile inhabitants, persistent surface factories, and permanent run failure. [The decision register](docs/decisions-and-questions.md) distinguishes confirmed requirements from working designs and open questions.
 
-The immediate playable target is a spaceship moving on screen because its internal factory supplies propulsion. Plan toward that small observable milestone while retaining the broader game direction in the existing system documents.
+The accepted immediate target is [M1 — First Factory-Powered Flight](docs/roadmap.md#milestone-m1-first-factory-powered-flight): prepare the small onboard factory, manufacture propellant, take the helm, and fly to a beacon. Its five implementation Phases retain the broader game direction in the existing system documents.
 
 ## Current starting point — 2026-11-08
 
@@ -21,13 +21,15 @@ The bootstrap is committed. The baseline inspected for this workflow import is [
 | Recorded Linux evidence | Development setup records successful build/check, scene automation, visible movement, and Linux export/launch on Linux Mint. Those are prior bootstrap results, not new runtime checks performed by this documentation import. |
 | Windows and macOS | Export presets exist. Their exports and target-OS runs remain unverified in the recorded baseline. |
 | Gameplay systems | Factory production, powered ship flight, travel, combat, saves, and outposts remain planned. The visible grid is not an implemented factory placement system. |
-| Roadmap | G0.1 remains IN PROGRESS under its existing criteria; G0.2 and subsequent Gates remain NOT STARTED. No Gate is qualified by importing these workflow files. |
+| Roadmap | The M1 plan is accepted; all M1 Phases/Gates remain NOT STARTED and their gameplay checks NOT OBSERVED. G0.1 remains IN PROGRESS; G0.2 and subsequent broader Gates retain their unqualified status. Plan adoption does not qualify gameplay. |
 
 ## Next development scope
 
-Use the existing [roadmap](docs/roadmap.md), [factory design](docs/systems/factory-and-resources.md), [ship design](docs/systems/ship-and-navigation.md), and current source to prepare a bounded phase plan for the first factory-powered flight playtest. The plan should identify the smallest production-to-propulsion loop and its visible acceptance criteria. Recipe quantities, controls, and other unresolved choices should be resolved only as that task requires them.
+The next scope is **M1-P1 — A coherent ship**, covering ship-local interior ownership, deck-relative engineer bounds, a stationary world reference, and nearby helm interaction with exclusive Walking/Piloting modes. Read its [roadmap Gates](docs/roadmap.md#m1-p1-a-coherent-ship), the [milestone design](docs/planning/p1/first-flight.md), and affected current source, then use [the workflow](docs/workflow.md) to assess, plan, and author bounded implementation work.
 
-The current roadmap also describes the later integrated expedition and outpost slice. Keep that longer destination distinct from the early flight milestone. Detailed execution stacks for the new milestone have not been authored by this import.
+The adopted M1 factory is finite ice → solar-powered processor → player-installed pipe → propellant tank → engine. Manual fixed-orientation four-direction flight and coasting are scoped prototype choices. Quantities, timings, speed, exact bindings, and presentation tuning remain task-level choices. [The decision register](docs/decisions-and-questions.md#accepted-m1-prototype-decisions) records their scope.
+
+The accepted plan was added against remote `main` at [7a5b1b55](https://github.com/jfin602/space-factory/commit/7a5b1b55acca2fe21d64790c56cd081e4cb8aed8), after the workflow import. Inspect current HEAD and preserve newer work. Detailed execution stacks have not been authored or run by this planning update; the later expedition/outpost roadmap remains in place.
 
 ## Repository responsibilities
 

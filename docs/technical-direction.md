@@ -6,7 +6,21 @@
 
 The bootstrap selected Godot 4 .NET and C# for desktop Linux, Windows, and macOS, with the versions and verification scope recorded in [development setup](development.md). Continue Phase 0 from that existing sandbox. Demonstrate the remaining state/time foundation and introduce tile placement, resource transfer, scene transitions, and local persistence only as their planned gameplay increments require them. Avoid repeating engine selection or turning preparation into an indefinite documentation task.
 
-The bootstrap contains one engineer and a visual deck. The next implementation increments should add a small ship, machines, and bounded destinations toward the complete expedition described in the [roadmap](roadmap.md). Actual setup and run commands are in [development setup](development.md).
+The bootstrap contains one engineer and a visual deck. The accepted next increment is [M1 — First Factory-Powered Flight](roadmap.md#milestone-m1-first-factory-powered-flight), which adds ship-local ownership, one small factory chain, and fuel-dependent manual flight before bounded expedition destinations. Actual setup and run commands are in [development setup](development.md).
+
+## M1 implementation boundary
+
+The [milestone design](planning/p1/first-flight.md) ties the accepted prototype to inspected source and its five implementation Phases. The following boundaries are planned, not implemented subsystems:
+
+- Ship world position/velocity are separate from the engineer's, deck's, and machines' ship-local positions. Replace the bootstrap's fixed coordinate bounds with deck-relative bounds when implementing M1-P1.
+- One authoritative C# state owns finite cargo/carried/input/output/tank quantities, the active recipe job, the installed pipe connection, and propulsion consumption. Introduce stable identifiers only for entities the current task actually needs.
+- Use shared game time for production, bounded transfer, and consumption. M1 production continues across Walking/Piloting and camera changes; equivalent elapsed game time and actions must preserve resource outcomes across rendering rates. A fixed simulation step remains the recommended implementation.
+- The installed solar supply is a simple processor electricity source, independent of propellant. It creates no materials. One pipe socket and a rate/capacity-limited route are sufficient; generic construction, fluid physics, and electrical-network systems are deferred.
+- Route input to Walking or Piloting exclusively. Helm exit clears thrust requests without resetting ship motion or engineer position. Fuel starvation disables powered acceleration and preserves the selected coasting behavior; any active brake uses the same supply.
+- Presentation observes the same world and resources. Changing views or taking/leaving the helm does not recreate the factory, pause it implicitly, duplicate stores, or restart production jobs.
+- Restart playtest reconstructs the defined fresh scenario, including empty propellant, initial finite supplies, zero motion, control state, and objectives. It is a test-session convenience, not a save/load or permanent-run implementation.
+
+Adapt the existing main-scene smoke assertions when scene composition changes and preserve meaningful C# runtime success/failure checks. The first milestone does not require a generic simulation framework, save format, or full game-wide lifecycle. [Validation](validation.md#first-flight-milestone-m1) defines the corresponding accounting, integration, and live-player evidence.
 
 ## Simulation and presentation
 

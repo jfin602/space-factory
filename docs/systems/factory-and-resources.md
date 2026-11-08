@@ -6,13 +6,35 @@ The factory keeps the traveling spaceship operational and supports missions, exp
 
 The player controls one engineer in a 2D top-down game. The spaceship contains a factory, travels through space, and can land on planets, asteroids, and other sufficiently large bodies. The engineer can leave the landed ship, establish persistent surface factories, transfer their products into the ship, and revisit those locations as a network of outposts. Larger ships can provide multiple access ports; the exact division between entrances and industrial interfaces is a working design.
 
-Resources matter to survival: exhaustion can leave the ship permanently stranded and end the engineer's life. The economy must preserve that possibility. Exact materials, recipes, equipment, transport mechanisms, and production rates are working design choices, not approved specifications. See [decisions and questions](../decisions-and-questions.md).
+Resources matter to survival: exhaustion can leave the ship permanently stranded and end the engineer's life. The economy must preserve that possibility. The M1 prototype choices below are accepted for that milestone; the broader resource catalog, equipment, transport mechanisms, and balance remain working designs. See [decisions and questions](../decisions-and-questions.md).
+
+## Accepted M1 factory loop
+
+**Scope: First Factory-Powered Flight, accepted for implementation planning on 2026-11-08; gameplay is not yet implemented or qualified.** The [roadmap](../roadmap.md#milestone-m1-first-factory-powered-flight) owns its Phases and Gates; the [milestone plan](../planning/p1/first-flight.md) describes the bounded scenario.
+
+Use a fixed starter arrangement: finite ice in a cargo crate, one installed processor, a bounded propellant tank, and an installed engine. The tank begins empty. One missing pipe segment separates the processor output from the tank; the engine's tank connection is already installed. The engineer receives one spare pipe segment in the starting supplies.
+
+| Stage | M1 behavior |
+| --- | --- |
+| Startup electricity | An installed, preconnected solar panel supplies the processor. It creates no ice or propellant. Batteries, power routing, and day/night simulation are outside M1. |
+| Loading | Nearby take/load actions transfer ice through the engineer's inventory into the processor, debiting each source and respecting destination capacity. |
+| Processing | One timed ice-to-propellant recipe consumes inputs and produces output exactly once. Recipe quantities, cycle time, and capacities are tunable implementation values. |
+| Delivery | Installing the supplied pipe consumes that part and creates a physically represented route with explicit endpoints, a finite rate, and capacity checks. |
+| Propulsion supply | The engine consumes actual propellant in the connected tank when applying thrust. No initial fuel grant substitutes for manufactured output. |
+
+Production and delivery share authoritative game time and continue during walking and piloting. A camera or control-mode change cannot refill a tank, duplicate a job, or alter its rate. Expose running, switched-off, missing-input, and blocked-output states from the actual simulation.
+
+Empty input prevents new production. Full output or downstream storage blocks work without losing committed material or generating duplicate products; restoring an available route permits progress. Transfers reconcile source, destination, and any in-flight ownership. Changing the pipe connection or stopping the processor affects new delivery; propellant already in the tank remains usable.
+
+Tune the initial chain to support ordinary flying while ice remains. Starvation checks can stop processing or use a small finite input batch. Recovery uses remaining ice and the same production path, without hidden refills.
+
+M1 construction is the single defined pipe connection. General machine placement, arbitrary pipe routing, conveyors, junctions, fluid pressure, salvage, and repair crafting follow later. The chain below remains illustrative beyond this accepted prototype selection.
 
 ## The relationship between production and capability
 
 The recommended rule is that every major capability depends on understandable equipment and supplies: stored products, continuous power, or replacement components after damage. Avoid giving every system the same generic upkeep meter.
 
-These chains illustrate that relationship without committing to chemistry or balance:
+These chains illustrate that relationship without committing to chemistry or balance; the ice-to-propellant chain is selected for M1 above:
 
 | Candidate chain | Capability | Useful tradeoff |
 | --- | --- | --- |
@@ -61,4 +83,4 @@ Candidate acceptance scenarios for later [validation](../validation.md):
 4. The engineer sacrifices existing equipment for a finite recovery supply, with the lost capability remaining lost.
 5. Save interruption during production or cargo transfer produces neither duplicate goods nor repeated consumption after recovery.
 
-See [game design](../game-design.md) for mission choice. Recipes, simulation frequency, and technology remain undecided.
+See [game design](../game-design.md) for mission choice. Beyond the scoped M1 recipe and the selected Godot/.NET stack, the wider content catalog, balance, and detailed simulation frequency remain to be defined.

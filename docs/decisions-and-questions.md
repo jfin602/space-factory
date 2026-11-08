@@ -1,6 +1,6 @@
 # Decisions and open questions
 
-**Baseline date:** 2026-11-08. This register records the initial project discussion. It is a design record, not a claim of implementation.
+**Baseline date:** 2026-11-08. This register records the initial project discussion and subsequent scoped decisions. It is a design record, not a claim of implementation.
 
 ## Provenance
 
@@ -9,8 +9,9 @@
 - **S3 — Surfaces and facilities:** the owner added landable planets, asteroids, and other large objects; hostile inhabitants; scouting and combat preparation; an exterior view of the landed ship; multiple entry ports; surface factories connected to the ship; and recurring resource visits.
 - **S4 — Repository initialization:** the owner requested the complete initial plan be turned into project documentation in `jfin602/space-factory`, primarily under `docs/`.
 - **S5 — Development bootstrap (2026-11-08):** the owner selected Godot 4 .NET, C#, single-player desktop targets (Linux, Windows, macOS), a 2D top-down view, and the Compatibility renderer for the initial sandbox. These choices do not settle later gameplay systems.
+- **S6 — First-flight plan adoption (2026-11-08):** after requesting a phased MVP from the pushed engineer/grid bootstrap to a ship moved by its internal factory, the owner accepted the preceding five-Phase plan and instructed the assistant to check the new boot/workflow files and add the plan/roadmap to the documentation. This adopts the M1 implementation scope and its prototype choices; it does not claim implemented behavior or approve every later game mechanic.
 
-Assistant elaborations are retained below as working designs. Their presence in these documents does not imply the owner separately selected every proposed mechanic, quantity, or technology.
+Assistant elaborations remain working designs unless explicitly adopted. The accepted M1 choices below are limited to that prototype. Other examples, quantities, and future mechanics remain proposals or open decisions.
 
 ## Confirmed requirements
 
@@ -30,15 +31,29 @@ Assistant elaborations are retained below as working designs. Their presence in 
 | C12 | Surface facilities persist between visits and can become recurring resource stops. | S3 |
 | C13 | Initial project documentation belongs in this repository, with the detailed set under `docs/`. | S4 |
 
+## Accepted M1 prototype decisions
+
+**Date:** 2026-11-08. **Source:** S6, the owner's instruction to document the reviewed First Factory-Powered Flight plan. **Status:** accepted for M1 implementation planning; gameplay remains planned and unqualified. [The roadmap](roadmap.md#milestone-m1-first-factory-powered-flight) owns the five Phase/ten Gate criteria and progress; [the milestone design](planning/p1/first-flight.md) records the source baseline and implementation boundaries.
+
+| ID | Adopted choice and rationale | Scope and affected documents |
+| --- | --- | --- |
+| M1D01 | Prove a small playable loop: prepare the onboard factory, manufacture propellant, pilot to a beacon, deplete the reserve, and restore thrust from remaining real inputs. Split it into coherent ship, factory preparation, manufacture, powered flight, and repeatable playtest. | M1 only; [roadmap](roadmap.md), [milestone design](planning/p1/first-flight.md), [tutorial](tutorial.md), [validation](validation.md). Later expedition/outpost work remains in place. |
+| M1D02 | Use finite ice cargo, one timed ice-to-propellant processor, bounded output/tank storage, a supplied pipe part installed into one missing processor-to-tank socket, and a preinstalled tank-to-engine route. A small installed solar supply provides processor electricity only, avoiding a circular need for propellant before any can be made. | [Factory](systems/factory-and-resources.md), [tutorial](tutorial.md), [technical direction](technical-direction.md). No hidden refills; quantities/rates remain tuning. General construction, wiring, and logistics are later work. |
+| M1D03 | Use one fixed starter hull and ship-local interior ownership, nearby helm interaction, exclusive Walking/Piloting modes, fixed-orientation four-direction thrust, simple acceleration and coasting. Actual thrust consumes manufactured propellant; depletion stops powered acceleration rather than erasing velocity. | [Ship](systems/ship-and-navigation.md), [technical direction](technical-direction.md), [presentation](ux-and-presentation.md). Exit clears thrust input. Rotation and later navigation controls remain open; an optional active brake uses the same supply. |
+| M1D04 | Keep production and consumption on the same authoritative game time during walking and piloting. Camera/control changes observe the same state. Use compact state-derived guidance, a beacon objective, actual-thrust feedback, and an explicit fresh-scenario Restart playtest action. | [Presentation](ux-and-presentation.md), [tutorial](tutorial.md), [technical direction](technical-direction.md), [validation](validation.md). Reset is a development convenience, not same-run respawning or qualification of permanent loss. |
+| M1D05 | Qualify the immediate playtest on Linux and retain Windows/macOS as project targets. Preserve the five-Phase dependency order and collect actual player-workflow evidence after focused/integration checks. | [Roadmap](roadmap.md), [milestone design](planning/p1/first-flight.md), [validation](validation.md), [BOOT](../BOOT.md). Native Windows/macOS validation, saves, survival, landings, combat, and outposts follow later. |
+
+These choices make the first playtest concrete without locking the full game's propulsion, materials, construction, or navigation model. Exact recipe quantities, capacities, timings, transfer/consumption rates, speed, key bindings, and visual tuning remain task-level choices. No M1 Gate passes through this decision record.
+
 ## Working designs to validate
 
 These proposals connect the confirmed requirements into an implementable game. A task can adopt a scoped prototype assumption and record what it is testing; they are not all prerequisites to writing the first code.
 
 | ID | Working design | Owning document |
 | --- | --- | --- |
-| W01 | Major capabilities depend on physical inventories, production throughput, power, and connected equipment. Recipe examples are provisional. | [Factory and resources](systems/factory-and-resources.md) |
+| W01 | Major capabilities depend on physical inventories, production throughput, power, and connected equipment. M1D02 adopts one prototype chain; other recipe examples remain provisional. | [Factory and resources](systems/factory-and-resources.md) |
 | W02 | Interior and exterior represent the same hull; entrances and utility ports connect to actual interior systems. | [Landings and outposts](systems/landings-and-outposts.md) |
-| W03 | Destination orders and travel priorities let factory work continue during flight. Exact piloting remains open. | [Ship and navigation](systems/ship-and-navigation.md) |
+| W03 | Destination orders and travel priorities are a proposal for later voyages. M1D03 adopts manual flight for the first playtest; full navigation remains open. | [Ship and navigation](systems/ship-and-navigation.md) |
 | W04 | Scouting and route forecasts distinguish known constraints from uncertainty and allow deliberate risks. | [UX and presentation](ux-and-presentation.md) |
 | W05 | The tutorial has a finite, deliberately solvable resource configuration and generous learning margin. | [Tutorial](tutorial.md) |
 | W06 | Resourceful recovery is possible until real supplies and capabilities are exhausted; an empty fuel tank alone is not a terminal-state test. | [Survival and runs](systems/survival-and-runs.md) |
@@ -58,12 +73,12 @@ Resolve choices when they affect the next concrete implementation step. Do not r
 | --- | --- | --- |
 | Q01 | **Partly resolved by S5:** Godot 4 .NET, C#, desktop Linux/Windows/macOS, keyboard movement, and Compatibility rendering. Packaging details and hardware budget remain open. | Before production packaging and performance qualification. |
 | Q02 | Intended run length, victory condition or open-ended objective, and expected session length. | Before long-term pacing and content balance. |
-| Q03 | Simulation time, pause/build behavior, time acceleration, and whether any time advances while the application is closed. | Before integrating travel, remote production, and save/load. |
+| Q03 | M1D04 adopts shared authoritative game time and continued production across Walking/Piloting and camera changes. Full pause/build behavior, time acceleration, and closed-application policy remain open. | Resolve M1 timing details during its implementation; broader policies before travel, remote production, and save/load. |
 | Q04 | Authored versus procedural locations, seed rules, starting-layout variation, and resource distribution. | Before generating more than the small test world. |
-| Q05 | Destination orders versus manual flight, travel representation, landing placement controls, and takeoff costs. | Before the first expedition implementation. |
+| Q05 | M1D03 adopts manual fixed-orientation four-direction flight and coasting for the prototype. Later destination orders, rotation, travel representation, landing controls, and takeoff costs remain open. | M1 implementation tunes its controls; remaining choices before the first expedition implementation. |
 | Q06 | Life-support model, engineer needs, damage sources, emergency reserves, and exact terminal loss rules. | Before survival and death are treated as complete. |
 | Q07 | Combat controls, hostile behavior, damage/armor rules, ship vulnerability while landed, and whether space combat exists. | Before implementing the first hostile surface encounter. |
-| Q08 | Hull construction model, expansion constraints, capacity, mass, cooling, and any gravity-related requirements. | Before expanding beyond the starter hull. |
+| Q08 | M1 uses a fixed hull and one pipe installation socket. General hull construction, expansion constraints, capacity, mass, cooling, and any gravity-related requirements remain open. | Before expanding beyond the starter hull and scoped connection. |
 | Q09 | Port types and placement, transfer rates, connector construction, and reconnection convenience. | Before the first complete docking workflow. |
 | Q10 | Research and recipe unlocks, equipment progression, saved layout rules, and any cross-run progression. | Before broadening the content/progression system. |
 | Q11 | Offscreen threat resolution, communications limits, report timing, and the level of simulation needed for remote facilities. | Before persistent remote defenses are qualified. |

@@ -1,6 +1,14 @@
 # Phase planning
 
-This directory holds focused designs for future implementation Phases. The [roadmap](../roadmap.md) remains the single authority for Phase order, Gate criteria, and current progress. No new Phase plan is established by this directory scaffold.
+This directory holds focused designs for implementation Phases. The [roadmap](../roadmap.md) remains the single authority for Phase order, Gate criteria, and current progress.
+
+## Accepted plans
+
+| Plan | Scope | Progress authority |
+| --- | --- | --- |
+| [M1 — First Factory-Powered Flight](p1/first-flight.md) | Five small implementation Phases expanding the broader Phase 0/1 foundation and stranded-ship work; accepted on 2026-11-08 | [M1 roadmap](../roadmap.md#milestone-m1-first-factory-powered-flight) |
+
+The M1 design is filed under `p1/` because it develops the existing stranded-ship milestone while supplying remaining Phase 0 foundation evidence. Its `M1-Pn`/`M1-Gn.n` identifiers avoid renumbering the broader roadmap. The plan supplies no execution or qualification claim; task stacks are authored separately when requested.
 
 ## When to add a plan
 

@@ -4,6 +4,8 @@ Space Factory is a proposed 2D game about a single engineer operating a spaceshi
 
 **Implementation status: bootstrap sandbox committed; gameplay systems remain planned.** A Godot 4 .NET project and developer commands now live in this repository; see [development setup](development.md) for recorded verification results and [BOOT.md](../BOOT.md) for current routing. Bootstrap delivery does not by itself qualify the roadmap's full foundation Gates.
 
+**Accepted next milestone:** [M1 — First Factory-Powered Flight](roadmap.md#milestone-m1-first-factory-powered-flight), a five-Phase plan from ship-relative interior movement through a real factory-supplied flight playtest. [The milestone design](planning/p1/first-flight.md) records its scoped choices and implementation boundaries; the roadmap alone tracks Gate progress.
+
 ## How to read these documents
 
 For a first overview, read [vision](vision.md), [game design](game-design.md), and [decisions and open questions](decisions-and-questions.md). To begin development, then read [technical direction](technical-direction.md), the next Phase in the [roadmap](roadmap.md), and the relevant [validation scenarios](validation.md).
@@ -27,6 +29,7 @@ For a focused task, begin with [AGENTS.md](../AGENTS.md) and [BOOT.md](../BOOT.m
 | [Module map](../MODULES.md) | Source-backed current responsibilities and explicitly planned future boundaries. |
 | [Workflow](workflow.md) | Task-scoped reading, documentation changes, prompt stacks, execution, validation tiers, and closeout. |
 | [Planning index](planning/README.md) | Phase design organization and references to the canonical roadmap. |
+| [First-flight milestone design](planning/p1/first-flight.md) | Accepted M1 scope, baseline, state boundaries, deferrals, and execution guidance. |
 | [Task index](tasks/README.md) | Executable task conventions and source-bound qualification records. |
 | [Decision-record index](decisions/README.md) | Detailed durable decisions linked from the existing decision register. |
 | [Roadmap](roadmap.md) | Small development Phases, Gates, dependencies, and expected evidence. |
@@ -38,6 +41,7 @@ For a focused task, begin with [AGENTS.md](../AGENTS.md) and [BOOT.md](../BOOT.m
 ## Design status vocabulary
 
 - **Confirmed requirement:** explicitly specified by the project owner in the discussion.
+- **Accepted prototype choice:** adopted for a named milestone; it is not a permanent game-wide rule or evidence of implementation.
 - **Working design:** a proposed way to realize the confirmed requirements; useful for planning but subject to validation and change.
 - **Example:** illustrative content, recipe, scenario, or number; not a locked balance specification.
 - **Open decision:** a choice that has not been made. Each should be resolved when its dependent work needs it.
@@ -47,4 +51,4 @@ The [decision register](decisions-and-questions.md) owns requirement status. Sys
 
 ## First development outcome
 
-Begin with a running foundation and a small recoverable ship, then demonstrate the engineer assembling a production connection that makes departure possible. Expand that into a complete excursion and, subsequently, a surface outpost that can be left and revisited. The roadmap makes these outcomes independently reviewable while retaining the full long-term game concept.
+Execute M1 in order: a coherent ship, factory preparation, propellant manufacture, first powered flight, and a repeatable playtest. Its fresh scenario starts with zero propellant and finite ice; the player restores a connection and manufactures the supply used for flight. Then expand toward the complete excursion and persistent surface outpost described in the broader roadmap. The roadmap makes these outcomes independently reviewable while retaining the full long-term game concept.

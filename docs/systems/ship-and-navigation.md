@@ -13,9 +13,25 @@ This describes intended behavior, not implementation. **Confirmed** identifies o
 
 The detailed relationship between ship damage, surviving a crash, and engineer death still needs definition. A temporarily disabled engine must not be confused with a confirmed terminal outcome; see [survival and runs](survival-and-runs.md).
 
+## Accepted M1 ship and flight rules
+
+**Scope: First Factory-Powered Flight, accepted for implementation planning on 2026-11-08; gameplay is not yet implemented or qualified.** See the [milestone plan](../planning/p1/first-flight.md) and canonical [roadmap Gates](../roadmap.md#milestone-m1-first-factory-powered-flight).
+
+- Use one fixed starter hull, a recognizable outline, a walkable deck, installed machinery, and a nearby-interaction helm. Stars and stationary beacons make world movement visible.
+- Ship position belongs to space. Engineer position, deck bounds, grid cells, machinery, and connections belong to the ship. Translating the ship preserves their local positions and relationships.
+- Walking and Piloting are mutually exclusive input modes. The engineer approaches the helm to enter it; leaving restores walking and clears the current thrust request.
+- Manual flight uses four-direction thrust with a fixed ship orientation and simple acceleration. Ship rotation, directional-engine layout, and orbital physics are deferred. Bindings, acceleration, consumption, and other tuning values are chosen during implementation.
+- Begin with an empty tank. The first powered acceleration depends on propellant manufactured by the [onboard factory](factory-and-resources.md#accepted-m1-factory-loop).
+- Applied thrust consumes tank propellant at a defined rate; quantities cannot become negative. An empty tank prevents powered acceleration while preserving existing coasting velocity. If an active brake is included, it uses the same propulsion supply.
+- Production continues during piloting and walking. Leaving the helm allows the engineer to tend the factory while the ship coasts; returning preserves velocity, inventories, connections, and production progress.
+- Stopping production leaves the stored reserve usable. Once exhausted, more propellant produced from remaining ice restores thrust. An empty tank does not by itself end the scenario or declare the engineer dead.
+- Camera changes observe the same authoritative ship and factory state. A wider piloting view may improve readability without replacing or resetting that state.
+
+The immediate objective is to fly to a visible beacon. These controls qualify the small first-flight prototype only; later destination orders, navigation forecasts, landings, survival, and permanent outcomes remain separate work.
+
 ## The ship as a working factory
 
-**Recommended:** every major capability should have a visible supporting system. Propulsion depends on an available fuel or energy supply; repairs depend on usable material; exploration equipment depends on capacity the player has installed and supplied. Particular propulsion types, recipes, coolant rules, and power requirements remain undecided.
+**Recommended:** every major capability should have a visible supporting system. Propulsion depends on an available fuel or energy supply; repairs depend on usable material; exploration equipment depends on capacity the player has installed and supplied. M1 adopts the propellant supply above; broader propulsion types, coolant rules, and power requirements remain undecided.
 
 The player should be able to trace a capability back through the factory: engine to supply connection, connection to storage, storage to processor, and processor to its inputs. A stopped engine should expose the relevant failure rather than present an unexplained general ship penalty.
 
@@ -25,7 +41,7 @@ Physical inventories matter. A component in a planetary warehouse is unavailable
 
 ## Travel and mission planning
 
-**Recommended:** begin with destination-based navigation. The engineer selects a location and travel priorities, then works inside while the ship follows those orders. This is a proposal, not a decision to exclude manual piloting. Flight controls, continuous versus sector travel, and the meaning of travel time remain open.
+**Recommended for later voyages:** destination-based navigation lets the engineer select a location and travel priorities, then work inside while the ship follows those orders. M1 first proves manual flight under the scoped rules above. The later relationship between destination orders and manual piloting, continuous versus sector travel, and voyage time remains open.
 
 Possible orders include holding position, approaching a resource field, following a route, and selecting efficient or faster travel. Each meaningful order should expose its implications for the systems that support it. A speed setting should have an understandable effect on consumption if that tradeoff is adopted.
 
@@ -55,4 +71,4 @@ These are design targets for future validation, not evidence of passing tests:
 
 ## Decisions still required
 
-Resolve flight controls, route structure, mission objectives, expansion rules, landing and departure costs, and which ship systems are essential in the first playable version. Do not infer an engine or technical architecture from this document; consult [technical direction](../technical-direction.md), [roadmap](../roadmap.md), and [validation](../validation.md). The opening recovery sequence is specified separately in [the tutorial](../tutorial.md).
+M1 selects its first-flight controls, beacon objective, and essential ship systems above. Resolve later flight and route structure, mission objectives, expansion rules, and landing/departure costs when their dependent work begins. Consult [technical direction](../technical-direction.md), [roadmap](../roadmap.md), and [validation](../validation.md) for architecture, implementation order, and evidence. The opening recovery sequence is specified separately in [the tutorial](../tutorial.md).

@@ -4,19 +4,40 @@
 
 Restarting a small stranded spaceship introduces the game through its actual factory, resources, and repair systems.
 
-The engineer is alone; death permanently ends a run. Location, damaged equipment, inventory, lesson order, and survival timer remain open. Being stranded does not imply a particular crash, planetary location, or enemy attack.
+The engineer is alone; death permanently ends a run. The scoped M1 opening below selects a first-flight test arrangement. The fuller tutorial's location, damage, inventory balance, lesson order, and survival timer remain open. Being stranded does not imply a particular crash, planetary location, or enemy attack.
 
 This opening should establish the promise described in [game design](game-design.md): the player builds the systems that make their ship capable of traveling and surviving.
 
+## Accepted M1 opening
+
+**Scope: First Factory-Powered Flight, accepted for implementation planning on 2026-11-08; gameplay is not yet implemented or qualified.** The [milestone plan](planning/p1/first-flight.md) gives the bounded scenario; the [roadmap](roadmap.md#milestone-m1-first-factory-powered-flight) owns Phase/Gate progress.
+
+Start aboard one fixed ship in a simple space scene. The propellant tank is empty, the processor-to-tank pipe is incomplete, and a finite cargo supply contains ice and one spare pipe segment. The processor, tank, engine connection, and solar supply are installed. Machinery does not need a general damage/repair system for this first restoration task.
+
+The player completes this sequence through nearby interactions:
+
+1. Inspect the empty propulsion reserve and observe that a thrust request cannot accelerate the ship.
+2. Retrieve ice from the crate and load it into the processor, with quantities transferred through the engineer's inventory.
+3. Install the supplied pipe segment to complete the actual processor-to-tank connection.
+4. Start the solar-powered processor and observe a timed recipe producing propellant and filling the tank.
+5. Enter the helm and fly toward a visible beacon while production continues.
+6. Leave the helm to tend the factory when needed, then resume piloting without resetting state.
+
+Keep the next useful objective visible and derive its completion from world conditions. Recognize valid actions performed early; do not require a ceremonial click order or reset a working system. A full mission framework and alternate ship layouts are outside this milestone.
+
+The recovery playtest stops processing, uses the stored reserve until powered acceleration is unavailable, then manufactures more propellant from remaining ice and regains thrust. Coasting continues according to the [M1 flight rules](systems/ship-and-navigation.md#accepted-m1-ship-and-flight-rules); zero fuel alone is not death.
+
+An explicit **Restart playtest** action restores the defined fresh scenario for development. It is not an in-world rescue or engineer respawn, and it does not implement or qualify durable permanent-run failure. The broader permanent-death requirement remains in force for the later survival work.
+
 ## A solvable starting problem
 
-Begin from a verifiably solvable state with finite, reachable recovery resources. The first machine needs a bootstrap path: an available tool, repairable power source, or recoverable component. The exact method remains undecided.
+Begin from a verifiably solvable state with finite, reachable recovery resources. M1 uses the installed solar supply to manufacture the first propellant without requiring propellant first. Other tutorial variants may use an available tool, repairable power source, or recoverable component; those methods remain undecided.
 
 Avoid recipes requiring a machine that can only manufacture itself. Explain irreversible consumption before asking the player to spend scarce material. A solvable start does not guarantee success after every choice; destroying the remaining recovery path follows normal consequences.
 
 No hidden resource refill or automatic rescue should repair a failed opening. Whether the first run has extra warnings, a relaxed timer, or optional guidance is an open teaching decision. Restarting after a loss begins a new run; it does not revive the dead engineer.
 
-## Suggested playable sequence
+## Suggested fuller tutorial sequence
 
 | Step | Player activity | What it teaches |
 | --- | --- | --- |
@@ -59,4 +80,4 @@ Use these as candidate requirements for [validation](validation.md), not as clai
 5. The player can connect the first departure to products they manufactured.
 6. Tutorial failure respects permanent death and does not confuse application interruption with an in-world crash.
 
-Record final opening location, recipes, prompts, and guidance choices in [decisions and questions](decisions-and-questions.md) before treating them as settled design.
+The accepted M1 scope is recorded in [decisions and questions](decisions-and-questions.md). Record later opening, recipe, prompt, and guidance choices there before treating them as settled beyond this prototype.
