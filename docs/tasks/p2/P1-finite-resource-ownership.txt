@@ -1,0 +1,34 @@
+TASK: Phase 2 / P1 — Finite resource ownership
+
+MODEL / REASONING / USAGE
+- Recommended configuration: `GPT-6 Sol High`.
+- Browser required: no.
+
+ROADMAP SCOPE
+M1-P2, resource/accounting foundation for M1-G2.1 and M1-G2.2. The runner's Phase 2 means Prepare the factory, not the broader expedition Phase 2. Authoring this brief did not implement or qualify its scope.
+
+GOAL
+Give the starter ship one small authoritative factory state with finite starting supplies, distinct bounded inventories, and conserving transfer operations. Leave normal play runnable and unpowered so later prompts can add physical machinery and player actions against this same state.
+
+PREREQUISITES AND NARROW READING
+Read AGENTS.md, BOOT.md, docs/tasks/p2/README.md, and the Resource and transaction contract, Verification and evidence, and Version and runner contract sections of docs/tasks/p2/implementation-plan.md. Inspect current Git revision/status and compatible partial work. Read the selected M1-G2.1/G2.2 criteria and the Accepted M1 factory loop section of docs/systems/factory-and-resources.md. Inspect MODULES.md, game/scripts/Ship.cs, Main.cs, the existing main scene, and tools/dev check composition. Consult development setup only for unknown tool readiness. The assessed gameplay baseline is committed main f274c89630a6033ccd79ad98b7fee6369dd5778a; it is a source reference, never a reset target. Require the prepared 0.2.0 baseline for a fresh run; resumed work follows the README history contract.
+
+SCOPE AND STEPS
+1. Introduce the smallest C# resource/state owner needed by this scenario. Ship composes one instance; the HUD, camera, controls, and future machine views observe it. Keep the qualified Ship control-mode owner and ship-local frame. Use the existing SpaceFactory namespace and Godot UID conventions.
+2. Represent separate cargo, engineer-carried supplies, processor input, processor output, and tank ownership with explicit capacities. Cargo starts with a documented finite positive amount of ice and exactly one spare pipe; carried inventory, processor buffers, and propellant tank start empty. Use named adjustable starting quantities/capacities and small stable owner/resource identities. Require positive carried-ice/input capacities, capacity for the one pipe, and starting cargo ice greater than processor-input capacity so normal transfers can fill that input and leave a reserve for a further full-input attempt and later recovery. Keep ice and pipe counts discrete. Do not build a general inventory framework or require save serialization.
+3. Provide the concrete cargo-to-carried and carried-to-processor operations that P3 will call. A positive request moves only the amount allowed by request, stock, and destination capacity; return the actual quantity and an inspectable outcome/reason. Debit and credit that same amount once as one synchronous transaction. Validate supported resource/destination relationships before mutation. Empty/full, invalid, and zero-result requests must leave all state unchanged. Reject zero/negative requests, arithmetic overflow, and nonfinite values wherever the accepted numeric type allows them.
+4. Make starting state a deliberate fresh-scenario construction. Repeated access, presentation refresh, interaction, or control-mode transitions must not reconstruct/refill it. Expose read-only inspection rather than public mutable counters. Keep the one pipe in a real inventory, not an independent unlimited installation entitlement. Reserve real bounded processor-output/tank state for P4; introduce no recipe, clock, or propellant grant.
+5. Add focused C# checks invoked by the existing smoke path, preferably in a small helper if Main.cs would otherwise accumulate unrelated rule details. Exercise the actual owner and operations, not copied arithmetic in another language. Cover fresh-state quantities, independent state instances, partial transfer at stock/capacity limits, repeated requests until exhaustion, rejected requests, and source/destination reconciliation. Use isolated instances for destructive boundary cases. Emit a distinct success marker only after these checks pass, such as SPACE_FACTORY_M1_P2_RESOURCES_OK. Keep the live scene's initial state unchanged by test setup and preserve existing smoke failure exits and P1 checks.
+
+EXPLICIT DEFERRALS
+P2 adds the factory's physical arrangement; P3 adds nearby interaction and HUD actions; P4 adds installation and bounded pipe transfer. No production, automatic delivery tick, actual thrust, power-network simulation, free fuel, general construction, saves, restart UI, or native qualification belongs here. Mode/range validation belongs at P3's action boundary; this prompt establishes the resource transaction contract it will call.
+
+VALIDATION
+Tier: T1; native observation is reserved for P6. Target about 8 minutes including focused validation, with the workflow's 10-minute soft ceiling and 15-minute ordinary budget. Run ./tools/dev doctor if readiness is unknown/changed. Run ./tools/dev check once on the final candidate: it already imports/builds, runs ordinary and translation-fixture C# smokes, and checks scene automation. Confirm the new accounting assertions execute and the existing markers/failure semantics remain intact. Do not repeat component builds or install a new test framework. If tools/checks fail or work overruns, preserve the implementation and exact remaining work; do not advance the checkpoint or call a build-only result an accounting pass.
+
+DONE CONDITION AND REPORT
+The real ship owns finite initial factory state; the implemented transfer operations preserve quantities and capacities; the focused C# and applicable existing checks pass. Create/update docs/tasks/p2/qualification/implementation.md with the P1 source identity, chosen starter quantities/capacities, owner/API paths, actual commands/results, concrete before/after quantities, remaining gaps, and P2/P3 handoff. Keep native behavior NOT OBSERVED and M1-P2 Gates unqualified. Report implementation, verification, and progression separately. Do not self-commit or push; the runner owns implementation checkpoints.
+
+VERSIONING
+The assigned project version is `0.2.1`.
+Only after the required implementation/checks pass, set the existing root package.json version to this checkpoint, preserving its other settings. On a fresh attempt failure leaves the prior 0.2.0 checkpoint unchanged; resumed partial work follows the README without resetting source or fabricating history. Do not change engine/SDK pins. A successful process exit or optimistic final prose does not substitute for the required checks.

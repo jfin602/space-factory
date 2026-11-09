@@ -15,12 +15,12 @@ This is the immediate playtest target. Its five Phases expand the existing found
 | Phase | Observable outcome | Dependency | Broader Gates served | Status |
 | --- | --- | --- | --- | --- |
 | M1-P1 — A coherent ship | Ship-relative interior, world reference, and exclusive walking/piloting modes | Committed bootstrap | G0.1, foundation for G0.2 | **COMPLETE** — [closeout](tasks/p1/closeout.md) |
-| M1-P2 — Prepare the factory | Finite supply can be loaded and the missing pipe installed | M1-P1 | G0.2, G1.1 | NOT STARTED |
+| M1-P2 — Prepare the factory | Finite supply can be loaded and the missing pipe installed | M1-P1 | G0.2, G1.1 | NOT STARTED — [execution stack authored](tasks/p2/README.md) |
 | M1-P3 — Manufacture propellant | Timed production and bounded delivery fill the tank | M1-P2 | G0.2, G1.2 | NOT STARTED |
 | M1-P4 — First powered flight | Manufactured propellant enables and sustains real thrust | M1-P3 | G1.2 | NOT STARTED |
 | M1-P5 — Complete the playtest | Fresh startup, beacon objective, starvation/recovery, and restart work together | M1-P4 | G1.1, G1.2 | NOT STARTED |
 
-M1-P1's selected checks are **PASS** through the [p1 implementation](tasks/p1/qualification/implementation.md), [native playtest](tasks/p1/qualification/native-playtest.md), and [closeout](tasks/p1/closeout.md). The remaining M1 gameplay checks are **NOT OBSERVED**. The p1 stack was executed manually in an uncommitted working tree; its development checkpoint versions are not runner Git checkpoint commits. Focused checks support the integrated result; actual input and appearance were observed in the native Linux game. This evidence does not qualify factory-powered flight or later player loops.
+M1-P1's selected checks are **PASS** through the [p1 implementation](tasks/p1/qualification/implementation.md), [native playtest](tasks/p1/qualification/native-playtest.md), and [closeout](tasks/p1/closeout.md), published in [f274c896](https://github.com/jfin602/space-factory/commit/f274c89630a6033ccd79ad98b7fee6369dd5778a). The remaining M1 gameplay checks are **NOT OBSERVED**. P1 was qualified in a manual working tree and committed together; its development versions are not individual runner checkpoint commits. Focused checks support the integrated result; actual input and appearance were observed in the native Linux game. This evidence does not qualify factory-powered flight or later player loops.
 
 M1-P4 delivers the core first-flight behavior. The full milestone passes when all ten M1 Gates pass, including the repeatable scenario in M1-P5. Review the original G0/G1 criteria against the same evidence before changing those broader statuses; milestone completion does not automatically qualify unrelated criteria or any later expedition Phase.
 
@@ -120,7 +120,7 @@ M1-P4 delivers the core first-flight behavior. The full milestone passes when al
 
 Linux is the immediate playtest target; Windows/macOS remain desktop targets requiring their own later export and native evidence. Fixed hull and installed machinery, one recipe, one pipe socket, and one beacon bound this milestone. General construction/logistics, ship rotation, damage/repair crafting, complex electrical systems, landings, combat, save/load, permanent-loss qualification, and outposts remain later work.
 
-The next implementation scope is **M1-P1**, using its authored [p1 assessment, plan, and prompts](tasks/p1/README.md) under [the workflow](workflow.md). Authoring does not execute the stack; later M1 execution stacks remain to be written. After the first flight, use observed play to order richer placement, repairs, hull/propulsion improvements, and the following expedition work.
+The next implementation scope is **M1-P2**, using its authored [p2 assessment, plan, and six prompts](tasks/p2/README.md) under [the workflow](workflow.md). P1's ship/helm scope is complete. Preparing the P2 `0.2.0` runner baseline and writing its tasks do not execute gameplay or pass Gates; M1-P3–P5 execution stacks remain to be written. After the first flight, use observed play to order richer placement, repairs, hull/propulsion improvements, and the following expedition work.
 
 ## First integrated slice
 

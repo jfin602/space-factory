@@ -24,7 +24,7 @@ The runner starts a separate `codex exec --json` process for each prompt using i
 
 ## Task folders and version metadata
 
-The private root [package.json](../package.json) was ported at `0.0.0`; its current initial baseline is deliberately prepared at `0.1.0` for the authored [M1-P1 stack](tasks/p1/README.md). Its version is development roadmap/checkpoint metadata. It is independent of Godot `4.7.2`, .NET SDK `10.0.403`, and any future public game-release policy. Preparing this baseline neither executes gameplay nor qualifies a Gate. Preserve the root manifest and its scripts when changing this version.
+The private root [package.json](../package.json) was ported at `0.0.0`; it is now deliberately prepared at `0.2.0` for the authored [M1-P2 stack](tasks/p2/README.md), following M1-P1's completed `0.1.4` checkpoint. Its version is development roadmap/checkpoint metadata. It is independent of Godot `4.7.2`, .NET SDK `10.0.403`, and any future public game-release policy. Preparing this baseline neither executes gameplay nor qualifies a Gate. Preserve the root manifest and its scripts when changing this version.
 
 | Folder | Prompt type and version rule |
 | --- | --- |
@@ -34,9 +34,9 @@ The private root [package.json](../package.json) was ported at `0.0.0`; its curr
 | `cN-slug` | `Correction N`; every prompt declares the same existing root version and must leave it unchanged. |
 | Descriptive correction name | A lowercase kebab name of 3–32 characters can identify a correction; its first prompt supplies the Phase number. Reserved names are rejected. Prefer `cN-slug` for new stacks. |
 
-For the initial `0.0.0` baseline, an ordinary Phase stack starts at `p0` with P1 assigned `0.0.1`. Starting `p1` requires a deliberate, reviewed root version update to `0.1.0` before running it. The runner does not perform this new-Phase baseline transition for you. Choose continuation versions deliberately so they do not reuse prior checkpoint subjects. Version metadata alone does not advance the [roadmap](roadmap.md).
+For the initial `0.0.0` baseline, an ordinary Phase stack starts at `p0` with P1 assigned `0.0.1`. Entering a later Phase requires its deliberate root baseline update, such as `0.2.0` before `p2`. The runner does not perform this new-Phase baseline transition for you. Choose continuation versions deliberately so they do not reuse prior checkpoint subjects. Version metadata alone does not advance the [roadmap](roadmap.md).
 
-The accepted [M1 plan](planning/p1/first-flight.md) begins with M1-P1. Its [p1 stack](tasks/p1/README.md) is now authored with the `0.1.0` baseline prepared and targets `0.1.1` through `0.1.4`. Validate it with `npm run space-factory:phase:validate -- p1`; when implementation is requested, use `npm run space-factory:phase -- p1`. P4 is a required native manual checkpoint and closeout. This preparation creates no extra gameplay Phase 0 and does not execute the M1 plan.
+The accepted [M1 plan](planning/p1/first-flight.md) has completed [M1-P1](tasks/p1/closeout.md), manually executed and published together in [f274c896](https://github.com/jfin602/space-factory/commit/f274c89630a6033ccd79ad98b7fee6369dd5778a). Its individual `0.1.x` runner checkpoint subjects were not created; do not fabricate them or rerun the completed stack. The new [p2 stack](tasks/p2/README.md) begins independently at `0.2.0`, targets `0.2.1` through `0.2.6`, and remains unexecuted. Validate with `npm run space-factory:phase:validate -- p2`; when implementation is requested, use `npm run space-factory:phase -- p2`. P6 is the required native manual checkpoint and final closeout, using `- Browser required: yes.`.
 
 ## Prompt grammar and templates
 

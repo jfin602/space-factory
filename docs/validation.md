@@ -10,7 +10,7 @@ Use three clear outcomes: **PASS**, **FAIL**, and **NOT OBSERVED**. A planned ch
 
 ## First-flight milestone M1
 
-These scenarios assess [M1 — First Factory-Powered Flight](roadmap.md#milestone-m1-first-factory-powered-flight). Their identifiers are scenario references, not installed test commands. All currently have **NOT OBSERVED** results. Store source-bound results under the selected task's qualification records and link them from the roadmap; this document defines the scenarios rather than a second progress tracker.
+These scenarios assess [M1 — First Factory-Powered Flight](roadmap.md#milestone-m1-first-factory-powered-flight). Their identifiers are scenario references, not installed test commands. Store source-bound results under the selected task's qualification records and link them from the roadmap, which owns current results. This document defines the scenarios rather than a second progress tracker.
 
 | ID | Scenario and required observation | Roadmap Gates | Evidence scope |
 | --- | --- | --- | --- |

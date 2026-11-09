@@ -1,0 +1,40 @@
+TASK: Phase 2 / P2 — Starter factory layout
+
+MODEL / REASONING / USAGE
+- Recommended configuration: `GPT-6 Sol Medium`.
+- Browser required: no.
+
+ROADMAP SCOPE
+M1-P2 / preparation for M1-G2.1 and M1-G2.2, preserving the qualified M1-P1 spatial and helm behavior. This task makes the fixed starter arrangement visible; P3 adds nearby transfer actions and P4 installs the pipe.
+
+GOAL
+Place a readable, reachable starter factory aboard the real ship and present P1's actual stored quantities without creating a second resource owner.
+
+PREREQUISITES AND NARROW READING
+Require P1's implemented resource/storage contract and passing required checks. Inspect current branch, HEAD, changes, and actual predecessor evidence before editing. Read AGENTS.md, BOOT.md, this stack's README.md, and implementation-plan.md sections "Scene and ownership contract", "Verification and evidence", and "Version and runner contract". Read P1's entry in docs/tasks/p2/qualification/implementation.md. Inspect the current resource owner, game/scenes/main.tscn, game/scripts/Ship.cs, Deck.cs, Engineer.cs, and the affected Main.cs HUD/smoke code. Consult only the accepted M1 factory/presentation sections when a behavior is unclear. Do not reread the whole documentation corpus or use the historical source revision as a reset target.
+
+SCOPE AND STEPS
+1. Add the cargo crate, processor, propellant tank, installed engine, and one missing processor-output-to-tank pipe socket to the actual main scene. Give the processor's input/output and the tank recognizable labels. Simple Godot shapes and text are sufficient; preserve relevant scene/script UID sidecars.
+2. Parent every onboard object and pipe visual under the existing Ship frame. Keep the deck, engineer, and helm ownership intact; the camera, HUD, and external beacon retain their existing world/presentation ownership. Reuse P1's one state instance and stable owner identities. Presentation reads that instance; neither a node's drawing callback nor HUD refresh may initialize or refill supplies.
+3. Choose a fixed arrangement inside the existing deck with reachable approach positions for cargo, processor, socket, and helm. Keep the engineer spawn, deck containment, helm position, and movement controls unless a concrete layout conflict requires a narrow, documented adjustment. Keep labels inside the usable viewport in ordinary and translated fixture states. Do not introduce a placement grid, building catalog, pathfinding, or a general machinery collision system.
+4. Define stable identities and explicit ship-local interaction points for cargo, processor, socket, and helm, ready for P3's dispatcher. Align the points with their visible objects and P1's state owners. A tank or engine label must not silently become a competing action target. Keep a consistent coordinate-space contract so range calculations continue working after ship translation.
+5. Draw the installed tank-to-engine route and the separate, visibly missing processor-to-tank segment with clear endpoints. The missing segment remains absent and uninstalled. A preconnected solar-panel visual may communicate the accepted starter arrangement, but electricity and processing behavior remain for M1-P3. Do not add transfer actions, consume the pipe, manufacture output, or grant propellant here.
+6. Show real cargo, carried, processor-input/output, and tank quantities/capacities where useful, using compact labels or the existing overlay. The tank starts at zero from the authoritative state. Keep the existing mode/help/feedback functional and all ordinary propulsion unavailable. A schematic line or installed engine is not evidence of usable propellant or powered flight.
+7. Extend only the relevant actual-scene assertions: required factory nodes/owner bindings exist; their local positions remain unchanged under ship translation; their globals move with the ship while the beacon stays fixed; constructing/refreshing presentation does not change the starting inventories. Preserve the meaningful P1 hull, body-inset, helm, held-input, and fixture checks. Do not weaken assertions merely to accommodate a changed scene path.
+
+EXPLICIT DEFERRALS
+No nearby transfer panel, installation action, recipe/job clock, running production, thrust, objective system, restart/save feature, general placement/logistics, asset generation pipeline, or platform release work. Readability and mouse/keyboard usability remain NOT OBSERVED until the P6 native checkpoint.
+
+VALIDATION
+Tier: T1. Target up to eight minutes including focused checks; preserve a precise bounded handoff if unfinished rather than skipping required verification.
+Run ./tools/dev check once on this changed candidate, including the actual-scene ownership/binding assertions above. It already imports, builds, runs ordinary and spatial-fixture C# smokes, and exercises scene automation; do not precede it with a duplicate build/import or repeat an unchanged passing run. A headless scene assertion verifies composition and state, not appearance. If a required dependency or check fails, record the failure and leave the version unchanged.
+
+DONE CONDITION
+The actual scene contains the fixed factory arrangement under Ship, linked to P1's authoritative state with valid interaction points. Counts and connection visuals reflect the initial empty-tank/missing-pipe scenario; resource totals and existing control/spatial behavior survive the focused checks. Native readability remains pending.
+
+RECORD AND REPORT
+Append the source identity, relevant dirty state, changed files, actual checks/results, chosen node/owner/target identities, local layout, and remaining observations to docs/tasks/p2/qualification/implementation.md. Give P3 the actual state access and target-point contract. Retain earlier failures and evidence. Keep M1-P2 Gates unqualified; do not rewrite the previous p1 closeout. Do not self-commit or push; the runner owns the implementation checkpoint.
+
+VERSIONING
+The assigned project version is `0.2.2`.
+After P2's required scope and checks pass, change only the existing root package.json version to this checkpoint, preserving its scripts/settings. Require P1's actual completed work and compatible checkpoint history under this stack's runner contract. On failure or an incomplete required check, retain the prior checkpoint and report the exact remaining work.

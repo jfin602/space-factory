@@ -1,0 +1,35 @@
+TASK: Phase 2 / P4 — Installable pipe connection
+
+MODEL / REASONING / USAGE
+- Recommended configuration: `GPT-6 Sol High`.
+- Browser required: no.
+
+ROADMAP SCOPE
+M1-P2, primarily M1-G2.2 and its finite-part relationship to M1-G2.1. Establish the real route and its bounded transfer operation; timed production/delivery in ordinary play belongs to M1-P3.
+
+GOAL
+Let the nearby walking engineer install the one carried pipe at the authored socket, consume it exactly once, and connect the actual processor output to the actual tank through a bounded route. Keep ordinary propellant zero and propulsion unavailable.
+
+PREREQUISITES AND NARROW READING
+Require P1 finite state, P2 layout, and P3 contextual take/load actions with their recorded applicable checks. Read AGENTS.md, BOOT.md, docs/tasks/p2/README.md, and the Interaction contract, Connection contract, Verification and evidence, and Version and runner contract sections of implementation-plan.md. Inspect docs/tasks/p2/qualification/implementation.md, current Git revision/status, and the actual resource owner, dispatcher, machine/socket views, main scene, Ship.cs, and Main.cs smoke/feedback paths. Read M1-G2.2 and the Accepted M1 factory loop section of docs/systems/factory-and-resources.md. Preserve compatible partial/newer work; do not rebuild P1-P3 from their prompts.
+
+SCOPE AND STEPS
+1. Activate Install in P3's existing socket panel through its shared action dispatcher. Require the matching active panel opening and recheck Walking mode, target identity, current proximity, carried pipe stock, and uninstalled state when applying the action; a displayed hint or previously opened panel is not authorization to mutate later. Retain the panel's E/Esc close behavior, invalidation on range/mode change, and Piloting E exit. Do not add another E listener or let one press both close the panel and use the helm.
+2. Make installation one synchronous transaction: consume exactly one carried pipe and establish the installed route once, or leave both inventory and connection unchanged. A missing part, distant/piloting attempt, or repeated installation must return the actual refusal reason. Reopening UI or switching modes must never award another part or install another route.
+3. Bind that route to stable processor-output and tank endpoints in P1's authoritative state. Define a finite positive throughput and honor actual receiving capacity. The transfer operation accepts elapsed game time from a future authoritative caller; for a valid interval it moves no more than available source, free destination space, or rate times elapsed time. Debit and credit the same amount once. Disconnected routes, empty output, full tanks, or invalid/nonpositive/nonfinite intervals move nothing and cannot create negative/nonfinite inventory. Do not add a render callback or normal-play delivery scheduler in this phase.
+4. Keep the installed tank-to-engine route tied to this same tank, with any exposed available reserve derived only from its actual stored quantity. It must not pool unrelated buffers or treat Installed as fuel. No engine consumption or applied thrust is added. The ordinary tank remains empty because no processor recipe exists yet.
+5. Present the missing/installed segment and endpoints from real connection state. Retain P3's readable transaction result long enough to inspect, expose useful installed/missing-part feedback, and keep the gap and helm reachable. Update empty-supply feedback from the real tank/capability state without implying that connection alone enables flight. Do not animate material flow when no material moved.
+6. Add focused C# checks through the existing smoke path for successful one-time installation, duplicate/missing-part rejection, and denied mode/range attempts through the actual action boundary. Exercise disconnected, rate-limited, source-limited, and capacity-limited transfers using a fresh isolated instance with a known processor-output quantity. Assert total output-plus-tank conservation, endpoint identity, repeat-call behavior, invalid intervals, and tank-only engine reserve. This isolated fixture is check setup, never a normal scenario seed/debug refill. Emit a distinct marker such as SPACE_FACTORY_M1_P2_CONNECTION_OK only after assertions pass and preserve existing smoke failures.
+
+EXPLICIT DEFERRALS
+No recipe/jobs, electricity simulation, automatic output generation, normal delivery clock, manufactured fuel, applied thrust, arbitrary pipe routing/junctions, dismantling, general machine placement, saves, or native Gate qualification. P5 integrates the full preparation sequence and retained P1 regressions; P6 observes the player workflow in the native game. Do not make gameplay fuel available merely to demonstrate this prompt.
+
+VALIDATION
+Tier: T1 focused installation/connection checks; complete scene integration belongs to P5. Target about 8 minutes including checks, with the workflow's 10-minute soft ceiling and 15-minute ordinary budget. Run ./tools/dev check once for the final candidate; this already imports/builds and runs both main-scene smoke modes plus scene automation. Confirm the new checks execute through the real C# operations, normal scenario supplies remain untouched by isolated test setup, and existing control assertions retain their meaning. Do not run a redundant build or broad runner suite. Preserve failures and partial work without advancing the checkpoint if required proof remains incomplete.
+
+DONE CONDITION AND HANDOFF
+The walking engineer can install one carried part through the shared dispatcher; the real route has explicit endpoints and demonstrated throughput/capacity limits; missing routes cannot deliver; ordinary output/tank remain zero and there is no powered motion. Append P4 evidence to docs/tasks/p2/qualification/implementation.md: source identity, actual commands/results, installation resource delta, test-fixture source/tank traces, selected rate/capacities, and P5/P6 handoff. Distinguish isolated transfer proof from ordinary gameplay and unobserved native interaction. Do not mark M1 Gates PASS, self-commit, or push.
+
+VERSIONING
+The assigned project version is `0.2.4`.
+After the required implementation/checks pass, change only the existing root package.json version to this checkpoint. A fresh P4 starts after 0.2.3; failed/incomplete work retains the prior checkpoint, with resumed partial work handled according to README.md. Preserve engine/SDK pins and other package settings. The runner owns the implementation commit; a success exit does not independently certify the reported behavior.

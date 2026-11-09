@@ -10,7 +10,7 @@ The accepted immediate target is [M1 — First Factory-Powered Flight](docs/road
 
 ## Current starting point — 2026-11-08
 
-The bootstrap is committed. M1-P1 was implemented and natively qualified as uncommitted work on `main` HEAD `4ec4b625b7948f02ba6df938263eea7e763dc579`; inspect current HEAD and local work rather than resetting to an earlier revision. [The p1 closeout](docs/tasks/p1/closeout.md) owns the detailed evidence.
+The bootstrap and qualified M1-P1 ship/helm are committed on `main` at [f274c896](https://github.com/jfin602/space-factory/commit/f274c89630a6033ccd79ad98b7fee6369dd5778a). [The p1 closeout](docs/tasks/p1/closeout.md) preserves the original source-bound runtime/native evidence. Inspect current HEAD and local work rather than resetting to an earlier revision.
 
 | Area | Current state |
 | --- | --- |
@@ -18,7 +18,7 @@ The bootstrap is committed. M1-P1 was implemented and natively qualified as unco
 | SDK | .NET SDK 10.0.403 in `game/global.json`; `Godot.NET.Sdk/4.7.2` and `net10.0` in `game/SpaceFactory.csproj`. |
 | Playable sandbox | `game/scenes/main.tscn` composes a ship-local deck, engineer, and helm; a world beacon; camera; and mode/help/feedback overlay. WASD or arrows walk, and nearby **E** enters/leaves Piloting. Propulsion remains unavailable. |
 | Developer tooling | `tools/dev` exposes inspection, import, C# build, runtime smoke, saved-scene automation, editor, play, and export commands. |
-| Phase runner | Node.js 24 tooling provides `npm run space-factory:phase` and `space-factory:phase:validate`. Root package version `0.1.4` records the completed p1 development checkpoint, independent of engine/SDK pins. P1–P4 were executed manually without runner checkpoint commits; reconcile Git history before any runner resume. See [the runner guide](docs/phase-runner.md). |
+| Phase runner | Node.js 24 tooling provides `npm run space-factory:phase` and `space-factory:phase:validate`. Root package version `0.2.0` prepares the authored [p2 stack](docs/tasks/p2/README.md), following p1's completed `0.1.4` checkpoint. This is development metadata, independent of engine/SDK pins or gameplay completion. See [the runner guide](docs/phase-runner.md). |
 | Recorded Linux evidence | [P1–P3 implementation evidence](docs/tasks/p1/qualification/implementation.md) records actual-scene checks. [P4 native evidence](docs/tasks/p1/qualification/native-playtest.md) records visible ship, movement, helm, unpowered feedback, and the spatial fixture on Linux Mint. Bootstrap build/export evidence remains in [development setup](docs/development.md). |
 | Windows and macOS | Export presets exist. Their exports and target-OS runs remain unverified in the recorded baseline. |
 | Gameplay systems | Factory production, powered ship flight, travel, combat, saves, and outposts remain planned. The visible grid is not an implemented factory placement system. |
@@ -26,13 +26,15 @@ The bootstrap is committed. M1-P1 was implemented and natively qualified as unco
 
 ## Next development scope
 
-The next gameplay scope is **M1-P2 — Prepare the factory**: finite starting supplies, nearby cargo/processor transfer, the missing pipe segment, and real bounded storage/connection ownership. Preserve the qualified ship-local hierarchy and control mode owner from [p1 closeout](docs/tasks/p1/closeout.md). Read [M1-P2 Gates](docs/roadmap.md#m1-p2-prepare-the-factory), the relevant factory/ship design, and current source before planning or implementation.
+The next gameplay scope is **M1-P2 — Prepare the factory**. Its [assessment, implementation plan, and six prompts](docs/tasks/p2/README.md) are authored, not executed. They add finite starting supplies, nearby cargo/processor transfer, the missing pipe segment, and real bounded storage/connection ownership while preserving the qualified ship-local hierarchy and control-mode owner. Read [M1-P2 Gates](docs/roadmap.md#m1-p2-prepare-the-factory), the task's narrow source list, and current work before execution.
 
-The [p1 stack](docs/tasks/p1/README.md) has completed P1–P3 actual-scene implementation and P4 native closeout. Its runner grammar may still be validated with `npm run space-factory:phase:validate -- p1`, but its manual, uncommitted execution history is incompatible with a simple runner resume. Do not fabricate checkpoint commits or restart it from the old 0.1.0 baseline.
+Validate the new stack with `npm run space-factory:phase:validate -- p2`. When execution is requested, `npm run space-factory:phase -- p2` runs pending P1–P5 implementation/integration tasks and leaves P6 as the required native manual closeout. Its `Browser required: yes` handoff applies even with `--closeout`.
+
+The completed p1 stack was executed manually and published together, without individual runner checkpoint commits. Do not restart it or fabricate those checkpoints. P2 begins independently at its prepared `0.2.0` baseline; reconcile current P2 history and dirty work on any continuation.
 
 The adopted M1 factory is finite ice → solar-powered processor → player-installed pipe → propellant tank → engine. Manual fixed-orientation four-direction flight and coasting are scoped prototype choices. Quantities, timings, speed, exact bindings, and presentation tuning remain task-level choices. [The decision register](docs/decisions-and-questions.md#accepted-m1-prototype-decisions) records their scope.
 
-The accepted plan was added against remote `main` at [7a5b1b55](https://github.com/jfin602/space-factory/commit/7a5b1b55acca2fe21d64790c56cd081e4cb8aed8), and p1 was later assessed and authored. P1–P4 were then manually executed against the current source and qualified as described above. Later M1 stacks and the expedition/outpost roadmap remain future work.
+M1-P1 is qualified and the M1-P2 execution stack is prepared. M1-P3–P5 stacks and the expedition/outpost roadmap remain future work; no factory production or powered-flight result is implied by this authoring step.
 
 ## Repository responsibilities
 

@@ -6,9 +6,10 @@ This directory holds bounded implementation briefs and their results. Use the [w
 
 | Stack | Scope | Current state |
 | --- | --- | --- |
-| [p1 — A coherent ship](p1/README.md) | M1-P1 / M1-G1.1 and M1-G1.2; three implementation/integration prompts plus one native manual checkpoint and closeout | Executed manually and qualified on Linux; [closeout](p1/closeout.md), checkpoint 0.1.4; uncommitted review state |
+| [p1 — A coherent ship](p1/README.md) | M1-P1 / M1-G1.1 and M1-G1.2; three implementation/integration prompts plus one native manual checkpoint and closeout | Qualified on Linux and committed at [f274c896](https://github.com/jfin602/space-factory/commit/f274c89630a6033ccd79ad98b7fee6369dd5778a); [closeout](p1/closeout.md), completed checkpoint `0.1.4` |
+| [p2 — Prepare the factory](p2/README.md) | M1-P2 / M1-G2.1 and M1-G2.2; five implementation/integration prompts plus one native manual checkpoint and closeout | Authored, NOT EXECUTED; prepared baseline `0.2.0`, targets `0.2.1`–`0.2.6` |
 
-The `p1` folder and runner Phase 1 label refer to M1-P1, not the entire broader stranded-ship Phase 1. [The roadmap](../roadmap.md) remains the gameplay progress authority; its selected p1 Gate results link to runtime and native evidence. Authoring status and runner metadata alone do not qualify Gates.
+The `p1`/`p2` folders and runner Phase labels refer to M1-P1/M1-P2, not the broader expedition Phases with those numbers. [The roadmap](../roadmap.md) remains the gameplay progress authority; its selected p1 Gate results link to runtime and native evidence. Authoring status and runner metadata alone do not qualify Gates.
 
 ## Folder conventions
 

@@ -1,0 +1,40 @@
+TASK: Phase 2 / P3 — Nearby cargo and loading
+
+MODEL / REASONING / USAGE
+- Recommended configuration: `GPT-6 Sol High`.
+- Browser required: no.
+
+ROADMAP SCOPE
+M1-P2 / M1-G2.1 implementation, preserving M1-G1.1 and M1-G1.2. P4 owns pipe installation; P6 owns native qualification and final Gate decisions.
+
+GOAL
+Let the Walking engineer take real ice and the supplied pipe from nearby cargo, then load carried ice into the processor through a small contextual interface. Keep every transaction accounted and every interaction unambiguous with the helm.
+
+PREREQUISITES AND NARROW READING
+Require P1's resource operations and P2's actual scene/target arrangement with passing required checks. Inspect current Git/source state and preserve compatible work. Read AGENTS.md, BOOT.md, this stack's README.md, and implementation-plan.md sections "Resource and transaction contract", "Scene and ownership contract", "Interaction contract", "Verification and evidence", and "Version and runner contract". Read predecessor findings in docs/tasks/p2/qualification/implementation.md. Inspect the current resource owner, Ship.cs input/control path, Main.cs HUD and smoke methods, main.tscn overlay/targets, and project.godot named input actions. Consult the selected nearby-interaction Gate and accepted M1 UX section only as needed.
+
+SCOPE AND STEPS
+1. Extend the existing single Ship-owned interaction route. While Walking with no panel open, E chooses the nearest eligible in-range target with a stable tie-break by target identity. Helm selection enters Piloting directly; cargo, processor, and socket selection opens one compact context panel for that identified target. In Piloting, E always exits the helm. Ignore key echo/release events and consume handled input so one press cannot trigger two targets, enter and exit together, or also activate a focused UI control.
+2. Keep the panel's target identity fixed while it is open. E closes an open panel only; Escape closes it too. Close/invalidate it when leaving range or changing mode. Walking movement remains available while the panel is open; do not add a hidden menu control mode. Configure button focus/input routing so the panel cannot swallow WASD/arrows or the advertised E/Escape actions. Retain one named action/dispatcher path rather than having each machine independently listen for E.
+3. Provide Cargo actions Take ice and Take pipe, and Processor action Load ice. Show the named positive ice batch amount, available/carried quantities, receiving capacity, and actual transfer result. Use P1's transfer policy when stock or free capacity is smaller than the request. The pipe moves from cargo into carried ownership exactly once; taking it does not install it. The socket may show its missing-part/installation-pending state, but P4 adds its Install action. Keep the panel small and avoid an inventory grid, drag/drop, or a recipe menu.
+4. Route every button/action through an authoritative command that requires the matching panel opening to remain active and rechecks Walking mode, target identity, current range, source stock, and destination capacity at application time. A callback captured before closing/replacing a panel must remain invalid even if that target is reopened; use a small opening token if old requests can survive. UI enablement is informative and cannot authorize a stale request. Apply source debit and destination credit through P1's operation before reporting success. No await/deferred UI mutation may split that transaction. Repeated clicks, empty sources, full destinations, distant targets, and invalid requests cannot duplicate or lose resources.
+5. Make mode, selected-target hint, quantities, and feedback observe actual state. The current Main.RefreshHud clears Walking feedback every frame: replace that behavior with a result lifetime/precedence that leaves success or failure readable until superseded or a documented short interval expires. Keep target hints separate from transaction results. Do not store resource counts only in labels or recreate inventories on panel open/close. Explain empty cargo, no carried ice, a full destination, and lost range plainly.
+6. Preserve helm range, local engineer position, immediate request/velocity cleanup, and exclusive Walking/Piloting direction routing. Existing smoke cases assume that E near the engineer's origin selects the helm: deliberately position the engineer at the intended target and close panels in test setup. Adapt the actual input adapter if event routing changes; retain the assertions for held-direction entry/exit and translated controls rather than bypassing input or deleting them.
+7. Add focused checks through the real dispatcher/state paths for cargo-to-carried-to-input accounting, pipe pickup ownership, one event/one action, stable target selection, stale/out-of-range submissions, panel lifecycle, and feedback surviving a HUD refresh. Exercise open/close and helm transitions without resource reset. Use actual C# operations and scene objects, not a second model of the rules. Leave the broad preparation sequence to P5 and visible focus/readability to P6.
+
+EXPLICIT DEFERRALS
+No pipe consumption/installation, production clock or recipe output, tank filling, powered motion, construction interface, save/load, restart action, or complete tutorial. All normal-play propellant remains zero. This task alone does not pass a native gameplay Gate.
+
+VALIDATION
+Tier: T1 with a bounded interaction integration exception. Plan ten to fifteen minutes because dispatcher, panel lifecycle, retained feedback, and regression checks form one player workflow; do not trade required checks for a time target.
+Run ./tools/dev check once on the changed candidate with the focused actual-scene cases above. Reuse its import/build/ordinary/fixture/scene-automation composition. Release injected inputs, close test panels, and restore test state so later checks remain independent. Preserve meaningful failure exits and the timeout. Missing dependencies or failed checks are failures/gaps, never a success marker. Native pointer/keyboard behavior and readability remain NOT OBSERVED for P6.
+
+DONE CONDITION
+Actual nearby actions move finite supplies through cargo, carried inventory, and processor input; stale or impossible actions fail with retained feedback. One input route handles factory panels and the helm while preserving qualified movement/mode behavior. The supplied pipe is carried but still uninstalled, and required focused checks pass.
+
+RECORD AND REPORT
+Append source-bound P3 results, exact controls/batch behavior, command/target owners, feedback lifetime, actual checks, and remaining gaps to docs/tasks/p2/qualification/implementation.md. Identify P4's Install integration point and P5/P6's interaction sequence. Preserve earlier evidence and leave Gate/native status unqualified. Do not self-commit or push; the runner owns the checkpoint.
+
+VERSIONING
+The assigned project version is `0.2.3`.
+Only after the required implementation and focused checks pass, set the existing root package.json version to this checkpoint, preserving scripts/settings and the shared runner contract. Failure or incomplete required work leaves the prior checkpoint unchanged; report the concrete remaining work.
