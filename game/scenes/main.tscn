@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_main"]
 [ext_resource type="Script" path="res://scripts/Deck.cs" id="2_deck"]
 [ext_resource type="Script" path="res://scripts/Engineer.cs" id="3_engineer"]
 [ext_resource type="Script" path="res://scripts/Ship.cs" id="4_ship"]
+[ext_resource type="Texture2D" path="res://assets/pixel/ship/helm.png" id="5_helm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_engineer"]
 radius = 13.0
@@ -13,6 +14,7 @@ script = ExtResource("1_main")
 
 [node name="Ship" type="Node2D" parent="."]
 position = Vector2(480, 300)
+texture_filter = 1
 script = ExtResource("4_ship")
 
 [node name="Deck" type="Node2D" parent="Ship"]
@@ -27,13 +29,8 @@ shape = SubResource("CircleShape2D_engineer")
 [node name="Helm" type="Node2D" parent="Ship"]
 position = Vector2(0, -95)
 
-[node name="Console" type="Polygon2D" parent="Ship/Helm"]
-color = Color(0.22, 0.48, 0.59, 1)
-polygon = PackedVector2Array(-35, -21, 35, -21, 35, 21, -35, 21)
-
-[node name="Screen" type="Polygon2D" parent="Ship/Helm"]
-color = Color(0.4, 0.83, 0.81, 1)
-polygon = PackedVector2Array(-25, -12, 25, -12, 25, 6, -25, 6)
+[node name="Console" type="Sprite2D" parent="Ship/Helm"]
+texture = ExtResource("5_helm")
 
 [node name="HelmLabel" type="Label" parent="Ship/Helm"]
 offset_left = -22.0

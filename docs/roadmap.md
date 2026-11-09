@@ -22,6 +22,8 @@ This is the immediate playtest target. Its five Phases expand the existing found
 
 M1-P1's selected checks are **PASS** through the [p1 implementation](tasks/p1/qualification/implementation.md), [native playtest](tasks/p1/qualification/native-playtest.md), and [closeout](tasks/p1/closeout.md), published in [f274c896](https://github.com/jfin602/space-factory/commit/f274c89630a6033ccd79ad98b7fee6369dd5778a). The remaining M1 gameplay checks are **NOT OBSERVED**. P1 was qualified in a manual working tree and committed together; its development versions are not individual runner checkpoint commits. Focused checks support the integrated result; actual input and appearance were observed in the native Linux game. This evidence does not qualify factory-powered flight or later player loops.
 
+The [starter pixel-art pack](art/starter-pack.md) replaces M1-P1's deck, engineer, and helm placeholders and previews planned M1 factory/propulsion equipment. Its visual evidence does not change any Phase or Gate status.
+
 M1-P4 delivers the core first-flight behavior. The full milestone passes when all ten M1 Gates pass, including the repeatable scenario in M1-P5. Review the original G0/G1 criteria against the same evidence before changing those broader statuses; milestone completion does not automatically qualify unrelated criteria or any later expedition Phase.
 
 ### M1-P1: A coherent ship

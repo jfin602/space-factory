@@ -104,7 +104,7 @@ public partial class Main : Node2D
         Require(ship.Position == new Vector2(480, 300), "initial ship origin");
         Require(deck.Position == Vector2.Zero && engineer.Position == Vector2.Zero, "initial local positions");
         Require(helm.Position == new Vector2(0, -95), "helm local position");
-        Require(GetNodeOrNull<Polygon2D>("Ship/Helm/Console") is not null, "visible helm console");
+        Require(GetNodeOrNull<Sprite2D>("Ship/Helm/Console")?.Texture is not null, "visible helm console");
 
         var collision = engineer.GetNode<CollisionShape2D>("CollisionShape2D").Shape as CircleShape2D;
         Require(collision is not null && collision.Radius <= Engineer.BodyInset, "body inset covers collision");

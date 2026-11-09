@@ -1,0 +1,113 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="Script" path="res://scripts/Deck.cs" id="1_deck"]
+[ext_resource type="Texture2D" path="res://assets/pixel/engineer/engineer_idle_down.png" id="2_engineer"]
+[ext_resource type="Texture2D" path="res://assets/pixel/ship/helm.png" id="3_helm"]
+[ext_resource type="Texture2D" path="res://assets/pixel/ship/hull_edge.png" id="4_edge"]
+[ext_resource type="Texture2D" path="res://assets/pixel/ship/hull_corner.png" id="5_corner"]
+[ext_resource type="Texture2D" path="res://assets/pixel/factory/cargo_crate.png" id="6_cargo"]
+[ext_resource type="Texture2D" path="res://assets/pixel/factory/solar_panel.png" id="7_solar"]
+[ext_resource type="Texture2D" path="res://assets/pixel/factory/processor_idle.png" id="8_processor_idle"]
+[ext_resource type="Texture2D" path="res://assets/pixel/factory/processor_active.png" id="9_processor_active"]
+[ext_resource type="Texture2D" path="res://assets/pixel/factory/pipe_gap.png" id="10_pipe_gap"]
+[ext_resource type="Texture2D" path="res://assets/pixel/factory/pipe_connected.png" id="11_pipe_connected"]
+[ext_resource type="Texture2D" path="res://assets/pixel/factory/propellant_tank.png" id="12_tank"]
+[ext_resource type="Texture2D" path="res://assets/pixel/ship/engine.png" id="13_engine"]
+[ext_resource type="Texture2D" path="res://assets/pixel/effects/exhaust_01.png" id="14_exhaust_1"]
+[ext_resource type="Texture2D" path="res://assets/pixel/effects/exhaust_02.png" id="15_exhaust_2"]
+[ext_resource type="Texture2D" path="res://assets/pixel/factory/ice_icon.png" id="16_ice"]
+[ext_resource type="Texture2D" path="res://assets/pixel/factory/propellant_icon.png" id="17_propellant"]
+
+[node name="AssetPreview" type="Node2D"]
+texture_filter = 1
+
+[node name="Deck" type="Node2D" parent="."]
+position = Vector2(480, 300)
+script = ExtResource("1_deck")
+
+[node name="Interior" type="Node2D" parent="."]
+position = Vector2(480, 300)
+
+[node name="HullCorner" type="Sprite2D" parent="Interior"]
+position = Vector2(-300, -170)
+texture = ExtResource("5_corner")
+
+[node name="HullEdgeA" type="Sprite2D" parent="Interior"]
+position = Vector2(-260, -170)
+texture = ExtResource("4_edge")
+
+[node name="HullEdgeB" type="Sprite2D" parent="Interior"]
+position = Vector2(-220, -170)
+texture = ExtResource("4_edge")
+
+[node name="Helm" type="Sprite2D" parent="Interior"]
+position = Vector2(0, -145)
+texture = ExtResource("3_helm")
+
+[node name="Engineer" type="Sprite2D" parent="Interior"]
+position = Vector2(0, -60)
+texture = ExtResource("2_engineer")
+
+[node name="Cargo" type="Sprite2D" parent="Interior"]
+position = Vector2(-250, -80)
+texture = ExtResource("6_cargo")
+
+[node name="IceIcon" type="Sprite2D" parent="Interior"]
+position = Vector2(-250, -30)
+texture = ExtResource("16_ice")
+
+[node name="Solar" type="Sprite2D" parent="Interior"]
+position = Vector2(-140, -145)
+texture = ExtResource("7_solar")
+
+[node name="ProcessorIdle" type="Sprite2D" parent="Interior"]
+position = Vector2(-115, 40)
+texture = ExtResource("8_processor_idle")
+
+[node name="ProcessorActive" type="Sprite2D" parent="Interior"]
+position = Vector2(-115, 140)
+texture = ExtResource("9_processor_active")
+
+[node name="PipeGap" type="Sprite2D" parent="Interior"]
+position = Vector2(-35, 40)
+texture = ExtResource("10_pipe_gap")
+
+[node name="PipeConnected" type="Sprite2D" parent="Interior"]
+position = Vector2(-35, 140)
+texture = ExtResource("11_pipe_connected")
+
+[node name="Tank" type="Sprite2D" parent="Interior"]
+position = Vector2(45, 40)
+texture = ExtResource("12_tank")
+
+[node name="PropellantIcon" type="Sprite2D" parent="Interior"]
+position = Vector2(45, 105)
+texture = ExtResource("17_propellant")
+
+[node name="Engine" type="Sprite2D" parent="Interior"]
+position = Vector2(180, 40)
+texture = ExtResource("13_engine")
+
+[node name="Exhaust01" type="Sprite2D" parent="Interior"]
+position = Vector2(180, 120)
+texture = ExtResource("14_exhaust_1")
+
+[node name="Exhaust02" type="Sprite2D" parent="Interior"]
+position = Vector2(270, 120)
+texture = ExtResource("15_exhaust_2")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 930.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 20
+text = "SPACE FACTORY — M1 starter art preview"
+
+[node name="Footer" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 562.0
+offset_right = 932.0
+offset_bottom = 590.0
+theme_override_font_sizes/font_size = 13
+text = "Preview-only factory and propulsion • left: idle / gap   lower: active / connected   right: separate exhaust frames"

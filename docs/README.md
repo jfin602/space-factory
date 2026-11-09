@@ -24,6 +24,8 @@ For a focused task, begin with [AGENTS.md](../AGENTS.md) and [BOOT.md](../BOOT.m
 | [Survival and runs](systems/survival-and-runs.md) | Engineer risk, combat boundaries, recoverable crises, terminal loss, and run lifecycle. |
 | [Tutorial](tutorial.md) | The deliberately solvable stranded-ship opening and first successful departure. |
 | [UX and presentation](ux-and-presentation.md) | Interior/exterior views, interaction, readable system states, and warnings. |
+| [Starter pixel-art direction](art-direction.md) | Native 40 px art grid, perspective, palette, lighting, and pixel treatment. |
+| [Starter asset pack](art/starter-pack.md) | Generated M1 sprites, manifest/readiness, source prompts, Godot preview, and visual checks. |
 | [Technical direction](technical-direction.md) | Working simulation and persistence architecture using the selected Godot/.NET stack. |
 | [Development setup](development.md) | Godot/.NET installation, commands, scene automation, exports, and bootstrap evidence. |
 | [Module map](../MODULES.md) | Source-backed current responsibilities and explicitly planned future boundaries. |
