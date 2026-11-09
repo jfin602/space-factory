@@ -1,6 +1,6 @@
 # Development roadmap
 
-**Status: M1 First Factory-Powered Flight plan accepted on 2026-11-08; M1-P1 coherent ship COMPLETE.** Its selected M1-G1.1 and M1-G1.2 Gates passed source-bound runtime and native checks in the [p1 closeout](tasks/p1/closeout.md). M1-P2–P5 remain NOT STARTED. The bootstrap evidence is in [development setup](development.md). Existing broader G0.1 remains IN PROGRESS; no broader G0/G1 Gate was qualified by this closeout. [Decisions and questions](decisions-and-questions.md) records the accepted prototype choices.
+**Status: M1-P1 COMPLETE; M1-P2 owner-reported complete on 2026-11-09; M1-P3 stack authored, NOT EXECUTED.** P1's selected Gates passed the [source-bound closeout](tasks/p1/closeout.md). The published revision inspected for P3, [ce163753](https://github.com/jfin602/space-factory/commit/ce163753d8973ccd018f2344c6175c52fe4b113d), does not yet contain the completed P2 implementation/qualification; its Gate evidence must be synchronized without replaying owner work. M1-P3–P5 remain unimplemented by this authoring step. Broader G0.1 remains IN PROGRESS; no broader Gate is promoted here. [Decisions and questions](decisions-and-questions.md) records the accepted prototype choices.
 
 ## Milestone M1: First Factory-Powered Flight
 
@@ -15,12 +15,12 @@ This is the immediate playtest target. Its five Phases expand the existing found
 | Phase | Observable outcome | Dependency | Broader Gates served | Status |
 | --- | --- | --- | --- | --- |
 | M1-P1 — A coherent ship | Ship-relative interior, world reference, and exclusive walking/piloting modes | Committed bootstrap | G0.1, foundation for G0.2 | **COMPLETE** — [closeout](tasks/p1/closeout.md) |
-| M1-P2 — Prepare the factory | Finite supply can be loaded and the missing pipe installed | M1-P1 | G0.2, G1.1 | NOT STARTED — [execution stack authored](tasks/p2/README.md) |
-| M1-P3 — Manufacture propellant | Timed production and bounded delivery fill the tank | M1-P2 | G0.2, G1.2 | NOT STARTED |
+| M1-P2 — Prepare the factory | Finite supply can be loaded and the missing pipe installed | M1-P1 | G0.2, G1.1 | OWNER-REPORTED COMPLETE — published source/evidence synchronization pending |
+| M1-P3 — Manufacture propellant | Timed production and bounded delivery fill the tank | M1-P2 | G0.2, G1.2 | NOT STARTED — [stack authored](tasks/p3/README.md), [source/version preflight](tasks/p3/preflight.md) required |
 | M1-P4 — First powered flight | Manufactured propellant enables and sustains real thrust | M1-P3 | G1.2 | NOT STARTED |
 | M1-P5 — Complete the playtest | Fresh startup, beacon objective, starvation/recovery, and restart work together | M1-P4 | G1.1, G1.2 | NOT STARTED |
 
-M1-P1's selected checks are **PASS** through the [p1 implementation](tasks/p1/qualification/implementation.md), [native playtest](tasks/p1/qualification/native-playtest.md), and [closeout](tasks/p1/closeout.md), published in [f274c896](https://github.com/jfin602/space-factory/commit/f274c89630a6033ccd79ad98b7fee6369dd5778a). The remaining M1 gameplay checks are **NOT OBSERVED**. P1 was qualified in a manual working tree and committed together; its development versions are not individual runner checkpoint commits. Focused checks support the integrated result; actual input and appearance were observed in the native Linux game. This evidence does not qualify factory-powered flight or later player loops.
+M1-P1's selected checks are **PASS** through the [p1 implementation](tasks/p1/qualification/implementation.md), [native playtest](tasks/p1/qualification/native-playtest.md), and [closeout](tasks/p1/closeout.md), published in [f274c896](https://github.com/jfin602/space-factory/commit/f274c89630a6033ccd79ad98b7fee6369dd5778a). The owner reports P2 complete; its detailed results were not available in the published authoring source and are not inferred here. P3–P5 checks remain **NOT OBSERVED**. P1 was qualified manually and committed together, without individual runner checkpoint subjects. Preserve actual later source/history when synchronizing. None of this authoring qualifies factory-powered flight.
 
 The [starter pixel-art pack](art/starter-pack.md) replaces M1-P1's deck, engineer, and helm placeholders and previews planned M1 factory/propulsion equipment. Its visual evidence does not change any Phase or Gate status.
 
@@ -48,14 +48,16 @@ M1-P4 delivers the core first-flight behavior. The full milestone passes when al
 
 **Outcome:** the engineer uses real starting supplies to prepare a small, mostly installed factory. Use a cargo crate, processor, tank, engine, and one missing pipe socket between processor and tank.
 
-**M1-G2.1 — Finite inventory and nearby interaction — NOT STARTED**
+**2026-11-09 progression:** the owner reports this Phase ran and is complete and requested P3. Its implemented source and source-bound qualification are not yet present in the inspected published revision. Preserve that completion report and synchronize the actual records; the Gate observations below do not claim an independently verified pass or require P2 to be replayed.
+
+**M1-G2.1 — Finite inventory and nearby interaction — NOT OBSERVED in the published qualification record**
 
 - Supply finite ice and one spare pipe segment in the scenario's starting inventory; begin with an empty propellant tank.
 - Let the nearby engineer take ice from cargo and load it into processor input through simple quantity-based actions.
 - Debit the source and credit the destination once, respecting available stock and destination capacity.
 - Reject out-of-range or impossible transfers with readable feedback; repeated interaction cannot create resources.
 
-**M1-G2.2 — Player-installed connection — NOT STARTED**
+**M1-G2.2 — Player-installed connection — NOT OBSERVED in the published qualification record**
 
 - Show the missing pipe segment in the actual interior and let the engineer install the supplied part there.
 - Consume that part once and establish a real processor-output-to-tank connection with explicit endpoints and a finite transfer rate.
@@ -122,7 +124,7 @@ M1-P4 delivers the core first-flight behavior. The full milestone passes when al
 
 Linux is the immediate playtest target; Windows/macOS remain desktop targets requiring their own later export and native evidence. Fixed hull and installed machinery, one recipe, one pipe socket, and one beacon bound this milestone. General construction/logistics, ship rotation, damage/repair crafting, complex electrical systems, landings, combat, save/load, permanent-loss qualification, and outposts remain later work.
 
-The next implementation scope is **M1-P2**, using its authored [p2 assessment, plan, and six prompts](tasks/p2/README.md) under [the workflow](workflow.md). P1's ship/helm scope is complete. Preparing the P2 `0.2.0` runner baseline and writing its tasks do not execute gameplay or pass Gates; M1-P3–P5 execution stacks remain to be written. After the first flight, use observed play to order richer placement, repairs, hull/propulsion improvements, and the following expedition work.
+The next requested implementation scope is **M1-P3**, using its authored [assessment, plan, and six prompts](tasks/p3/README.md). Follow [preflight](tasks/p3/preflight.md) in the actual completed P2 checkout before its deliberate `0.3.0` runner transition. The published root remains `0.2.0` while P2 source synchronization is pending. P3 authoring does not execute gameplay or pass Gates; M1-P4/P5 stacks remain to be written. After the first flight, use observed play to order richer placement, repairs, hull/propulsion improvements, and the following expedition work.
 
 ## First integrated slice
 

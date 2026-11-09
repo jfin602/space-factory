@@ -8,33 +8,35 @@ Space Factory is a single-player, top-down 2D survival and automation game. One 
 
 The accepted immediate target is [M1 — First Factory-Powered Flight](docs/roadmap.md#milestone-m1-first-factory-powered-flight): prepare the small onboard factory, manufacture propellant, take the helm, and fly to a beacon. Its five implementation Phases retain the broader game direction in the existing system documents.
 
-## Current starting point — 2026-11-08
+## Current starting point — 2026-11-09
 
 The bootstrap and qualified M1-P1 ship/helm are committed on `main` at [f274c896](https://github.com/jfin602/space-factory/commit/f274c89630a6033ccd79ad98b7fee6369dd5778a). [The p1 closeout](docs/tasks/p1/closeout.md) preserves the original source-bound runtime/native evidence. Inspect current HEAD and local work rather than resetting to an earlier revision.
+
+The owner reports **M1-P2 ran and is complete** and requested the [M1-P3 prompt stack](docs/tasks/p3/README.md). The published source inspected for that authoring, [ce163753](https://github.com/jfin602/space-factory/commit/ce163753d8973ccd018f2344c6175c52fe4b113d), still contains P1 gameplay plus pixel art and the authored P2 tasks; completed P2 code and qualification records are not yet present there. Use the completed owner checkout and [P3 preflight](docs/tasks/p3/preflight.md) to reconcile its real source before execution. Do not replay P2 or infer missing native evidence.
 
 | Area | Current state |
 | --- | --- |
 | Engine and language | Godot 4.7.2 .NET with C# and the Compatibility renderer. |
 | SDK | .NET SDK 10.0.403 in `game/global.json`; `Godot.NET.Sdk/4.7.2` and `net10.0` in `game/SpaceFactory.csproj`. |
-| Playable sandbox | `game/scenes/main.tscn` composes a ship-local pixel-art deck, engineer, and helm; a world beacon; camera; and mode/help/feedback overlay. WASD or arrows walk, and nearby **E** enters/leaves Piloting. Propulsion remains unavailable. The [starter art pack](docs/art/starter-pack.md) previews the planned M1 machinery separately. |
+| Published gameplay source | `game/scenes/main.tscn` composes the ship-local pixel-art deck, engineer, and helm; world beacon; camera; and overlay. WASD/arrows walk and nearby **E** enters/leaves Piloting. Propulsion remains unavailable. The [starter art pack](docs/art/starter-pack.md) includes machinery variants for factory integration. Actual completed P2 owners must be located in the owner checkout. |
 | Developer tooling | `tools/dev` exposes inspection, import, C# build, runtime smoke, saved-scene automation, editor, play, and export commands. |
-| Phase runner | Node.js 24 tooling provides `npm run space-factory:phase` and `space-factory:phase:validate`. Root package version `0.2.0` prepares the authored [p2 stack](docs/tasks/p2/README.md), following p1's completed `0.1.4` checkpoint. This is development metadata, independent of engine/SDK pins or gameplay completion. See [the runner guide](docs/phase-runner.md). |
+| Phase runner | Node.js 24 tooling provides `space-factory:phase` and `space-factory:phase:validate`. Published root version remains `0.2.0`; the new [p3 stack](docs/tasks/p3/README.md) requires deliberate `0.3.0` preparation in the completed P2 checkout before running. Authoring does not change gameplay or engine/SDK pins. See [the runner guide](docs/phase-runner.md). |
 | Recorded Linux evidence | [P1–P3 implementation evidence](docs/tasks/p1/qualification/implementation.md) records actual-scene checks. [P4 native evidence](docs/tasks/p1/qualification/native-playtest.md) records visible ship, movement, helm, unpowered feedback, and the spatial fixture on Linux Mint. Bootstrap build/export evidence remains in [development setup](docs/development.md). |
 | Windows and macOS | Export presets exist. Their exports and target-OS runs remain unverified in the recorded baseline. |
-| Gameplay systems | Factory production, powered ship flight, travel, combat, saves, and outposts remain planned. The visible grid is not an implemented factory placement system. |
-| Roadmap | M1-P1 is COMPLETE; selected M1-G1.1 and M1-G1.2 are PASS. M1-P2–P5 and their Gates remain NOT STARTED/NOT OBSERVED. G0.1 remains IN PROGRESS; broader G0/G1 statuses were not changed by p1. |
+| Gameplay systems | P2 preparation is owner-reported complete with source synchronization pending. Timed production, powered flight, travel, combat, saves, and outposts remain future work. The art grid is not a general placement system. |
+| Roadmap | M1-P1 is COMPLETE with selected Gates PASS. M1-P2 is owner-reported complete; its published qualification remains pending. M1-P3 is authored, NOT EXECUTED; M1-P4/P5 remain future work. Broader G0/G1 results are unchanged. |
 
 ## Next development scope
 
-The next gameplay scope is **M1-P2 — Prepare the factory**. Its [assessment, implementation plan, and six prompts](docs/tasks/p2/README.md) are authored, not executed. They add finite starting supplies, nearby cargo/processor transfer, the missing pipe segment, and real bounded storage/connection ownership while preserving the qualified ship-local hierarchy and control-mode owner. Read [M1-P2 Gates](docs/roadmap.md#m1-p2-prepare-the-factory), the task's narrow source list, and current work before execution.
+The next requested gameplay scope is **M1-P3 — Manufacture propellant**. Its [assessment, implementation plan, preparation brief, and six prompts](docs/tasks/p3/README.md) are authored, not executed. They add one timed recipe, installed solar electricity, one shared production/delivery clock, bounded flow/backpressure, Start/Stop controls, and actual state feedback. Preserve the completed P2 inventories, interaction owner, and installed connection.
 
-Validate the new stack with `npm run space-factory:phase:validate -- p2`. When execution is requested, `npm run space-factory:phase -- p2` runs pending P1–P5 implementation/integration tasks and leaves P6 as the required native manual closeout. Its `Browser required: yes` handoff applies even with `--closeout`.
+Validate grammar with `npm run space-factory:phase:validate -- p3`. Before execution, follow [preflight](docs/tasks/p3/preflight.md) to map the actual P2 source and prepare `0.3.0`; the current published `0.2.0` is not P3 execution-ready. Then `npm run space-factory:phase -- p3` runs P1–P5 and leaves P6 as the required native manual closeout. Its `Browser required: yes` handoff applies even with `--closeout`.
 
-The completed p1 stack was executed manually and published together, without individual runner checkpoint commits. Do not restart it or fabricate those checkpoints. P2 begins independently at its prepared `0.2.0` baseline; reconcile current P2 history and dirty work on any continuation.
+The completed p1 stack was published together without individual runner checkpoint commits. Preserve actual P2 history and owner work as well; do not fabricate earlier checkpoints or reset a progressed checkout to an old baseline. Missing historical P2 evidence alone is recorded as a gap, while missing actual P2 code is a dependency to synchronize before P3.
 
 The adopted M1 factory is finite ice → solar-powered processor → player-installed pipe → propellant tank → engine. Manual fixed-orientation four-direction flight and coasting are scoped prototype choices. Quantities, timings, speed, exact bindings, and presentation tuning remain task-level choices. [The decision register](docs/decisions-and-questions.md#accepted-m1-prototype-decisions) records their scope.
 
-M1-P1 is qualified and the M1-P2 execution stack is prepared. M1-P3–P5 stacks and the expedition/outpost roadmap remain future work; no factory production or powered-flight result is implied by this authoring step.
+P3 authoring claims no production or flight result. M1-P4/P5 stacks and the expedition/outpost roadmap remain future work.
 
 ## Repository responsibilities
 

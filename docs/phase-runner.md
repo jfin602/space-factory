@@ -24,7 +24,7 @@ The runner starts a separate `codex exec --json` process for each prompt using i
 
 ## Task folders and version metadata
 
-The private root [package.json](../package.json) was ported at `0.0.0`; it is now deliberately prepared at `0.2.0` for the authored [M1-P2 stack](tasks/p2/README.md), following M1-P1's completed `0.1.4` checkpoint. Its version is development roadmap/checkpoint metadata. It is independent of Godot `4.7.2`, .NET SDK `10.0.403`, and any future public game-release policy. Preparing this baseline neither executes gameplay nor qualifies a Gate. Preserve the root manifest and its scripts when changing this version.
+The private root [package.json](../package.json) was ported at `0.0.0`; the inspected published source remains at P2's prepared `0.2.0`. The owner reports P2 complete, but its actual source/version history is not yet published. The authored [M1-P3 stack](tasks/p3/README.md) requires `0.3.0` after its [preflight](tasks/p3/preflight.md) reconciles that completed checkout. Its version is development roadmap/checkpoint metadata, independent of engine/SDK pins and any future public game-release policy. Preparing a baseline neither executes gameplay nor qualifies a Gate. Preserve the root manifest and its scripts when changing this version.
 
 | Folder | Prompt type and version rule |
 | --- | --- |
@@ -36,7 +36,7 @@ The private root [package.json](../package.json) was ported at `0.0.0`; it is no
 
 For the initial `0.0.0` baseline, an ordinary Phase stack starts at `p0` with P1 assigned `0.0.1`. Entering a later Phase requires its deliberate root baseline update, such as `0.2.0` before `p2`. The runner does not perform this new-Phase baseline transition for you. Choose continuation versions deliberately so they do not reuse prior checkpoint subjects. Version metadata alone does not advance the [roadmap](roadmap.md).
 
-The accepted [M1 plan](planning/p1/first-flight.md) has completed [M1-P1](tasks/p1/closeout.md), manually executed and published together in [f274c896](https://github.com/jfin602/space-factory/commit/f274c89630a6033ccd79ad98b7fee6369dd5778a). Its individual `0.1.x` runner checkpoint subjects were not created; do not fabricate them or rerun the completed stack. The new [p2 stack](tasks/p2/README.md) begins independently at `0.2.0`, targets `0.2.1` through `0.2.6`, and remains unexecuted. Validate with `npm run space-factory:phase:validate -- p2`; when implementation is requested, use `npm run space-factory:phase -- p2`. P6 is the required native manual checkpoint and final closeout, using `- Browser required: yes.`.
+The accepted [M1 plan](planning/p1/first-flight.md) has qualified P1 and owner-reported completed P2. Preserve their actual source/checkpoint history; missing earlier numbered checkpoint subjects do not by themselves prevent starting a distinct Phase. The new [p3 stack](tasks/p3/README.md) targets `0.3.1`–`0.3.6` and remains unexecuted. Grammar validation with `npm run space-factory:phase:validate -- p3` can pass before source synchronization or version preparation; it does not establish runner readiness. Prepare `0.3.0` outside numbered prompts first, because the runner checks the baseline before P1 launches. Then use `npm run space-factory:phase -- p3`. P6 is the required native manual checkpoint and final closeout, using `- Browser required: yes.`.
 
 ## Prompt grammar and templates
 
